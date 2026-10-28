@@ -1,0 +1,10 @@
+# 1-based lines to bookmark, one per line.
+
+# Inside if > for > compute() — the function is the container.
+12
+
+# Inside compute(), the return statement.
+18
+
+# Inside the top-level function `formatMoney`.
+28

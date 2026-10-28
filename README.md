@@ -13,7 +13,13 @@ codemark languages add ./tree-sitter-ruby.wasm --from-registry ruby
 |---|---|---|---|
 | bash | `sh`, `bash` | [tree-sitter-bash](https://github.com/tree-sitter/tree-sitter-bash) | `v0.25.1` |
 | lua | `lua` | [tree-sitter-lua](https://github.com/tree-sitter-grammars/tree-sitter-lua) | `v0.4.0` |
+| php | `php`, `phtml` | [tree-sitter-php](https://github.com/tree-sitter/tree-sitter-php) | `v0.25.1` |
 | ruby | `rb`, `rake`, `gemspec` | [tree-sitter-ruby](https://github.com/tree-sitter/tree-sitter-ruby) | `v0.23.1` |
+| scala | `scala`, `sc` | [tree-sitter-scala](https://github.com/tree-sitter/tree-sitter-scala) | `v0.26.3` |
+| zig | `zig`, `zon` | [tree-sitter-zig](https://github.com/tree-sitter-grammars/tree-sitter-zig) | `v1.1.2` |
+
+Some languages were evaluated and set aside — see
+[NOT-YET-SUPPORTED.md](NOT-YET-SUPPORTED.md) for which, and why.
 
 ### Where each `.wasm` came from
 
@@ -25,7 +31,10 @@ build matches:
 |---|---|---|---|
 | bash | [`tree-sitter-bash.wasm` @ v0.25.1](https://github.com/tree-sitter/tree-sitter-bash/releases/download/v0.25.1/tree-sitter-bash.wasm) | `8292919c88a0f7d3…` | 1.30 MB |
 | lua | [`tree-sitter-lua.wasm` @ v0.4.0](https://github.com/tree-sitter-grammars/tree-sitter-lua/releases/download/v0.4.0/tree-sitter-lua.wasm) | `46aa46cf86966ba3…` | 48 KB |
+| php | [`tree-sitter-php.wasm` @ v0.25.1](https://github.com/tree-sitter/tree-sitter-php/releases/download/v0.25.1/tree-sitter-php.wasm) | `bd5e2bf8d42306b7…` | 1.03 MB |
 | ruby | [`tree-sitter-ruby.wasm` @ v0.23.1](https://github.com/tree-sitter/tree-sitter-ruby/releases/download/v0.23.1/tree-sitter-ruby.wasm) | `09a96427d7c72f06…` | 2.01 MB |
+| scala | [`tree-sitter-scala.wasm` @ v0.26.3](https://github.com/tree-sitter/tree-sitter-scala/releases/download/v0.26.3/tree-sitter-scala.wasm) | `3809e090e63fa5a9…` | 3.84 MB |
+| zig | [`tree-sitter-zig.wasm` @ v1.1.2](https://github.com/tree-sitter-grammars/tree-sitter-zig/releases/download/v1.1.2/tree-sitter-zig.wasm) | `54b3b83dd9c62da5…` | 675 KB |
 
 Regenerate this table with `scripts/asset-table.sh` after adding a language or
 re-pinning a revision, so it can't drift from `index.json`.
@@ -63,17 +72,17 @@ git clone --depth 1 --branch <rev> https://github.com/tree-sitter/tree-sitter-ru
 cd tree-sitter-ruby && tree-sitter build --wasm
 ```
 
+Shipping profiles rather than binaries is deliberate: hosting `.wasm` files
+would mean a build pipeline per grammar, a license review per grammar, and
+megabytes per language — none of which is the actual problem. The problem is the
+profile.
+
 **Finding a grammar:** tree-sitter has no search command.
 [nvim-treesitter's `parsers.lua`](https://github.com/nvim-treesitter/nvim-treesitter/blob/main/lua/nvim-treesitter/parsers.lua)
 is the best source — ~570 parsers, machine-readable, each with a repo URL and a
 pinned revision (which is what `grammar_rev` wants). The
 [tree-sitter wiki list](https://github.com/tree-sitter/tree-sitter/wiki/List-of-parsers)
 is the canonical catalogue but carries no revisions.
-
-That split is deliberate. Hosting binaries would mean running a build pipeline
-for every grammar at ABI 0.25, reviewing each grammar's license for
-redistribution, and serving megabytes per language — none of which is the actual
-problem. The problem is the profile.
 
 ## What a profile is, and why it needs curating
 

@@ -1,0 +1,46 @@
+[
+  {
+    "breadcrumbs": [
+      {
+        "line": 6,
+        "text": "class Invoice(val lines: List[Line]) {"
+      },
+      {
+        "line": 12,
+        "text": "  def compute(): Double = {"
+      }
+    ],
+    "line": 15,
+    "query": "(class_definition\n  (template_body\n    (function_definition\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"compute\")\n      (block\n        (for_expression\n          (block\n            (if_expression\n              (block\n                (assignment_expression\n                  left: (_) @left\n                  (#eq? @left \"total\")) @target))))))))",
+    "resolution_method": "exact",
+    "sample": "sample.scala"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 6,
+        "text": "class Invoice(val lines: List[Line]) {"
+      },
+      {
+        "line": 23,
+        "text": "  class Summary(val label: String) {"
+      }
+    ],
+    "line": 24,
+    "query": "(class_definition\n  (template_body\n    (class_definition\n      name: (identifier) @name0\n      (#eq? @name0 \"Summary\")\n      (template_body\n        (function_definition\n          name: (identifier) @fn_name @sticky.function\n          (#eq? @fn_name \"render\")) @target))))",
+    "resolution_method": "exact",
+    "sample": "sample.scala"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 28,
+        "text": "object Invoice {"
+      }
+    ],
+    "line": 29,
+    "query": "(object_definition\n  name: (identifier) @name0\n  (#eq? @name0 \"Invoice\")\n  (template_body\n    (function_definition\n      name: (identifier) @fn_name @sticky.function\n      (#eq? @fn_name \"empty\")) @target))",
+    "resolution_method": "exact",
+    "sample": "sample.scala"
+  }
+]

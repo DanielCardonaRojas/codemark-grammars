@@ -1,0 +1,43 @@
+{
+  "extensions": [
+    "scala",
+    "sc"
+  ],
+  "name": "scala",
+  "profile": {
+    "containers": [
+      [
+        "class_definition",
+        "name"
+      ],
+      [
+        "object_definition",
+        "name"
+      ],
+      [
+        "trait_definition",
+        "name"
+      ],
+      [
+        "function_definition",
+        "name"
+      ]
+    ],
+    "landmark_kinds": [
+      "class_definition",
+      "function_declaration",
+      "function_definition",
+      "object_definition",
+      "trait_definition"
+    ],
+    "node_labels": {
+      "class_definition": "class",
+      "for_expression": "for loop",
+      "function_declaration": "function",
+      "function_definition": "function",
+      "if_expression": "if statement",
+      "trait_definition": "interface"
+    }
+  },
+  "version": "1.0.0"
+}

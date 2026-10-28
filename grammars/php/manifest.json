@@ -1,0 +1,51 @@
+{
+  "extensions": [
+    "php",
+    "phtml"
+  ],
+  "name": "php",
+  "profile": {
+    "containers": [
+      [
+        "class_declaration",
+        "name"
+      ],
+      [
+        "interface_declaration",
+        "name"
+      ],
+      [
+        "namespace_definition",
+        "name"
+      ],
+      [
+        "method_declaration",
+        "name"
+      ],
+      [
+        "function_definition",
+        "name"
+      ]
+    ],
+    "landmark_kinds": [
+      "class_declaration",
+      "function_definition",
+      "interface_declaration",
+      "method_declaration",
+      "namespace_definition"
+    ],
+    "node_labels": {
+      "assignment_expression": "assignment",
+      "augmented_assignment_expression": "assignment",
+      "class_declaration": "class",
+      "function_call_expression": "call",
+      "function_definition": "function",
+      "if_statement": "if statement",
+      "interface_declaration": "interface",
+      "method_declaration": "method",
+      "namespace_definition": "namespace",
+      "return_statement": "return"
+    }
+  },
+  "version": "1.0.0"
+}

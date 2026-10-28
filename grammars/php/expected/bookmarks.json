@@ -1,0 +1,46 @@
+[
+  {
+    "breadcrumbs": [
+      {
+        "line": 7,
+        "text": "class Invoice"
+      },
+      {
+        "line": 16,
+        "text": "    public function total(): float"
+      }
+    ],
+    "line": 21,
+    "query": "(class_declaration\n  (declaration_list\n    (method_declaration\n      name: (name) @name0 @sticky.method\n      (#eq? @name0 \"total\")\n      (compound_statement\n        (foreach_statement\n          (compound_statement\n            (if_statement\n              (compound_statement\n                (expression_statement) @target))))))))",
+    "resolution_method": "exact",
+    "sample": "sample.php"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 7,
+        "text": "class Invoice"
+      },
+      {
+        "line": 29,
+        "text": "    public static function empty(): self"
+      }
+    ],
+    "line": 31,
+    "query": "(class_declaration\n  (declaration_list\n    (method_declaration\n      name: (name) @name0 @sticky.method\n      (#eq? @name0 \"empty\")\n      (compound_statement\n        (return_statement) @target))))",
+    "resolution_method": "exact",
+    "sample": "sample.php"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 40,
+        "text": "function formatMoney(float $v): string"
+      }
+    ],
+    "line": 42,
+    "query": "(function_definition\n  name: (name) @name0 @sticky.function\n  (#eq? @name0 \"formatMoney\")\n  (compound_statement\n    (return_statement) @target))",
+    "resolution_method": "exact",
+    "sample": "sample.php"
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "breadcrumbs": [
+      {
+        "line": 8,
+        "text": "    pub fn compute(self: *Invoice) f64 {"
+      }
+    ],
+    "line": 12,
+    "query": "(variable_declaration\n  (struct_declaration\n    (function_declaration\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"compute\")\n      (block\n        (labeled_statement\n          (for_statement\n            (block_expression\n              (block\n                (if_statement\n                  (block_expression\n                    (block\n                      (variable_declaration) @target)))))))))))",
+    "resolution_method": "exact",
+    "sample": "sample.zig"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 8,
+        "text": "    pub fn compute(self: *Invoice) f64 {"
+      }
+    ],
+    "line": 18,
+    "query": "(variable_declaration\n  (struct_declaration\n    (function_declaration\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"compute\")\n      (block\n        (expression_statement) @target))))",
+    "resolution_method": "exact",
+    "sample": "sample.zig"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 27,
+        "text": "pub fn formatMoney(value: f64) f64 {"
+      }
+    ],
+    "line": 28,
+    "query": "(function_declaration\n  name: (identifier) @name0 @sticky.function\n  (#eq? @name0 \"formatMoney\")\n  (block\n    (expression_statement) @target))",
+    "resolution_method": "exact",
+    "sample": "sample.zig"
+  }
+]

@@ -1,0 +1,12 @@
+# 1-based lines to bookmark, one per line.
+
+# Inside if > for > compute() > class Invoice. The two if-branches are given
+# different shapes on purpose: identical sibling statements make the generated
+# structural query ambiguous, which is a sample problem, not a profile one.
+15
+
+# Inside `render()` in the nested `class Summary` — proves class nesting.
+24
+
+# Inside the companion `object Invoice`.
+29

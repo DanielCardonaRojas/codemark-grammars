@@ -1,0 +1,15 @@
+# 1-based lines to bookmark. Each sits INSIDE a construct the profile claims to
+# understand, so a broken `containers` shows up as a missing breadcrumb.
+#
+# Note: the semicolon form `namespace App\Billing;` does not enclose the class
+# in the AST, so it never appears in a breadcrumb. That is the language, not a
+# profile gap — a braced `namespace X { ... }` would nest.
+
+# Inside if > foreach > total() > class Invoice.
+21
+
+# Inside the static method `empty()`.
+31
+
+# Inside the top-level function `formatMoney`.
+42

@@ -1,0 +1,29 @@
+{
+  "extensions": [
+    "zig",
+    "zon"
+  ],
+  "name": "zig",
+  "profile": {
+    "containers": [
+      [
+        "function_declaration",
+        "name"
+      ]
+    ],
+    "landmark_kinds": [
+      "function_declaration",
+      "struct_declaration",
+      "variable_declaration"
+    ],
+    "node_labels": {
+      "for_statement": "for loop",
+      "function_declaration": "function",
+      "if_statement": "if statement",
+      "return_expression": "return",
+      "struct_declaration": "class",
+      "variable_declaration": "variable"
+    }
+  },
+  "version": "1.0.0"
+}
