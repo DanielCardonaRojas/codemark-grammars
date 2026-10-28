@@ -5,13 +5,25 @@ proves your profile works instead of asking a reviewer to take it on faith.
 
 ## 1. Build the grammar
 
+Many grammars publish a prebuilt `.wasm` in their releases — try that first,
+since codemark accepts ABI 13–15 (roughly CLI 0.21–0.25) and rejects an
+incompatible module up front:
+
 ```bash
-npm install -g tree-sitter-cli@0.25          # must be 0.25 — that's the ABI codemark loads
+curl -fsSL -o ruby.wasm \
+  https://github.com/tree-sitter/tree-sitter-ruby/releases/download/v1.2.3/tree-sitter-ruby.wasm
+```
+
+Otherwise build it (needs Docker or emscripten); 0.25 is the safe default
+because it can never emit an ABI too new for codemark:
+
+```bash
+npm install -g tree-sitter-cli@0.25
 git clone --depth 1 --branch v1.2.3 https://github.com/tree-sitter/tree-sitter-ruby
 cd tree-sitter-ruby && tree-sitter build --wasm
 ```
 
-Note the exact tag you cloned — it becomes `grammar_rev`.
+Note the exact tag — it becomes `grammar_rev`.
 
 ## 2. Generate the profile — don't hand-write it
 
@@ -28,7 +40,9 @@ whether it became a landmark, which field held its name, and why — so you can
 audit each decision rather than trusting the output.
 
 Hand-writing is the fallback, not the default. The kinds are grammar-specific
-and a wrong one fails silently.
+and a wrong one fails silently — see
+[the manifest anatomy guide](https://github.com/DanielCardonaRojas/codemark/blob/main/dev-docs/guides/manifest-anatomy.md)
+for what each field means and how it fails.
 
 ## 3. Add samples and pick lines
 
