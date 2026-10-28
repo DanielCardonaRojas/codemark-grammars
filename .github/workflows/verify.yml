@@ -71,17 +71,16 @@ jobs:
           workspaces: codemark
 
       # Built from source rather than a release, so a profile is verified
-      # against the codemark that will actually consume it.
+      # against the codemark that will actually consume it — the default branch,
+      # which is what users install.
       #
-      # `ref` is pinned to the branch that adds `languages add --from-registry`,
-      # which this harness depends on. Drop the `ref:` line (falling back to the
-      # default branch) once that branch merges —
-      # https://github.com/DanielCardonaRojas/codemark/pull/242
+      # Set the `CODEMARK_REF` repository variable to test against a branch
+      # (e.g. when a change to the registry needs an unreleased CLI feature).
       - name: Check out codemark
         uses: actions/checkout@v4
         with:
           repository: DanielCardonaRojas/codemark
-          ref: ${{ vars.CODEMARK_REF || 'feat/grammar-profile-lint' }}
+          ref: ${{ vars.CODEMARK_REF || '' }}
           path: codemark
 
       - name: Build codemark
