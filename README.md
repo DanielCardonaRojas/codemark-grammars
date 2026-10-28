@@ -4,7 +4,7 @@ Curated **language profiles** for [codemark](https://github.com/DanielCardonaRoj
 
 ```bash
 codemark languages registry list
-codemark languages add ./tree-sitter-ruby.wasm --from-registry ruby
+codemark languages install ruby      # downloads, verifies, installs
 ```
 
 ## Available
@@ -51,20 +51,22 @@ that matters to you.
 
 ## Profiles, not binaries
 
-This registry ships `manifest.json` files. It does **not** host `.wasm`
-grammars — you supply those.
+This registry **hosts** `manifest.json` files only. It does not serve `.wasm`
+grammars — but each entry *points at* the prebuilt one published by the
+grammar's own project, pinned by SHA-256, which is what makes
+`codemark languages install <lang>` a single step. Codemark downloads from
+upstream, verifies the digest against this repo's index, and refuses to install
+anything else.
 
-Many grammars publish a prebuilt `.wasm` in their GitHub releases, which is the
-quickest route. Codemark accepts **ABI 13–15** (roughly CLI 0.21–0.25) and
-rejects an incompatible module up front, so it's safe to just try one:
+An entry without a `wasm_url` still works; you just supply the `.wasm`:
 
 ```bash
-curl -fsSL -o ruby.wasm \
-  https://github.com/tree-sitter/tree-sitter-ruby/releases/download/v0.23.1/tree-sitter-ruby.wasm
 codemark languages add ./ruby.wasm --from-registry ruby
 ```
 
-Otherwise build it (needs Docker or emscripten):
+Codemark accepts **ABI 13–15** (roughly CLI 0.21–0.25) and rejects an
+incompatible module up front, so it's safe to try whatever you have. To build it
+yourself (needs Docker or emscripten):
 
 ```bash
 npm install -g tree-sitter-cli@0.25

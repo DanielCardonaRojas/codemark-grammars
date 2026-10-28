@@ -68,8 +68,22 @@ Sample code must be yours or permissively licensed.
   "ts_abi": "0.25",
   "grammar_repo": "https://github.com/tree-sitter/tree-sitter-ruby",
   "grammar_rev": "v1.2.3",
-  "description": "Ruby"
+  "description": "Ruby",
+  "wasm_url": "https://github.com/tree-sitter/tree-sitter-ruby/releases/download/v1.2.3/tree-sitter-ruby.wasm",
+  "wasm_sha256": "09a96427d7c72f0613ed470cd9812223fc4a91d6a9c025c0235cc6bd59ff96f4"
 }
+```
+
+`wasm_url` + `wasm_sha256` are what enable `codemark languages install ruby`.
+Both or neither — codemark refuses to download unpinned bytes. The URL must be
+https and share a host with `grammar_repo`, so an entry can't point at a binary
+unrelated to the grammar it names. Omit both if the grammar publishes no release
+asset; the language still installs from a user-supplied `.wasm`.
+
+Get the checksum from `scripts/asset-table.sh` (step 5), or:
+
+```bash
+curl -fsSL <wasm_url> | shasum -a 256
 ```
 
 `name` must not collide with a codemark built-in (rust, swift, typescript,
