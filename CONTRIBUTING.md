@@ -74,6 +74,11 @@ Sample code must be yours or permissively licensed.
 }
 ```
 
+`grammar_dir` is only needed when `grammar.js` isn't at the repo root — some
+repos publish several grammars from one repository (`tree-sitter-php` keeps them
+in `php/` and `php_only/`). CI builds from the clone root otherwise, and fails
+with "Failed to load grammar.js" if the field is missing.
+
 `wasm_url` + `wasm_sha256` are what enable `codemark languages install ruby`.
 Both or neither — codemark refuses to download unpinned bytes. The URL must be
 https and share a host with `grammar_repo`, so an entry can't point at a binary

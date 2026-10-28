@@ -41,6 +41,7 @@
       "ts_abi": "0.25",
       "grammar_repo": "https://github.com/tree-sitter/tree-sitter-php",
       "grammar_rev": "v0.25.1",
+      "grammar_dir": "php",
       "description": "PHP",
       "wasm_url": "https://github.com/tree-sitter/tree-sitter-php/releases/download/v0.25.1/tree-sitter-php.wasm",
       "wasm_sha256": "bd5e2bf8d42306b7aa32e6b7e39ae9fd9543c62a875ad8b2bc3d488242f72817"

@@ -55,6 +55,10 @@ PY
 
 GRAMMAR_REPO="$(read_index_field grammar_repo)"
 GRAMMAR_REV="$(read_index_field grammar_rev)"
+# Subdirectory holding `grammar.js`, for repos that publish several grammars.
+# tree-sitter-php keeps them in `php/` and `php_only/` and has nothing at the
+# root, so building from the clone root fails with "Failed to load grammar.js".
+GRAMMAR_DIR="$(read_index_field grammar_dir)"
 
 [[ -n "$GRAMMAR_REPO" ]] || { echo "index.json: $LANG_NAME has no grammar_repo" >&2; exit 2; }
 [[ -n "$GRAMMAR_REV" ]]  || { echo "index.json: $LANG_NAME has no grammar_rev" >&2; exit 2; }
@@ -72,8 +76,15 @@ WASM="${WASM_OVERRIDE:-}"
 if [[ -z "$WASM" ]]; then
   echo "==> building $LANG_NAME grammar at $GRAMMAR_REV"
   git clone --quiet --depth 1 --branch "$GRAMMAR_REV" "$GRAMMAR_REPO" "$WORK/grammar"
-  ( cd "$WORK/grammar" && tree-sitter build --wasm )
-  WASM="$(find "$WORK/grammar" -maxdepth 1 -name '*.wasm' | head -1)"
+  BUILD_DIR="$WORK/grammar${GRAMMAR_DIR:+/$GRAMMAR_DIR}"
+  [[ -f "$BUILD_DIR/grammar.js" ]] || {
+    echo "no grammar.js in ${GRAMMAR_DIR:-the repository root} — set \`grammar_dir\` in index.json" >&2
+    echo "candidates:" >&2
+    find "$WORK/grammar" -name grammar.js -not -path '*/node_modules/*' -maxdepth 3 >&2
+    exit 1
+  }
+  ( cd "$BUILD_DIR" && tree-sitter build --wasm )
+  WASM="$(find "$BUILD_DIR" -maxdepth 1 -name '*.wasm' | head -1)"
   [[ -n "$WASM" ]] || { echo "tree-sitter build --wasm produced no .wasm" >&2; exit 1; }
 fi
 

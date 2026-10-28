@@ -275,7 +275,7 @@ Real cases from profiles in this repo, worth reading before authoring a new one:
 |---|---|
 | **Lua** | `function_call`, not `call_expression`; no `local_function_declaration` at all. An early hand-written profile used both and silently produced no breadcrumbs. |
 | **Ruby** | Declarations are bare words (`class`, `module`, `method`) with no `_declaration` suffix. Anything deriving kinds from naming conventions misses them. |
-| **PHP** | `namespace X;` (semicolon form) doesn't enclose anything in the AST, so it can never appear in a breadcrumb. The braced form does. |
+| **PHP** | `namespace X;` (semicolon form) doesn't enclose anything in the AST, so it can never appear in a breadcrumb. The braced form does. The repo also publishes two grammars from subdirectories, so its index entry needs `grammar_dir` and names one of two wasm assets. |
 | **Zig** | A struct is an anonymous value bound by the enclosing `variable_declaration`, so `struct_declaration` has no name field and can't be a container. |
 | **Scala** | Identical sibling statements make the generated query ambiguous and codemark refuses the bookmark — a sample-authoring constraint, not a profile defect. |
 | **Kotlin** | The grammar declares *no field names at all*, so no `containers` entry is possible. See [NOT-YET-SUPPORTED.md](NOT-YET-SUPPORTED.md). |
