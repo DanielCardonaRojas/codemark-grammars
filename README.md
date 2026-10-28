@@ -98,7 +98,9 @@ just stops producing breadcrumbs. A profile can be wrong for a long time without
 anyone noticing.
 
 So every profile here is machine-verified, not merely reviewed. See
-[CONTRIBUTING.md](CONTRIBUTING.md).
+[CONTRIBUTING.md](CONTRIBUTING.md) to add one, and [MANIFEST.md](MANIFEST.md)
+for a field-by-field breakdown of what a profile contains and how each part
+fails.
 
 ## Layout
 
@@ -111,6 +113,8 @@ grammars/<lang>/
   expected/bookmarks.json          committed snapshot of the results
   README.md                        grammar repo, revision, notes
 scripts/verify.sh                  the verification harness
+scripts/asset-table.sh             regenerates the provenance table
+MANIFEST.md                        what every manifest field means
 ```
 
 ### One entry per language, not per version

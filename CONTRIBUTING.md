@@ -40,9 +40,8 @@ whether it became a landmark, which field held its name, and why — so you can
 audit each decision rather than trusting the output.
 
 Hand-writing is the fallback, not the default. The kinds are grammar-specific
-and a wrong one fails silently — see
-[the manifest anatomy guide](https://github.com/DanielCardonaRojas/codemark/blob/main/dev-docs/guides/manifest-anatomy.md)
-for what each field means and how it fails.
+and a wrong one fails silently — see [MANIFEST.md](MANIFEST.md) for what each
+field means, which code reads it, and how each one fails.
 
 ## 3. Add samples and pick lines
 
