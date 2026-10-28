@@ -1,0 +1,28 @@
+# 1-based lines to bookmark, one per line. Blank lines and # comments ignored.
+#
+# Each line is chosen to sit INSIDE a construct the profile claims to
+# understand, so that a broken `containers` entry shows up as a missing
+# breadcrumb rather than passing unnoticed.
+
+# Inside `function M.add` — a nested if, so the breadcrumb must name the
+# enclosing function. This is the line that fails if `containers` is wrong.
+13
+
+# Inside `function M.process` — a local declaration, exercising
+# `variable_declaration` as a landmark.
+19
+
+# Inside a for loop inside `function M.process` — two levels deep, so the
+# breadcrumb walk has to skip the loop (not a container) and find the function.
+#
+# DISABLED: this currently fails in the query generator, not in the profile.
+# It emits `name: (identifier) @fn_name` against an ancestor kind that has no
+# `name` field, so tree-sitter rejects the query as an impossible pattern and
+# the bookmark can't be created at all. Reproduces with an empty profile too, so
+# it is not something a curated profile can fix. Re-enable once the generator
+# checks that the field exists on the ancestor kind before constraining it.
+# 21
+
+# Inside an anonymous `function_definition` assigned to a local, which is the
+# landmark tier that has no name field of its own.
+30

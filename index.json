@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "grammars": [
+    {
+      "name": "lua",
+      "extensions": ["lua"],
+      "profile_version": "1.0.0",
+      "profile_url": "grammars/lua/manifest.json",
+      "ts_abi": "0.25",
+      "grammar_repo": "https://github.com/tree-sitter-grammars/tree-sitter-lua",
+      "grammar_rev": "v0.4.0",
+      "description": "Lua"
+    }
+  ]
+}

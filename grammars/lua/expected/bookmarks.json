@@ -1,0 +1,33 @@
+[
+  {
+    "breadcrumbs": [
+      {
+        "line": 11,
+        "text": "function M.add(a, b)"
+      }
+    ],
+    "line": 13,
+    "query": "(chunk\n  (function_declaration\n    name: (dot_index_expression) @name0 @sticky.function\n    (#eq? @name0 \"M.add\")\n    (block\n      (if_statement\n        (block\n          (return_statement) @target)))))",
+    "resolution_method": "exact",
+    "sample": "sample.lua"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 18,
+        "text": "function M.process(items)"
+      }
+    ],
+    "line": 19,
+    "query": "(chunk\n  (function_declaration\n    name: (dot_index_expression) @name0 @sticky.function\n    (#eq? @name0 \"M.process\")\n    (block\n      (variable_declaration) @target)))",
+    "resolution_method": "exact",
+    "sample": "sample.lua"
+  },
+  {
+    "breadcrumbs": [],
+    "line": 30,
+    "query": "(chunk\n  (variable_declaration\n    (assignment_statement\n      (expression_list\n        (function_definition\n          (block\n            (return_statement) @target))))))",
+    "resolution_method": "exact",
+    "sample": "sample.lua"
+  }
+]

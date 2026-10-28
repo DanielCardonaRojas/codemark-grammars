@@ -1,0 +1,87 @@
+name: verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  # Which grammars changed? Verifying one means building its .wasm from source,
+  # so a PR touching a single profile shouldn't rebuild every grammar in the
+  # repo. On main (or when the script/index changes) everything is verified.
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      languages: ${{ steps.list.outputs.languages }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - id: list
+        run: |
+          set -euo pipefail
+          all=$(ls grammars | jq -R . | jq -sc .)
+
+          if [[ "${{ github.event_name }}" != "pull_request" ]]; then
+            echo "languages=$all" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          changed=$(git diff --name-only \
+            "origin/${{ github.base_ref }}...HEAD")
+
+          # A change to the harness, the index, or the workflow itself could
+          # affect any grammar, so verify them all.
+          if grep -qE '^(scripts/|index\.json|\.github/)' <<<"$changed"; then
+            echo "languages=$all" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          langs=$(grep -oE '^grammars/[^/]+' <<<"$changed" \
+            | cut -d/ -f2 | sort -u | jq -R . | jq -sc .)
+          [[ "$langs" == "[]" || -z "$langs" ]] && langs='[]'
+          echo "languages=$langs" >> "$GITHUB_OUTPUT"
+
+  verify:
+    needs: discover
+    if: needs.discover.outputs.languages != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      # One red grammar shouldn't hide the state of the others.
+      fail-fast: false
+      matrix:
+        language: ${{ fromJSON(needs.discover.outputs.languages) }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Must match the ABI codemark's WasmStore loads. A grammar built with a
+      # different CLI can fail to load or crash while parsing.
+      - name: Install tree-sitter CLI 0.25
+        run: npm install -g tree-sitter-cli@0.25
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: codemark
+
+      # Built from source rather than a release, so a profile is verified
+      # against the codemark that will actually consume it.
+      - name: Check out codemark
+        uses: actions/checkout@v4
+        with:
+          repository: codemark-dev/codemark
+          path: codemark
+
+      - name: Build codemark
+        run: cargo build --release --manifest-path codemark/Cargo.toml -p codemark-cli
+
+      - name: Verify ${{ matrix.language }}
+        env:
+          CODEMARK: ${{ github.workspace }}/codemark/target/release/codemark
+        run: ./scripts/verify.sh ${{ matrix.language }}

@@ -1,0 +1,6 @@
+# Grammars are built from source at the pinned revision, never committed —
+# see README.md on why this registry ships profiles, not binaries.
+*.wasm
+
+# Local verification scratch
+/tmp/
