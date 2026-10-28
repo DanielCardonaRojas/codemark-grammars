@@ -87,6 +87,20 @@ export CODEMARK_GRAMMARS_DIR="$WORK/grammars"
 export CODEMARK_GRAMMAR_REGISTRY="$REPO_ROOT"
 mkdir -p "$CODEMARK_GRAMMARS_DIR"
 
+# A codemark without `--from-registry` can't verify anything here, and clap's
+# "unexpected argument" is a confusing way to learn that.
+if ! "$CODEMARK" languages add --help 2>&1 | grep -q -- '--from-registry'; then
+  cat >&2 <<MSG
+This codemark has no \`languages add --from-registry\`, which this harness needs.
+
+  codemark: $CODEMARK
+
+Build one from a revision that includes the grammar registry, or set CODEMARK
+to point at it.
+MSG
+  exit 2
+fi
+
 echo "==> installing $LANG_NAME with this repo's profile"
 "$CODEMARK" languages add "$WASM" --from-registry "$LANG_NAME" >/dev/null
 
