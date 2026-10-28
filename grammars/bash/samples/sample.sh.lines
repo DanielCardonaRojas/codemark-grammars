@@ -1,0 +1,7 @@
+# 1-based lines to bookmark, one per line.
+
+# Inside the `if` inside `deploy()` — the breadcrumb must name the function.
+11
+
+# Inside the `for` loop inside `deploy()` — two levels deep.
+14

@@ -1,0 +1,45 @@
+{
+  "extensions": [
+    "rb",
+    "rake",
+    "gemspec"
+  ],
+  "name": "ruby",
+  "profile": {
+    "containers": [
+      [
+        "class",
+        "name"
+      ],
+      [
+        "module",
+        "name"
+      ],
+      [
+        "method",
+        "name"
+      ],
+      [
+        "singleton_method",
+        "name"
+      ]
+    ],
+    "landmark_kinds": [
+      "class",
+      "method",
+      "module",
+      "singleton_method"
+    ],
+    "node_labels": {
+      "assignment": "assignment",
+      "call": "call",
+      "class": "class",
+      "if": "if statement",
+      "method": "method",
+      "module": "module",
+      "operator_assignment": "assignment",
+      "singleton_method": "method"
+    }
+  },
+  "version": "1.0.0"
+}

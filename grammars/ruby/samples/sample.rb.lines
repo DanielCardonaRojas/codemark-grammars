@@ -1,0 +1,13 @@
+# 1-based lines to bookmark. Each sits INSIDE a construct the profile claims to
+# understand, so a broken `containers` shows up as a missing breadcrumb.
+
+# Inside `if` inside `compute` inside `Invoice` inside `Billing` — four levels,
+# so the breadcrumb walk must skip the `if` (not a container) and name the
+# method, class and module.
+14
+
+# Inside the singleton method `self.empty`.
+23
+
+# Inside `amount` in the nested `LineItem` class — proves class nesting.
+28

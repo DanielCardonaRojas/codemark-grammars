@@ -1,0 +1,27 @@
+{
+  "extensions": [
+    "sh",
+    "bash"
+  ],
+  "name": "bash",
+  "profile": {
+    "containers": [
+      [
+        "function_definition",
+        "name"
+      ]
+    ],
+    "landmark_kinds": [
+      "declaration_command",
+      "function_definition"
+    ],
+    "node_labels": {
+      "for_statement": "for loop",
+      "function_definition": "function",
+      "if_statement": "if statement",
+      "variable_assignment": "assignment",
+      "while_statement": "while loop"
+    }
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "breadcrumbs": [
+      {
+        "line": 7,
+        "text": "deploy() {"
+      }
+    ],
+    "line": 11,
+    "query": "(function_definition\n  name: (word) @name0 @sticky.function\n  (#eq? @name0 \"deploy\")\n  (compound_statement\n    (if_statement\n      (command\n        name: (command_name) @fn_name\n        (#eq? @fn_name \"return\")) @target)))",
+    "resolution_method": "exact",
+    "sample": "sample.sh"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 7,
+        "text": "deploy() {"
+      }
+    ],
+    "line": 14,
+    "query": "(function_definition\n  name: (word) @name0 @sticky.function\n  (#eq? @name0 \"deploy\")\n  (compound_statement\n    (for_statement\n      (do_group\n        (command\n          name: (command_name) @fn_name\n          (#eq? @fn_name \"echo\")) @target))))",
+    "resolution_method": "exact",
+    "sample": "sample.sh"
+  }
+]
