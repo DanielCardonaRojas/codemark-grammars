@@ -9,11 +9,36 @@ codemark languages add ./tree-sitter-ruby.wasm --from-registry ruby
 
 ## Available
 
-| Language | Extensions | Grammar |
-|---|---|---|
-| bash | `sh`, `bash` | [tree-sitter-bash](https://github.com/tree-sitter/tree-sitter-bash) |
-| lua | `lua` | [tree-sitter-lua](https://github.com/tree-sitter-grammars/tree-sitter-lua) |
-| ruby | `rb`, `rake`, `gemspec` | [tree-sitter-ruby](https://github.com/tree-sitter/tree-sitter-ruby) |
+| Language | Extensions | Grammar | Revision |
+|---|---|---|---|
+| bash | `sh`, `bash` | [tree-sitter-bash](https://github.com/tree-sitter/tree-sitter-bash) | `v0.25.1` |
+| lua | `lua` | [tree-sitter-lua](https://github.com/tree-sitter-grammars/tree-sitter-lua) | `v0.4.0` |
+| ruby | `rb`, `rake`, `gemspec` | [tree-sitter-ruby](https://github.com/tree-sitter/tree-sitter-ruby) | `v0.23.1` |
+
+### Where each `.wasm` came from
+
+Every profile here was verified against a specific `.wasm`. These are the exact
+release assets, so you can reproduce the verification rather than hoping your
+build matches:
+
+| Language | Download | SHA-256 | Size |
+|---|---|---|---|
+| bash | [`tree-sitter-bash.wasm` @ v0.25.1](https://github.com/tree-sitter/tree-sitter-bash/releases/download/v0.25.1/tree-sitter-bash.wasm) | `8292919c88a0f7d3…` | 1.30 MB |
+| lua | [`tree-sitter-lua.wasm` @ v0.4.0](https://github.com/tree-sitter-grammars/tree-sitter-lua/releases/download/v0.4.0/tree-sitter-lua.wasm) | `46aa46cf86966ba3…` | 48 KB |
+| ruby | [`tree-sitter-ruby.wasm` @ v0.23.1](https://github.com/tree-sitter/tree-sitter-ruby/releases/download/v0.23.1/tree-sitter-ruby.wasm) | `09a96427d7c72f06…` | 2.01 MB |
+
+Regenerate this table with `scripts/asset-table.sh` after adding a language or
+re-pinning a revision, so it can't drift from `index.json`.
+
+A checksum mismatch isn't necessarily a problem — a `.wasm` you build yourself
+from the same revision will differ byte-for-byte from the released one (emscripten
+output isn't reproducible across toolchains). The Lua profile was authored against
+a locally built 53 KB `.wasm` and verifies *identically* against the 48 KB release
+asset: node kinds come from the grammar revision, not the build.
+
+The checksums are here so you can tell *which* artifact a result came from, not
+as a security control — verify the download against GitHub's release page if
+that matters to you.
 
 ## Profiles, not binaries
 

@@ -72,6 +72,17 @@ resolve, and codemark rejects it on install.
 
 Commit the generated `expected/bookmarks.json`. CI runs the same script.
 
+Then record where your `.wasm` came from, so the next person can reproduce the
+verification instead of guessing which build you used:
+
+```bash
+./scripts/asset-table.sh      # paste into README.md's provenance table
+```
+
+and add the download URL + SHA-256 to `grammars/<lang>/README.md`. If you built
+from source rather than using a release asset, say so and give the exact
+`tree-sitter build --wasm` invocation.
+
 ### What verification actually checks
 
 1. The grammar builds at the pinned revision.
@@ -99,6 +110,8 @@ mean a `containers` entry stopped matching. Bump `profile_version` in
 - [ ] Samples cover nesting, not just top-level declarations
 - [ ] At least one chosen line is 2+ levels deep
 - [ ] `expected/bookmarks.json` is committed and CI is green
+- [ ] The `.wasm`'s download URL and SHA-256 are recorded (README provenance
+      table + `grammars/<lang>/README.md`)
 - [ ] Non-empty breadcrumbs wherever a line sits inside a named construct
 - [ ] `grammars/<lang>/README.md` records the grammar repo, revision, and
       anything surprising about the language

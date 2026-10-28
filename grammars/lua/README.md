@@ -4,8 +4,22 @@
 |---|---|
 | Grammar | https://github.com/tree-sitter-grammars/tree-sitter-lua |
 | Revision | `v0.4.0` |
-| Tree-sitter ABI | 0.25 |
+| Built with | tree-sitter CLI 0.25 (prebuilt release asset) |
 | Profile version | 1.0.0 |
+
+## Verified against
+
+```bash
+curl -fsSL -o lua.wasm \
+  https://github.com/tree-sitter-grammars/tree-sitter-lua/releases/download/v0.4.0/tree-sitter-lua.wasm
+codemark languages add ./lua.wasm --from-registry lua
+```
+
+SHA-256 `46aa46cf86966ba30af11a2674372ec0e51dd355464cad1aa1dca3a981a84a2b`.
+
+A `.wasm` you build yourself will differ byte-for-byte (emscripten output
+isn't reproducible) but should verify identically — node kinds come from the
+grammar revision, not the build.
 
 ## Notes on this grammar
 
