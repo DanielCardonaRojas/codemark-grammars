@@ -1,6 +1,6 @@
 # codemark-grammars
 
-Curated **language profiles** for [codemark](https://github.com/codemark-dev/codemark).
+Curated **language profiles** for [codemark](https://github.com/DanielCardonaRojas/codemark).
 
 ```bash
 codemark languages registry list

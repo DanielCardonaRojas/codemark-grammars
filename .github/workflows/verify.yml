@@ -75,7 +75,7 @@ jobs:
       - name: Check out codemark
         uses: actions/checkout@v4
         with:
-          repository: codemark-dev/codemark
+          repository: DanielCardonaRojas/codemark
           path: codemark
 
       - name: Build codemark
