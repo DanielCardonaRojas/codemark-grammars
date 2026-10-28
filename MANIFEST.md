@@ -139,12 +139,36 @@ it works. You can add kinds; you can't remove them.
 
 ### `node_labels`
 
-Node kind → human-readable label, used in query summaries and TUI icon
-selection. Also additive: a missing entry falls through to a global table, then
-to the raw node kind.
+**This is a translation layer into one cross-language vocabulary.** Each grammar
+spells its constructs differently; `node_labels` maps those spellings onto a
+shared set of concepts, so query summaries and TUI icons can talk about "a
+function" without knowing the language.
 
-**Stick to the established vocabulary**, because icon lookup keys off the label
-string — an invented one parses fine and silently loses its icon:
+The same concept across the profiles in this repo:
+
+| Language | Node kind | Label |
+|---|---|---|
+| Ruby | `method` | `method` |
+| Bash | `function_definition` | `function` |
+| Lua | `function_declaration` | `function` |
+| PHP | `method_declaration` | `method` |
+| Scala | `function_definition` | `function` |
+| Zig | `function_declaration` | `function` |
+
+Six grammars, five spellings, one concept. That normalization is the whole
+point — a profile that gets the left column right but invents labels on the
+right has made its language *less* usable, not more.
+
+It isn't limited to landmarks: control flow and expressions get labels too
+(`if statement`, `for loop`, `call`), which is what makes a query summary
+readable.
+
+Also additive: a missing entry falls through to a global table, then to the raw
+node kind.
+
+**So the value side is not free-form.** Icon lookup keys off the label string,
+so an invented one parses fine and silently loses its icon — and splits a
+concept that should be unified across languages:
 
 `function` · `method` · `class` · `interface` · `enum` · `impl` · `module` ·
 `namespace` · `type` · `variable` · `macro` · `constructor` · `init` ·
