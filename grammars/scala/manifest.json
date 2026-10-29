@@ -5,22 +5,18 @@
   ],
   "curation": {
     "drop_landmarks": [
+      "case_class_pattern",
       "class_parameter",
       "class_parameters",
+      "import_declaration",
       "val_definition",
       "var_definition"
     ],
-    "add_containers": [
-      [
-        "function_definition",
-        "name"
-      ]
-    ],
-    "why": "the class_parameter* kinds are constructor-parameter wrappers; var_definition and val_definition name a 'type', not a name. The two dropped labels are expression kinds the sample happens to contain but which add nothing to a summary.",
     "drop_labels": [
       "assignment_expression",
       "call_expression"
-    ]
+    ],
+    "why": "case_class_pattern is a destructuring pattern in a match (`LineItem(_, amount, true)`), not a class definition \u2014 it only looks like one because it has a 'type' field and holds patterns, and labelling it 'class' would put a spurious type in the summary. class_parameter/class_parameters are constructor-parameter wrappers. val_definition and var_definition name a 'type', not a name. import_declaration declares nothing nestable. The two dropped labels are expression kinds that add nothing to a summary. Note package_clause and function_definition are now OBSERVED containers rather than curated in, because the sample uses the braced package form and nests a local def."
   },
   "name": "scala",
   "profile": {
@@ -30,24 +26,32 @@
         "name"
       ],
       [
+        "function_definition",
+        "name"
+      ],
+      [
         "object_definition",
+        "name"
+      ],
+      [
+        "package_clause",
         "name"
       ],
       [
         "trait_definition",
         "name"
-      ],
-      [
-        "function_definition",
-        "name"
       ]
     ],
     "landmark_kinds": [
       "class_definition",
+      "extension_definition",
       "function_declaration",
       "function_definition",
+      "given_definition",
       "object_definition",
-      "trait_definition"
+      "package_clause",
+      "trait_definition",
+      "type_definition"
     ],
     "node_labels": {
       "class_definition": "class",
@@ -55,8 +59,10 @@
       "function_declaration": "function",
       "function_definition": "function",
       "if_expression": "if statement",
-      "trait_definition": "interface"
+      "match_expression": "match",
+      "trait_definition": "interface",
+      "type_definition": "type"
     }
   },
-  "version": "1.0.0"
+  "version": "1.1.0"
 }

@@ -2,44 +2,132 @@
   {
     "breadcrumbs": [
       {
-        "line": 6,
-        "text": "class Invoice(val lines: List[Line]) {"
+        "line": 13,
+        "text": "package app.billing {"
       },
       {
-        "line": 12,
-        "text": "  def compute(): Double = {"
+        "line": 36,
+        "text": "  trait Payable {"
       }
     ],
-    "line": 15,
-    "query": "(class_definition\n  (template_body\n    (function_definition\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"compute\")\n      (block\n        (for_expression\n          (block\n            (if_expression\n              (block\n                (assignment_expression\n                  left: (_) @left\n                  (#eq? @left \"total\")) @target))))))))",
+    "line": 41,
+    "query": "(package_clause\n  (template_body\n    (trait_definition\n      name: (identifier) @name0\n      (#eq? @name0 \"Payable\")\n      (template_body\n        (function_definition\n          name: (identifier) @fn_name @sticky.function\n          (#eq? @fn_name \"describe\")) @target))))",
     "resolution_method": "exact",
     "sample": "sample.scala"
   },
   {
     "breadcrumbs": [
       {
-        "line": 6,
-        "text": "class Invoice(val lines: List[Line]) {"
+        "line": 13,
+        "text": "package app.billing {"
       },
       {
-        "line": 23,
-        "text": "  class Summary(val label: String) {"
+        "line": 44,
+        "text": "  class Invoice(val id: String, val lines: List[LineItem]) extends Payable {"
+      },
+      {
+        "line": 52,
+        "text": "    def compute(): Double = {"
       }
     ],
-    "line": 24,
-    "query": "(class_definition\n  (template_body\n    (class_definition\n      name: (identifier) @name0\n      (#eq? @name0 \"Summary\")\n      (template_body\n        (function_definition\n          name: (identifier) @fn_name @sticky.function\n          (#eq? @fn_name \"render\")) @target))))",
+    "line": 59,
+    "query": "(package_clause\n  (template_body\n    (class_definition\n      (template_body\n        (function_definition\n          name: (identifier) @name0 @sticky.function\n          (#eq? @name0 \"compute\")\n          (block\n            (for_expression\n              (block\n                (infix_expression\n                  (parenthesized_expression\n                    (match_expression\n                      (case_block\n                        (case_clause\n                          (val_definition) @target)))))))))))))",
     "resolution_method": "exact",
     "sample": "sample.scala"
   },
   {
     "breadcrumbs": [
       {
-        "line": 28,
-        "text": "object Invoice {"
+        "line": 13,
+        "text": "package app.billing {"
+      },
+      {
+        "line": 44,
+        "text": "  class Invoice(val id: String, val lines: List[LineItem]) extends Payable {"
+      },
+      {
+        "line": 52,
+        "text": "    def compute(): Double = {"
       }
     ],
-    "line": 29,
-    "query": "(object_definition\n  name: (identifier) @name0\n  (#eq? @name0 \"Invoice\")\n  (template_body\n    (function_definition\n      name: (identifier) @fn_name @sticky.function\n      (#eq? @fn_name \"empty\")) @target))",
+    "line": 66,
+    "query": "(package_clause\n  (template_body\n    (class_definition\n      (template_body\n        (function_definition\n          name: (identifier) @name0 @sticky.function\n          (#eq? @name0 \"compute\")\n          (block\n            (function_definition\n              name: (identifier) @fn_name @sticky.function\n              (#eq? @fn_name \"rounded\")) @target))))))",
+    "resolution_method": "exact",
+    "sample": "sample.scala"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 44,
+        "text": "  class Invoice(val id: String, val lines: List[LineItem]) extends Payable {"
+      },
+      {
+        "line": 89,
+        "text": "    class Summary(val label: String) {"
+      },
+      {
+        "line": 90,
+        "text": "      def render(): String = {"
+      }
+    ],
+    "line": 91,
+    "query": "(package_clause\n  (template_body\n    (class_definition\n      (template_body\n        (class_definition\n          (template_body\n            (function_definition\n              name: (identifier) @name0 @sticky.function\n              (#eq? @name0 \"render\")\n              (block\n                (val_definition) @target))))))))",
+    "resolution_method": "exact",
+    "sample": "sample.scala"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 13,
+        "text": "package app.billing {"
+      },
+      {
+        "line": 100,
+        "text": "  object Invoice {"
+      },
+      {
+        "line": 103,
+        "text": "    def apply(id: String, lines: LineItem*): Invoice ="
+      }
+    ],
+    "line": 105,
+    "query": "(package_clause\n  (template_body\n    (object_definition\n      (template_body\n        (function_definition\n          name: (identifier) @name0 @sticky.function\n          (#eq? @name0 \"apply\")\n          (indented_block) @target)))))",
+    "resolution_method": "exact",
+    "sample": "sample.scala"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 13,
+        "text": "package app.billing {"
+      },
+      {
+        "line": 118,
+        "text": "  object Formatting {"
+      }
+    ],
+    "line": 121,
+    "query": "(package_clause\n  (template_body\n    (object_definition\n      name: (identifier) @name0\n      (#eq? @name0 \"Formatting\")\n      (template_body\n        (function_definition\n          name: (identifier) @fn_name @sticky.function\n          (#eq? @fn_name \"money\")) @target))))",
+    "resolution_method": "exact",
+    "sample": "sample.scala"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 118,
+        "text": "  object Formatting {"
+      },
+      {
+        "line": 124,
+        "text": "    object Debug {"
+      },
+      {
+        "line": 125,
+        "text": "      def dump(invoice: Invoice): String = invoice.lines"
+      }
+    ],
+    "line": 127,
+    "query": "(package_clause\n  (template_body\n    (object_definition\n      (template_body\n        (object_definition\n          (template_body\n            (function_definition\n              name: (identifier) @name0 @sticky.function\n              (#eq? @name0 \"dump\")\n              (call_expression\n                (_) @func\n                (#eq? @func \"invoice.lines\\n        .map(line => s\\\"${line.sku}=${money(line.amount)}\\\")\\n        .mkString\")) @target)))))))",
     "resolution_method": "exact",
     "sample": "sample.scala"
   }
