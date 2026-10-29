@@ -239,6 +239,23 @@ no inline code at all. They would need as much curation as writing the sample
 directly, with worse structural coverage. Rejected; revisit per-language if an
 idiomatic sample proves hard to write.
 
+**[Rosetta Code](https://rosettacode.org/wiki/Rosetta_Code).** Appealing shape:
+the same task implemented across many languages, which would make samples
+comparable and give broad coverage cheaply. Rejected on two grounds.
+
+*Licence, decisively.* Content is **GFDL 1.2** — copyleft with share-alike, and
+notably harder to work with than learnxinyminutes' CC BY-SA: using the material
+under any GFDL-incompatible licence requires permission from *every individual
+contributor* who edited it. For a wiki with years of history that is not
+practical.
+
+*Structure, independently.* The examples are task fragments, not nested
+programs — the C# `Classes` entry is ~25 lines with a class and a `Main`, the
+Swift one ~15 lines with no namespace layer at all. That is the same flatness
+problem the grammar corpus has, without the corpus's compensating breadth. It
+would add a third source that overlaps what the idiomatic sample already
+covers, while contributing no rare constructs.
+
 **learnxinyminutes.** ~800–900 lines per language, genuinely good coverage of
 syntax variations. Rejected on licence: CC BY-SA 3.0 share-alike would
 propagate to this repo, which currently declares no licence at all and whose
