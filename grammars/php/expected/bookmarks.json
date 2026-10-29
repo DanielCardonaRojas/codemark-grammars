@@ -2,44 +2,172 @@
   {
     "breadcrumbs": [
       {
-        "line": 7,
-        "text": "class Invoice"
+        "line": 16,
+        "text": "namespace App\\Billing {"
       },
+      {
+        "line": 23,
+        "text": "    enum InvoiceState: string"
+      },
+      {
+        "line": 31,
+        "text": "        public function isSettled(): bool"
+      }
+    ],
+    "line": 33,
+    "query": "(namespace_definition\n  (compound_statement\n    (enum_declaration\n      (enum_declaration_list\n        (method_declaration\n          name: (name) @name0 @sticky.method\n          (#eq? @name0 \"isSettled\")\n          (compound_statement\n            (return_statement) @target))))))",
+    "resolution_method": "exact",
+    "sample": "sample.php"
+  },
+  {
+    "breadcrumbs": [
       {
         "line": 16,
-        "text": "    public function total(): float"
-      }
-    ],
-    "line": 21,
-    "query": "(class_declaration\n  (declaration_list\n    (method_declaration\n      name: (name) @name0 @sticky.method\n      (#eq? @name0 \"total\")\n      (compound_statement\n        (foreach_statement\n          (compound_statement\n            (if_statement\n              (compound_statement\n                (expression_statement) @target))))))))",
-    "resolution_method": "exact",
-    "sample": "sample.php"
-  },
-  {
-    "breadcrumbs": [
-      {
-        "line": 7,
-        "text": "class Invoice"
+        "text": "namespace App\\Billing {"
       },
       {
-        "line": 29,
-        "text": "    public static function empty(): self"
+        "line": 46,
+        "text": "    trait Describable"
+      },
+      {
+        "line": 48,
+        "text": "        public function describe(): string"
       }
     ],
-    "line": 31,
-    "query": "(class_declaration\n  (declaration_list\n    (method_declaration\n      name: (name) @name0 @sticky.method\n      (#eq? @name0 \"empty\")\n      (compound_statement\n        (return_statement) @target))))",
+    "line": 50,
+    "query": "(namespace_definition\n  (compound_statement\n    (trait_declaration\n      (declaration_list\n        (method_declaration\n          name: (name) @name0 @sticky.method\n          (#eq? @name0 \"describe\")\n          (compound_statement\n            (return_statement) @target))))))",
     "resolution_method": "exact",
     "sample": "sample.php"
   },
   {
     "breadcrumbs": [
       {
-        "line": 40,
-        "text": "function formatMoney(float $v): string"
+        "line": 16,
+        "text": "namespace App\\Billing {"
+      },
+      {
+        "line": 83,
+        "text": "    final class Invoice extends Document implements JsonSerializable"
+      },
+      {
+        "line": 96,
+        "text": "        public function __construct(string $id, array $lines = [])"
       }
     ],
-    "line": 42,
-    "query": "(function_definition\n  name: (name) @name0 @sticky.function\n  (#eq? @name0 \"formatMoney\")\n  (compound_statement\n    (return_statement) @target))",
+    "line": 101,
+    "query": "(namespace_definition\n  (compound_statement\n    (class_declaration\n      (declaration_list\n        (method_declaration\n          name: (name) @name0 @sticky.method\n          (#eq? @name0 \"__construct\")\n          (compound_statement\n            (if_statement\n              (compound_statement\n                (expression_statement) @target))))))))",
+    "resolution_method": "exact",
+    "sample": "sample.php"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 16,
+        "text": "namespace App\\Billing {"
+      },
+      {
+        "line": 83,
+        "text": "    final class Invoice extends Document implements JsonSerializable"
+      },
+      {
+        "line": 109,
+        "text": "        public function total(): float"
+      }
+    ],
+    "line": 116,
+    "query": "(namespace_definition\n  (compound_statement\n    (class_declaration\n      (declaration_list\n        (method_declaration\n          name: (name) @name0 @sticky.method\n          (#eq? @name0 \"total\")\n          (compound_statement\n            (foreach_statement\n              (compound_statement\n                (expression_statement\n                  (augmented_assignment_expression\n                    (match_expression\n                      (match_block) @target)))))))))))",
+    "resolution_method": "exact",
+    "sample": "sample.php"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 16,
+        "text": "namespace App\\Billing {"
+      },
+      {
+        "line": 83,
+        "text": "    final class Invoice extends Document implements JsonSerializable"
+      },
+      {
+        "line": 124,
+        "text": "        public function pay(float $amount): bool"
+      }
+    ],
+    "line": 127,
+    "query": "(namespace_definition\n  (compound_statement\n    (class_declaration\n      (declaration_list\n        (method_declaration\n          name: (name) @name0 @sticky.method\n          (#eq? @name0 \"pay\")\n          (compound_statement\n            (try_statement\n              (compound_statement\n                (expression_statement) @target))))))))",
+    "resolution_method": "exact",
+    "sample": "sample.php"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 16,
+        "text": "namespace App\\Billing {"
+      },
+      {
+        "line": 83,
+        "text": "    final class Invoice extends Document implements JsonSerializable"
+      },
+      {
+        "line": 142,
+        "text": "        public function jsonSerialize(): array"
+      }
+    ],
+    "line": 146,
+    "query": "(namespace_definition\n  (compound_statement\n    (class_declaration\n      (declaration_list\n        (method_declaration\n          name: (name) @name0 @sticky.method\n          (#eq? @name0 \"jsonSerialize\")\n          (compound_statement\n            (expression_statement\n              (assignment_expression\n                left: (_) @left\n                (#eq? @left \"$format\")) @target)))))))",
+    "resolution_method": "exact",
+    "sample": "sample.php"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 16,
+        "text": "namespace App\\Billing {"
+      },
+      {
+        "line": 164,
+        "text": "    final class LineItem"
+      },
+      {
+        "line": 173,
+        "text": "        public function isVoid(): bool"
+      }
+    ],
+    "line": 175,
+    "query": "(namespace_definition\n  (compound_statement\n    (class_declaration\n      (declaration_list\n        (method_declaration\n          name: (name) @name0 @sticky.method\n          (#eq? @name0 \"isVoid\")\n          (compound_statement\n            (return_statement) @target))))))",
+    "resolution_method": "exact",
+    "sample": "sample.php"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 16,
+        "text": "namespace App\\Billing {"
+      },
+      {
+        "line": 179,
+        "text": "    function formatMoney(float $value, string $currency = DEFAULT_CURRENCY): string"
+      }
+    ],
+    "line": 181,
+    "query": "(namespace_definition\n  (compound_statement\n    (function_definition\n      name: (name) @name0 @sticky.function\n      (#eq? @name0 \"formatMoney\")\n      (compound_statement\n        (expression_statement) @target))))",
+    "resolution_method": "exact",
+    "sample": "sample.php"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 16,
+        "text": "namespace App\\Billing {"
+      },
+      {
+        "line": 187,
+        "text": "    function eachTaxable(Invoice $invoice): iterable"
+      }
+    ],
+    "line": 191,
+    "query": "(namespace_definition\n  (compound_statement\n    (function_definition\n      name: (name) @name0 @sticky.function\n      (#eq? @name0 \"eachTaxable\")\n      (compound_statement\n        (foreach_statement\n          (compound_statement\n            (if_statement\n              (compound_statement\n                (continue_statement) @target))))))))",
     "resolution_method": "exact",
     "sample": "sample.php"
   }

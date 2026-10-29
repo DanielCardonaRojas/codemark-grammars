@@ -6,23 +6,19 @@
   "curation": {
     "drop_landmarks": [
       "declaration_list",
+      "enum_declaration_list",
       "property_declaration"
     ],
+    "drop_labels": [
+      "enum_declaration_list"
+    ],
     "add_containers": [
-      [
-        "namespace_definition",
-        "name"
-      ],
-      [
-        "method_declaration",
-        "name"
-      ],
       [
         "function_definition",
         "name"
       ]
     ],
-    "why": "declaration_list is the { } body. The semicolon form of namespace never encloses anything in the AST, so it must be added rather than observed; methods and functions likewise nest in real code."
+    "why": "declaration_list and enum_declaration_list are the { } body wrappers. property_declaration is a field, not something a breadcrumb should descend into. function_definition is added rather than observed: this sample's top-level functions contain statements but no nested declaration, yet a function is worth naming in a trail. Note namespace_definition is now OBSERVED rather than curated in, because the sample uses the braced namespace form \u2014 the semicolon form encloses nothing in the AST and could never appear in a breadcrumb."
   },
   "name": "php",
   "profile": {
@@ -32,11 +28,15 @@
         "name"
       ],
       [
-        "interface_declaration",
+        "enum_declaration",
         "name"
       ],
       [
-        "namespace_definition",
+        "function_definition",
+        "name"
+      ],
+      [
+        "interface_declaration",
         "name"
       ],
       [
@@ -44,29 +44,44 @@
         "name"
       ],
       [
-        "function_definition",
+        "namespace_definition",
+        "name"
+      ],
+      [
+        "trait_declaration",
         "name"
       ]
     ],
     "landmark_kinds": [
+      "anonymous_function",
+      "arrow_function",
       "class_declaration",
+      "enum_declaration",
       "function_definition",
       "interface_declaration",
       "method_declaration",
-      "namespace_definition"
+      "namespace_definition",
+      "trait_declaration"
     ],
     "node_labels": {
+      "anonymous_function": "function",
+      "arrow_function": "function",
       "assignment_expression": "assignment",
       "augmented_assignment_expression": "assignment",
       "class_declaration": "class",
+      "enum_declaration": "enum",
       "function_call_expression": "call",
       "function_definition": "function",
       "if_statement": "if statement",
       "interface_declaration": "interface",
+      "match_expression": "match",
+      "member_call_expression": "call",
       "method_declaration": "method",
       "namespace_definition": "namespace",
-      "return_statement": "return"
+      "return_statement": "return",
+      "scoped_call_expression": "call",
+      "trait_declaration": "interface"
     }
   },
-  "version": "1.0.0"
+  "version": "1.1.0"
 }
