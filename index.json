@@ -17,6 +17,22 @@
       "wasm_sha256": "8292919c88a0f7d3fb31d0cd0253ca5a9531bc1ede82b0537f2c63dd8abe6a7a"
     },
     {
+      "name": "c_sharp",
+      "extensions": [
+        "cs",
+        "csx"
+      ],
+      "profile_version": "1.0.0",
+      "profile_url": "grammars/c_sharp/manifest.json",
+      "ts_abi": "0.23",
+      "grammar_repo": "https://github.com/tree-sitter/tree-sitter-c-sharp",
+      "grammar_rev": "v0.23.1",
+      "description": "C# (overrides the built-in)",
+      "overrides_builtin": true,
+      "wasm_url": "https://github.com/tree-sitter/tree-sitter-c-sharp/releases/download/v0.23.1/tree-sitter-c_sharp.wasm",
+      "wasm_sha256": "d7fe0bf8e8b8d26b2b253f375e3c43386b332d23f7b7b3e15d49fff180fe46e3"
+    },
+    {
       "name": "lua",
       "extensions": [
         "lua"

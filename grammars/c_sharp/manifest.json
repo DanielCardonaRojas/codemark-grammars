@@ -1,0 +1,58 @@
+{
+  "extensions": [
+    "cs",
+    "csx"
+  ],
+  "name": "c_sharp",
+  "profile": {
+    "containers": [
+      [
+        "class_declaration",
+        "name"
+      ],
+      [
+        "interface_declaration",
+        "name"
+      ],
+      [
+        "method_declaration",
+        "name"
+      ],
+      [
+        "namespace_declaration",
+        "name"
+      ],
+      [
+        "property_declaration",
+        "name"
+      ],
+      [
+        "constructor_declaration",
+        "name"
+      ]
+    ],
+    "landmark_kinds": [
+      "accessor_declaration",
+      "class_declaration",
+      "constructor_declaration",
+      "field_declaration",
+      "interface_declaration",
+      "method_declaration",
+      "namespace_declaration",
+      "property_declaration"
+    ],
+    "node_labels": {
+      "assignment_expression": "assignment",
+      "class_declaration": "class",
+      "constructor_declaration": "constructor",
+      "field_declaration": "variable",
+      "if_statement": "if statement",
+      "interface_declaration": "interface",
+      "method_declaration": "method",
+      "namespace_declaration": "namespace",
+      "property_declaration": "variable",
+      "return_statement": "return"
+    }
+  },
+  "version": "1.0.0"
+}

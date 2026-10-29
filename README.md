@@ -12,11 +12,18 @@ codemark languages install ruby      # downloads, verifies, installs
 | Language | Extensions | Grammar | Revision |
 |---|---|---|---|
 | bash | `sh`, `bash` | [tree-sitter-bash](https://github.com/tree-sitter/tree-sitter-bash) | `v0.25.1` |
+| c_sharp | `cs`, `csx` | [tree-sitter-c-sharp](https://github.com/tree-sitter/tree-sitter-c-sharp) | `v0.23.1` |
 | lua | `lua` | [tree-sitter-lua](https://github.com/tree-sitter-grammars/tree-sitter-lua) | `v0.4.0` |
 | php | `php`, `phtml` | [tree-sitter-php](https://github.com/tree-sitter/tree-sitter-php) | `v0.25.1` |
 | ruby | `rb`, `rake`, `gemspec` | [tree-sitter-ruby](https://github.com/tree-sitter/tree-sitter-ruby) | `v0.23.1` |
 | scala | `scala`, `sc` | [tree-sitter-scala](https://github.com/tree-sitter/tree-sitter-scala) | `v0.26.3` |
 | zig | `zig`, `zon` | [tree-sitter-zig](https://github.com/tree-sitter-grammars/tree-sitter-zig) | `v1.1.2` |
+
+**c_sharp replaces a codemark built-in.** Installing it needs
+`--override-builtin` on a manual `add`; `languages install c_sharp` handles it.
+Codemark prefers a dynamic grammar over the built-in it shadows, which is what
+lets a bundled language be served from here instead — C# is 5.65 MB of codemark's
+binary, the largest of the eight.
 
 Some languages were evaluated and set aside — see
 [NOT-YET-SUPPORTED.md](NOT-YET-SUPPORTED.md) for which, and why.
@@ -30,6 +37,7 @@ build matches:
 | Language | Download | SHA-256 | Size |
 |---|---|---|---|
 | bash | [`tree-sitter-bash.wasm` @ v0.25.1](https://github.com/tree-sitter/tree-sitter-bash/releases/download/v0.25.1/tree-sitter-bash.wasm) | `8292919c88a0f7d3…` | 1.30 MB |
+| c_sharp | [`tree-sitter-c_sharp.wasm` @ v0.23.1](https://github.com/tree-sitter/tree-sitter-c-sharp/releases/download/v0.23.1/tree-sitter-c_sharp.wasm) | `d7fe0bf8e8b8d26b…` | 5.65 MB |
 | lua | [`tree-sitter-lua.wasm` @ v0.4.0](https://github.com/tree-sitter-grammars/tree-sitter-lua/releases/download/v0.4.0/tree-sitter-lua.wasm) | `46aa46cf86966ba3…` | 48 KB |
 | php | [`tree-sitter-php.wasm` @ v0.25.1](https://github.com/tree-sitter/tree-sitter-php/releases/download/v0.25.1/tree-sitter-php.wasm) | `bd5e2bf8d42306b7…` | 1.03 MB |
 | ruby | [`tree-sitter-ruby.wasm` @ v0.23.1](https://github.com/tree-sitter/tree-sitter-ruby/releases/download/v0.23.1/tree-sitter-ruby.wasm) | `09a96427d7c72f06…` | 2.01 MB |

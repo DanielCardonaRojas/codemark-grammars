@@ -1,0 +1,16 @@
+# 1-based lines to bookmark. Each sits INSIDE a construct the profile claims to
+# understand, so a broken `containers` shows up as a missing breadcrumb.
+#
+# The two if-branches are given different shapes on purpose: identical sibling
+# statements make the generated structural query ambiguous and codemark refuses
+# the bookmark. That's a sample-authoring constraint, not a profile defect.
+
+# Inside if > foreach > Compute() > class Invoice > namespace Billing —
+# four container levels, the deepest chain here.
+33
+
+# Inside the constructor.
+18
+
+# Inside the nested `class Line` — proves class-in-class nesting.
+41

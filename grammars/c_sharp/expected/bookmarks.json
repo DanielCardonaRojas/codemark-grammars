@@ -1,0 +1,62 @@
+[
+  {
+    "breadcrumbs": [
+      {
+        "line": 4,
+        "text": "namespace Billing"
+      },
+      {
+        "line": 11,
+        "text": "    public class Invoice"
+      },
+      {
+        "line": 26,
+        "text": "        public double Compute()"
+      }
+    ],
+    "line": 33,
+    "query": "(namespace_declaration\n  (declaration_list\n    (class_declaration\n      (declaration_list\n        (method_declaration\n          name: (identifier) @name0 @sticky.method\n          (#eq? @name0 \"Compute\")\n          (block\n            (foreach_statement\n              (block\n                (if_statement\n                  (block\n                    (expression_statement) @target))))))))))",
+    "resolution_method": "exact",
+    "sample": "Invoice.cs"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 4,
+        "text": "namespace Billing"
+      },
+      {
+        "line": 11,
+        "text": "    public class Invoice"
+      },
+      {
+        "line": 16,
+        "text": "        public Invoice(List<Line> lines)"
+      }
+    ],
+    "line": 18,
+    "query": "(namespace_declaration\n  (declaration_list\n    (class_declaration\n      (declaration_list\n        (constructor_declaration\n          name: (identifier) @name0\n          (#eq? @name0 \"Invoice\")\n          (block\n            (expression_statement) @target))))))",
+    "resolution_method": "exact",
+    "sample": "Invoice.cs"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 4,
+        "text": "namespace Billing"
+      },
+      {
+        "line": 11,
+        "text": "    public class Invoice"
+      },
+      {
+        "line": 39,
+        "text": "        public class Line"
+      }
+    ],
+    "line": 41,
+    "query": "(namespace_declaration\n  (declaration_list\n    (class_declaration\n      (declaration_list\n        (class_declaration\n          name: (identifier) @name0 @sticky.class\n          (#eq? @name0 \"Line\")\n          (declaration_list\n            (property_declaration\n              name: (identifier) @fn_name\n              (#eq? @fn_name \"Amount\")) @target))))))",
+    "resolution_method": "exact",
+    "sample": "Invoice.cs"
+  }
+]

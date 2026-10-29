@@ -112,8 +112,17 @@ MSG
   exit 2
 fi
 
+# An entry that replaces a codemark built-in needs `--override-builtin`;
+# without it the install is refused. Passing it unconditionally would hide a
+# genuine collision for a language that *isn't* meant to override one, so only
+# add it when the index says this entry is deliberately an override.
+OVERRIDE_FLAG=()
+if [[ "$(read_index_field overrides_builtin)" == "True" ]]; then
+  OVERRIDE_FLAG=(--override-builtin)
+fi
+
 echo "==> installing $LANG_NAME with this repo's profile"
-"$CODEMARK" languages add "$WASM" --from-registry "$LANG_NAME" >/dev/null
+"$CODEMARK" languages add "$WASM" --from-registry "$LANG_NAME" "${OVERRIDE_FLAG[@]}" >/dev/null
 
 # --- 3. the profile must be lint-clean ---------------------------------------
 #
