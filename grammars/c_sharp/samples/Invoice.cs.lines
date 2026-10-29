@@ -1,16 +1,55 @@
 # 1-based lines to bookmark. Each sits INSIDE a construct the profile claims to
 # understand, so a broken `containers` shows up as a missing breadcrumb.
 #
-# The two if-branches are given different shapes on purpose: identical sibling
-# statements make the generated structural query ambiguous and codemark refuses
-# the bookmark. That's a sample-authoring constraint, not a profile defect.
+# Switch arms and if-branches are given different shapes on purpose: identical
+# sibling statements make the generated structural query ambiguous and codemark
+# refuses the bookmark. That's a sample-authoring constraint, not a profile
+# defect.
 
-# Inside if > foreach > Compute() > class Invoice > namespace Billing —
-# four container levels, the deepest chain here.
-33
+# Inside the constructor's guard clause — constructor > class > namespace.
+83
 
-# Inside the constructor.
-18
+# Inside a switch arm inside the foreach inside Compute(). The deepest chain in
+# the file: namespace > class > method > foreach > switch > arm. `switch_body`
+# and `switch_section` are deliberately unlabelled wrappers, so the breadcrumb
+# names the method rather than the branch.
+#
+# This targets the arm's `var taxed` declaration rather than the `Total +=`
+# below it. Because `switch_section` is (correctly) not a landmark, the query
+# has no anchor inside the arm, so `Total += taxed;` is indistinguishable from
+# `Total -= amount;` in Pay() — two compound assignments to the same field in
+# the same class. A uniquely shaped declaration gives the query something to
+# match on. Same class of limitation as codemark#239.
+131
 
-# Inside the nested `class Line` — proves class-in-class nesting.
-41
+# Inside the local function declared in Compute()'s body — proves
+# `local_function_statement` works as a container, which only idiomatic code
+# reaches (a parser corpus has no reason to nest one).
+147
+
+# Inside the LINQ chain in SettleAsync(), an async method.
+158
+
+# Inside the catch filter in Pay().
+190
+
+# Inside Render() in the nested `class Summary` — proves type-in-type
+# containment: namespace > class > class > method.
+218
+
+# Inside Register() on the generic `InvoiceBook<TInvoice>`, which is outside
+# the Invoice class entirely.
+234
+
+# Inside TryFind() on the same generic class.
+239
+
+# NOT bookmarkable, recorded rather than silently omitted:
+#
+#   104    get => total;
+#   105    private set
+#
+# An `accessor_declaration` has no `name` field, so the generator emits an
+# impossible `name:` pattern for the enclosing property and tree-sitter rejects
+# the query. Reproduces with an empty profile, so no curation can fix it. This
+# is codemark#239 — the same root cause as the Lua case.

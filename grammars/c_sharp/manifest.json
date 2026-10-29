@@ -6,16 +6,22 @@
   "curation": {
     "drop_landmarks": [
       "declaration_list",
+      "enum_member_declaration_list",
       "foreach_statement",
+      "local_declaration_statement",
       "variable_declaration"
     ],
     "add_containers": [
       [
         "constructor_declaration",
         "name"
+      ],
+      [
+        "local_function_statement",
+        "name"
       ]
     ],
-    "why": "declaration_list is the { } body wrapper; foreach_statement is control flow and variable_declaration matched on a 'type' field, not a name. A constructor nests statements in real code even though this sample's doesn't."
+    "why": "declaration_list and enum_member_declaration_list are the { } body wrappers. foreach_statement is control flow that carries a body, so it looks like a declaration. variable_declaration and local_declaration_statement matched on a 'type' field rather than a name \u2014 a breadcrumb reading 'decimal' helps nobody. A constructor and a local function both nest statements in real code and are worth naming in a trail, so they are added as containers even though the generator did not observe a declaration inside them."
   },
   "name": "c_sharp",
   "profile": {
@@ -25,7 +31,19 @@
         "name"
       ],
       [
+        "constructor_declaration",
+        "name"
+      ],
+      [
+        "enum_declaration",
+        "name"
+      ],
+      [
         "interface_declaration",
+        "name"
+      ],
+      [
+        "local_function_statement",
         "name"
       ],
       [
@@ -41,7 +59,11 @@
         "name"
       ],
       [
-        "constructor_declaration",
+        "record_declaration",
+        "name"
+      ],
+      [
+        "struct_declaration",
         "name"
       ]
     ],
@@ -49,24 +71,40 @@
       "accessor_declaration",
       "class_declaration",
       "constructor_declaration",
+      "conversion_operator_declaration",
+      "delegate_declaration",
+      "enum_declaration",
+      "enum_member_declaration",
+      "event_field_declaration",
       "field_declaration",
+      "indexer_declaration",
       "interface_declaration",
+      "local_function_statement",
       "method_declaration",
       "namespace_declaration",
-      "property_declaration"
+      "operator_declaration",
+      "property_declaration",
+      "record_declaration",
+      "struct_declaration"
     ],
     "node_labels": {
       "assignment_expression": "assignment",
       "class_declaration": "class",
       "constructor_declaration": "constructor",
+      "enum_declaration": "enum",
+      "enum_member_declaration": "enum",
+      "event_field_declaration": "variable",
       "field_declaration": "variable",
       "if_statement": "if statement",
       "interface_declaration": "interface",
+      "local_function_statement": "function",
       "method_declaration": "method",
       "namespace_declaration": "namespace",
       "property_declaration": "variable",
-      "return_statement": "return"
+      "return_statement": "return",
+      "struct_declaration": "class",
+      "switch_statement": "match"
     }
   },
-  "version": "1.0.0"
+  "version": "1.1.0"
 }
