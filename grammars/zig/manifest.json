@@ -14,7 +14,7 @@
         "name"
       ]
     ],
-    "why": "a Zig struct is an anonymous value bound by the enclosing variable_declaration, so it has no name of its own; variable_declaration's 'type' field is a type, not a name \u2014 a breadcrumb reading 'f64' helps nobody."
+    "why": "a Zig struct is an anonymous value bound by the enclosing variable_declaration, so it has no name of its own and cannot be a container; variable_declaration's 'type' field is a type, not a name \u2014 a breadcrumb reading 'f64' helps nobody. Both stay as landmarks (they are real query anchors) but neither can name a breadcrumb, which is why every trail here names a function."
   },
   "name": "zig",
   "profile": {
@@ -25,18 +25,26 @@
       ]
     ],
     "landmark_kinds": [
+      "enum_declaration",
       "function_declaration",
+      "function_signature",
       "struct_declaration",
       "variable_declaration"
     ],
     "node_labels": {
+      "assignment_expression": "assignment",
+      "call_expression": "call",
+      "enum_declaration": "enum",
       "for_statement": "for loop",
       "function_declaration": "function",
+      "function_signature": "function",
       "if_statement": "if statement",
       "return_expression": "return",
       "struct_declaration": "class",
-      "variable_declaration": "variable"
+      "switch_expression": "match",
+      "variable_declaration": "variable",
+      "while_statement": "while loop"
     }
   },
-  "version": "1.0.0"
+  "version": "1.1.0"
 }

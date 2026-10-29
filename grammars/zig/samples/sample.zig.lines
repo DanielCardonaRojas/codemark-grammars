@@ -1,10 +1,57 @@
 # 1-based lines to bookmark, one per line.
+#
+# Every breadcrumb here names a FUNCTION, never a struct or enum. That is the
+# language, not a profile gap: a Zig struct is an anonymous value bound by the
+# enclosing `variable_declaration`, so `struct_declaration` has no name field
+# and cannot be a container. Both kinds stay as landmarks — they are real query
+# anchors — but neither can name a trail.
+#
+# Switch prongs are given different shapes on purpose: identical siblings make
+# the generated query ambiguous and codemark refuses the bookmark.
 
-# Inside if > for > compute() — the function is the container.
-12
+# Inside a method on an enum — the breadcrumb names the fn, not the enum.
+30
 
-# Inside compute(), the return statement.
-18
+# Inside a method on the LineItem struct.
+45
 
-# Inside the top-level function `formatMoney`.
-28
+# Inside the first guard in init(), which returns an error union.
+61
+
+# Inside the `if` inside a switch prong inside the for loop in compute() — the
+# deepest chain this language's breadcrumbs can describe.
+84
+
+# Inside render(), on the `defer` — Zig's defining cleanup idiom.
+100
+
+# Inside `fn label` declared on a struct inside render()'s body. This is the
+# ONLY shape that gives Zig a two-level breadcrumb: a function nested inside a
+# function, since the struct between them cannot be named.
+109
+
+# Inside pay().
+125
+
+# Inside the while loop with a continue expression in countTaxable().
+141
+
+# Inside the generic comptime function sumBy(), outside any struct.
+153
+
+# Inside the test block. Snapshots an EMPTY breadcrumb, deliberately: a Zig
+# `test "name"` is not a named declaration the profile can descend into, so
+# there is nothing for the walker to show. Pinning the empty value keeps that
+# distinguishable from `containers` having silently broken.
+172
+
+# NOT bookmarkable, recorded rather than silently omitted:
+#
+#    80    const taxed = line.taxed(DEFAULT_TAX_RATE);
+#    81    sum += taxed;
+#   137    var found: usize = 0;
+#   170    var invoice = try Invoice.init(&lines);
+#
+# Each collides with a same-shaped sibling statement elsewhere in the file and
+# has no landmark between it and the enclosing fn to anchor on. The targets
+# above sit on uniquely shaped statements instead.

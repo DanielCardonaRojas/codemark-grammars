@@ -130,7 +130,7 @@
         "zig",
         "zon"
       ],
-      "profile_version": "1.0.0",
+      "profile_version": "1.1.0",
       "profile_url": "grammars/zig/manifest.json",
       "ts_abi": "0.25",
       "grammar_repo": "https://github.com/tree-sitter-grammars/tree-sitter-zig",
