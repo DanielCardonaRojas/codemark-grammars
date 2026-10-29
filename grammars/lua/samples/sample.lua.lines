@@ -1,28 +1,53 @@
 # 1-based lines to bookmark, one per line. Blank lines and # comments ignored.
 #
-# Each line is chosen to sit INSIDE a construct the profile claims to
-# understand, so that a broken `containers` entry shows up as a missing
-# breadcrumb rather than passing unnoticed.
+# Each line sits INSIDE a construct the profile claims to understand, so a
+# broken `containers` entry shows up as a missing breadcrumb rather than passing
+# unnoticed. Lua's only container kind is `function_declaration` — tables and
+# metatables are values, not declarations — so every breadcrumb below names a
+# function and nothing deeper exists to assert.
 
-# Inside `function M.add` — a nested if, so the breadcrumb must name the
-# enclosing function. This is the line that fails if `containers` is wrong.
-13
+# Inside the `if` in Invoice.new() — the breadcrumb must name the function.
+# This is the line that fails if `containers` is wrong.
+31
 
-# Inside `function M.process` — a local declaration, exercising
-# `variable_declaration` as a landmark.
-19
+# Inside the `if`/`elseif` chain inside the generic `for` in Invoice:compute()
+# — two statement levels, so the breadcrumb walk has to skip both.
+49
 
-# Inside a for loop inside `function M.process` — two levels deep, so the
-# breadcrumb walk has to skip the loop (not a container) and find the function.
+# Inside the numeric `for` in Invoice:retry(), exercising the other `for`
+# spelling and a `variable_declaration` landmark.
+67
+
+# Inside the `repeat ... until` body in Invoice:drain().
+88
+
+# Inside the bare `do` block. `do_statement` is deliberately unlabelled: no
+# entry in codemark's label vocabulary fits a plain block, and the fallback
+# renders it "do statement" anyway.
+92
+
+# Inside an anonymous `function_definition` bound to a local — the landmark tier
+# with no name field of its own, since the name lives on the declaration.
 #
-# DISABLED: this currently fails in the query generator, not in the profile.
-# It emits `name: (identifier) @fn_name` against an ancestor kind that has no
-# `name` field, so tree-sitter rejects the query as an impossible pattern and
-# the bookmark can't be created at all. Reproduces with an empty profile too, so
-# it is not something a curated profile can fix. Re-enable once the generator
-# checks that the field exists on the ancestor kind before constraining it.
-# 21
+# Both this and the next line snapshot an EMPTY breadcrumb, deliberately.
+# `function_definition` cannot be a container: it has no name field to read, so
+# there is nothing for the walker to show. Pinning the empty value is what keeps
+# that distinguishable from `containers` having silently broken.
+108
 
-# Inside an anonymous `function_definition` assigned to a local, which is the
-# landmark tier that has no name field of its own.
-30
+# Inside the same anonymous shape assigned to a table field instead.
+113
+
+# Inside the `for` in eachLine(), a `local function` declaration.
+121
+
+# NOT bookmarkable, kept here as a record rather than silently omitted:
+#
+#   36    self.state = state or statuses.draft
+#
+# The generator emits `name: (dot_index_expression) @fn_name` for the enclosing
+# `function Invoice.new`, and tree-sitter rejects it as an impossible pattern —
+# that field cannot hold that node type. Reproduces with an empty profile, so no
+# curation can fix it. This is codemark#239; re-enable a line here once the
+# generator checks the field is valid for the ancestor kind before constraining
+# it.

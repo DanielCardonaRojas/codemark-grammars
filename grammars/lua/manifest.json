@@ -1,11 +1,14 @@
 {
   "name": "lua",
-  "version": "0.3.0",
+  "version": "1.1.0",
   "extensions": [
     "lua"
   ],
   "curation": {
-    "why": "no curation \u2014 the generated profile is used as proposed."
+    "drop_landmarks": [
+      "table_constructor"
+    ],
+    "why": "a Lua table constructor is a literal, not a declaration: `{ draft = \"draft\" }` is a value. It carries fields so it looks like a named body to the generator, but promoting it makes every table literal a query anchor, and the 'constructor' label means an initialiser elsewhere in the registry (C#, Swift) rather than a collection literal."
   },
   "profile": {
     "landmark_kinds": [
@@ -14,15 +17,17 @@
       "variable_declaration"
     ],
     "node_labels": {
+      "assignment_statement": "assignment",
+      "elseif_statement": "if statement",
+      "for_statement": "for loop",
+      "function_call": "call",
       "function_declaration": "function",
       "function_definition": "function",
-      "variable_declaration": "variable",
       "if_statement": "if statement",
-      "for_statement": "for loop",
-      "while_statement": "while loop",
+      "repeat_statement": "while loop",
       "return_statement": "return",
-      "assignment_statement": "assignment",
-      "function_call": "call"
+      "variable_declaration": "variable",
+      "while_statement": "while loop"
     },
     "containers": [
       [

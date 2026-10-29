@@ -2,31 +2,86 @@
   {
     "breadcrumbs": [
       {
-        "line": 11,
-        "text": "function M.add(a, b)"
+        "line": 28,
+        "text": "function Invoice.new(lines, state)"
       }
     ],
-    "line": 13,
-    "query": "(chunk\n  (function_declaration\n    name: (dot_index_expression) @name0 @sticky.function\n    (#eq? @name0 \"M.add\")\n    (block\n      (if_statement\n        (block\n          (return_statement) @target)))))",
+    "line": 31,
+    "query": "(chunk\n  (function_declaration\n    name: (dot_index_expression) @name0 @sticky.function\n    (#eq? @name0 \"Invoice.new\")\n    (block\n      (if_statement\n        condition: (_) @cond\n        (#eq? @cond \"type(lines) ~= \\\"table\\\"\")) @target)))",
     "resolution_method": "exact",
     "sample": "sample.lua"
   },
   {
     "breadcrumbs": [
       {
-        "line": 18,
-        "text": "function M.process(items)"
+        "line": 43,
+        "text": "function Invoice:compute()"
       }
     ],
-    "line": 19,
-    "query": "(chunk\n  (function_declaration\n    name: (dot_index_expression) @name0 @sticky.function\n    (#eq? @name0 \"M.process\")\n    (block\n      (variable_declaration) @target)))",
+    "line": 49,
+    "query": "(chunk\n  (function_declaration\n    name: (method_index_expression) @name0 @sticky.function\n    (#eq? @name0 \"Invoice:compute\")\n    (block\n      (for_statement\n        (block\n          (if_statement\n            (elseif_statement) @target))))))",
+    "resolution_method": "exact",
+    "sample": "sample.lua"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 63,
+        "text": "function Invoice:retry(send)"
+      }
+    ],
+    "line": 67,
+    "query": "(chunk\n  (function_declaration\n    name: (method_index_expression) @name0 @sticky.function\n    (#eq? @name0 \"Invoice:retry\")\n    (block\n      (for_statement\n        (block\n          (variable_declaration) @target)))))",
+    "resolution_method": "exact",
+    "sample": "sample.lua"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 83,
+        "text": "function Invoice:drain(queue)"
+      }
+    ],
+    "line": 88,
+    "query": "(chunk\n  (function_declaration\n    name: (method_index_expression) @name0 @sticky.function\n    (#eq? @name0 \"Invoice:drain\")\n    (block\n      (repeat_statement\n        (block\n          (if_statement\n            condition: (_) @cond\n            (#eq? @cond \"item ~= nil\")) @target)))))",
+    "resolution_method": "exact",
+    "sample": "sample.lua"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 83,
+        "text": "function Invoice:drain(queue)"
+      }
+    ],
+    "line": 92,
+    "query": "(chunk\n  (function_declaration\n    name: (method_index_expression) @name0 @sticky.function\n    (#eq? @name0 \"Invoice:drain\")\n    (block) @target))",
     "resolution_method": "exact",
     "sample": "sample.lua"
   },
   {
     "breadcrumbs": [],
-    "line": 30,
+    "line": 108,
     "query": "(chunk\n  (variable_declaration\n    (assignment_statement\n      (expression_list\n        (function_definition\n          (block\n            (return_statement) @target))))))",
+    "resolution_method": "exact",
+    "sample": "sample.lua"
+  },
+  {
+    "breadcrumbs": [],
+    "line": 113,
+    "query": "(chunk\n  (assignment_statement\n    (expression_list\n      (function_definition\n        (block\n          (variable_declaration) @target)))))",
+    "resolution_method": "exact",
+    "sample": "sample.lua"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 119,
+        "text": "local function eachLine(invoice, visit)"
+      }
+    ],
+    "line": 121,
+    "query": "(chunk\n  (function_declaration\n    name: (identifier) @name0 @sticky.function\n    (#eq? @name0 \"eachLine\")\n    (block\n      (for_statement\n        (block\n          (function_call\n            name: (identifier) @fn_name\n            (#eq? @fn_name \"visit\")) @target)))))",
     "resolution_method": "exact",
     "sample": "sample.lua"
   }
