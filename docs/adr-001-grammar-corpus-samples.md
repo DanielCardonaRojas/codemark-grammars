@@ -34,8 +34,17 @@ problem: a human guessing which constructs matter.
 
 ## Decision
 
-Use the grammar's own `test/corpus/` as an additional sample source, alongside
-a small hand-written file.
+Use **three** sample sources per language, committed side by side in
+`grammars/<lang>/samples/`:
+
+| File | Source | Supplies |
+|---|---|---|
+| `corpus.<ext>` | extracted from the grammar's `test/corpus/` | syntactic breadth — every construct the grammar handles |
+| `idiomatic.<ext>` | written for this repo | realistic nesting, ordinary constructs in context |
+| `<Name>.<ext>` | written for this repo, small | the `.lines` breadcrumb targets |
+
+`verify.sh` already passes every non-`.lines` file in `samples/` to the
+generator, so this needs no harness change beyond the extractor.
 
 Tree-sitter grammars conventionally ship a corpus of test cases in
 `test/corpus/*.txt`, in this format:
@@ -85,26 +94,79 @@ Newly discovered: `enum_declaration`, `record_declaration`,
 `conversion_operator_declaration`, `file_scoped_namespace_declaration`, and
 more.
 
-## The corpus is not sufficient on its own
+## The corpus is not idiomatic, and that matters
 
-**This is the part that decides the design.** Corpus blocks are syntax
-fragments — the median C# block is **5 lines**, and only 25 of 154 blocks show
-a class with meaningful nesting. They demonstrate that a construct *parses*,
-not that it *contains* other constructs.
+A corpus block is a *parser test*, not code anyone would write:
 
-`containers` depends entirely on observing one declaration nested inside
-another. Measured directly:
+```csharp
+public class F {}
+public class F : object, IAlpha, IOmega { }
+internal class F<in T1, out T2> {}
+```
 
-| Input | Containers found |
+Measured across the 154 C# blocks:
+
+| Property | Value |
 |---|---|
-| Corpus alone | 13 — but **no `method_declaration`** |
-| Corpus + hand-written sample | 13 — **including `method_declaration`** |
+| Blocks using single-letter type names (`F`, `A`, `T1`) | 30 |
+| Blocks showing a method body inside a class | **24 / 154** |
+| Blocks at brace depth ≤ 1 (flat declarations) | **98 / 154** |
+| Blocks at brace depth ≥ 3 | 16 |
 
-A method inside a class is the single most valuable breadcrumb in almost any
-language, and the corpus alone misses it. So:
+The corpus is **breadth-first and structurally flat by construction** — it
+proves each construct *parses*, deliberately in isolation. But `containers` is
+derived only from observing one declaration nested inside another, so flatness
+is exactly the wrong shape for the field that fails hardest.
 
-> **Both sources are required.** The corpus supplies syntactic breadth; the
-> hand-written sample supplies nesting depth. Neither substitutes for the other.
+### Idiomatic code finds different things
+
+Running the generator over a hand-written, idiomatic 65-line C# service
+(async, LINQ, records, events, a nested private class) against the 1387-line
+corpus:
+
+| Source | Landmarks | Containers |
+|---|---|---|
+| Corpus alone | 32 | 13 |
+| Idiomatic alone | 17 | 8 |
+| **Combined** | **32** | **14** |
+
+The sets are not nested. Each finds containers the other misses:
+
+- **Only idiomatic finds:** `constructor_declaration`
+- **Only corpus finds:** `event_declaration`, `indexer_declaration`,
+  `struct_declaration`, `local_function_statement`, `variable_declaration`,
+  `function_pointer_parameter`
+
+The corpus wins on *rare* constructs; idiomatic code wins on the *ordinary*
+ones that a parser test has no reason to nest. A constructor containing
+statements is unremarkable in real code and absent from a test suite that only
+needs to prove constructors parse.
+
+> **Three sources, not one.** Corpus for syntactic breadth, idiomatic sample
+> for realistic nesting, small hand-written sample for the `.lines` breadcrumb
+> targets. Measured, each contributes containers the others miss.
+
+## What makes a good idiomatic sample
+
+The corpus covers *what parses*. The idiomatic sample must cover *what nests*,
+since that is the only way `containers` is discovered. Concretely:
+
+- **Every container kind must actually contain something.** A constructor with
+  a body, a method with a loop, a nested type with a method. An empty
+  declaration teaches the generator nothing about containment.
+- **Three levels deep at least** — `namespace > class > method > statement` —
+  because that is what a real breadcrumb trail looks like.
+- **The language's ordinary idioms**, not its exotica: async/await, LINQ or
+  comprehensions, pattern matching, properties, generics with real
+  constraints, error handling. These are what users bookmark.
+- **No two sibling statements with the same shape.** Identical siblings make
+  the generated structural query ambiguous and codemark refuses the bookmark —
+  this has already bitten Scala, C# and Zig samples.
+- **Realistic names.** `InvoiceService`, not `F`. Costs nothing, and makes a
+  failing snapshot readable.
+
+Sample code must be original to this repo or permissively licensed, as
+CONTRIBUTING already requires.
 
 ## Consequences
 
@@ -169,6 +231,14 @@ ones.
 
 ## Alternatives considered
 
+**Published style guides** ([google/styleguide](https://github.com/google/styleguide)).
+Code samples there are Apache-2.0 — a usable licence, unlike
+learnxinyminutes. But they are *snippets illustrating a rule*, often
+deliberately showing the wrong way too, and several guides (Java) carry almost
+no inline code at all. They would need as much curation as writing the sample
+directly, with worse structural coverage. Rejected; revisit per-language if an
+idiomatic sample proves hard to write.
+
 **learnxinyminutes.** ~800–900 lines per language, genuinely good coverage of
 syntax variations. Rejected on licence: CC BY-SA 3.0 share-alike would
 propagate to this repo, which currently declares no licence at all and whose
@@ -176,8 +246,11 @@ CONTRIBUTING states "sample code must be yours or permissively licensed".
 Worth revisiting for a grammar with no corpus, after settling this repo's own
 licence.
 
-**Hand-writing richer samples.** Does not scale, and reproduces the guessing
-the generator exists to remove.
+**Hand-writing samples *instead of* the corpus.** Rejected — it reproduces the
+guessing the generator exists to remove, and measurably misses rare constructs
+(`event_declaration`, `indexer_declaration`, `struct_declaration`). But
+hand-writing *alongside* the corpus is now part of the decision, because the
+corpus is flat and misses ordinary nesting like a constructor with a body.
 
 **Enumerating node types from the grammar.** Rejected previously and still
 rejected: no usage signal, and it cannot produce `containers` at all. It is
