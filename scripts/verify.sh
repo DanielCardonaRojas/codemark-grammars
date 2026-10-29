@@ -85,6 +85,18 @@ if [[ -z "$WASM" ]]; then
     find "$WORK/grammar" -name grammar.js -not -path '*/node_modules/*' -maxdepth 3 >&2
     exit 1
   }
+  # Most grammars commit the generated `src/parser.c`, but not all:
+  # tree-sitter-swift ships only `grammar.js` and `src/scanner.c` and expects
+  # the parser to be generated. `tree-sitter build --wasm` assumes parser.c is
+  # already present and fails with a bare "parser.c: No such file or directory".
+  #
+  # Generating only when it is missing keeps the committed-parser case building
+  # from exactly the bytes the grammar authors published.
+  if [[ ! -f "$BUILD_DIR/src/parser.c" ]]; then
+    echo "==> no src/parser.c committed, running tree-sitter generate"
+    ( cd "$BUILD_DIR" && tree-sitter generate )
+  fi
+
   ( cd "$BUILD_DIR" && tree-sitter build --wasm )
   WASM="$(find "$BUILD_DIR" -maxdepth 1 -name '*.wasm' | head -1)"
   [[ -n "$WASM" ]] || { echo "tree-sitter build --wasm produced no .wasm" >&2; exit 1; }
@@ -152,8 +164,12 @@ PY
 # proposal leaves the manifest quietly stale, and nothing distinguishes
 # deliberate curation from drift.
 #
-# Needs a codemark built with --features profile-authoring. Skipped (with a
-# note) when that isn't available, so the rest of the harness still runs.
+# Needs a codemark built with --features profile-authoring. Skipping is allowed
+# for a local run against a stock binary, but in CI it is a failure: the check
+# skipped itself silently on every run for its first day of life, which defeats
+# the point of having it. Set REQUIRE_REPRODUCIBLE=0 to downgrade to a warning.
+
+REQUIRE_REPRODUCIBLE="${REQUIRE_REPRODUCIBLE:-${CI:-0}}"
 
 if "$CODEMARK" languages profile --help >/dev/null 2>&1; then
   echo "==> checking the profile is reproducible from samples + curation"
@@ -166,6 +182,17 @@ if "$CODEMARK" languages profile --help >/dev/null 2>&1; then
     --name "$LANG_NAME" > "$WORK/generated.json"
   python3 "$REPO_ROOT/scripts/apply-curation.py" \
     "$WORK/generated.json" "$LANG_DIR/manifest.json" --check
+elif [[ "$REQUIRE_REPRODUCIBLE" != "0" && "$REQUIRE_REPRODUCIBLE" != "false" ]]; then
+  cat >&2 <<MSG
+This codemark has no \`languages profile init\`, so the profile cannot be
+checked for reproducibility — and this run requires it.
+
+  codemark: $CODEMARK
+
+Build it with \`--features profile-authoring\`, or set REQUIRE_REPRODUCIBLE=0
+to downgrade this to a warning.
+MSG
+  exit 2
 else
   echo "==> skipping reproducibility check (no profile-authoring build)"
 fi

@@ -83,8 +83,15 @@ jobs:
           ref: ${{ vars.CODEMARK_REF || '' }}
           path: codemark
 
+      # `profile-authoring` is what provides `languages profile init`, which the
+      # harness needs for its reproducibility check. Without the feature that
+      # step skips itself — which it did silently on every run until this was
+      # added, so a sample change could leave the committed profile stale and
+      # still go green.
       - name: Build codemark
-        run: cargo build --release --manifest-path codemark/Cargo.toml -p codemark-cli
+        run: |
+          cargo build --release --manifest-path codemark/Cargo.toml \
+            -p codemark-cli --features profile-authoring
 
       - name: Verify ${{ matrix.language }}
         env:

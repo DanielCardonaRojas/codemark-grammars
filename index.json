@@ -118,6 +118,7 @@
       "ts_abi": "0.23",
       "grammar_repo": "https://github.com/tree-sitter/tree-sitter-typescript",
       "grammar_rev": "v0.23.2",
+      "grammar_dir": "typescript",
       "description": "TypeScript (overrides the built-in)",
       "overrides_builtin": true,
       "wasm_url": "https://github.com/tree-sitter/tree-sitter-typescript/releases/download/v0.23.2/tree-sitter-typescript.wasm",
