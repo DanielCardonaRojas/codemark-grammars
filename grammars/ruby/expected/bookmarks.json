@@ -2,60 +2,60 @@
   {
     "breadcrumbs": [
       {
-        "line": 2,
+        "line": 13,
         "text": "module Billing"
       },
       {
-        "line": 3,
+        "line": 17,
+        "text": "  module Formatting"
+      },
+      {
+        "line": 18,
+        "text": "    def self.money(value)"
+      }
+    ],
+    "line": 19,
+    "query": "(body_statement\n  (singleton_method\n    name: (identifier) @name0\n    (#eq? @name0 \"money\")\n    (body_statement\n      (call) @target)))",
+    "resolution_method": "exact",
+    "sample": "sample.rb"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 13,
+        "text": "module Billing"
+      },
+      {
+        "line": 32,
         "text": "  class Invoice"
       },
       {
-        "line": 11,
+        "line": 47,
         "text": "    def compute"
       }
     ],
-    "line": 14,
-    "query": "(body_statement\n  (class\n    (body_statement\n      (method\n        name: (identifier) @name0\n        (#eq? @name0 \"compute\")\n        (body_statement\n          (call\n            (do_block\n              (body_statement\n                (if\n                  (then\n                    (operator_assignment) @target))))))))))",
+    "line": 51,
+    "query": "(body_statement\n  (class\n    (body_statement\n      (method\n        name: (identifier) @name0\n        (#eq? @name0 \"compute\")\n        (body_statement\n          (call\n            (do_block\n              (body_statement\n                (if_modifier) @target))))))))",
     "resolution_method": "exact",
     "sample": "sample.rb"
   },
   {
     "breadcrumbs": [
       {
-        "line": 2,
-        "text": "module Billing"
-      },
-      {
-        "line": 3,
+        "line": 32,
         "text": "  class Invoice"
       },
       {
-        "line": 22,
-        "text": "    def self.empty"
-      }
-    ],
-    "line": 23,
-    "query": "(body_statement\n  (class\n    (body_statement\n      (singleton_method\n        name: (identifier) @name0\n        (#eq? @name0 \"empty\")\n        (body_statement\n          (call) @target)))))",
-    "resolution_method": "exact",
-    "sample": "sample.rb"
-  },
-  {
-    "breadcrumbs": [
-      {
-        "line": 3,
-        "text": "  class Invoice"
-      },
-      {
-        "line": 26,
+        "line": 82,
         "text": "    class LineItem"
       },
       {
-        "line": 27,
-        "text": "      def amount"
+        "line": 94,
+        "text": "      def void?"
       }
     ],
-    "line": 28,
-    "query": "(body_statement\n  (class\n    (body_statement\n      (class\n        (body_statement\n          (method\n            name: (identifier) @name0\n            (#eq? @name0 \"amount\")\n            (body_statement\n              (instance_variable) @target)))))))",
+    "line": 95,
+    "query": "(body_statement\n  (class\n    (body_statement\n      (class\n        (body_statement\n          (method\n            name: (identifier) @name0\n            (#eq? @name0 \"void?\")\n            (body_statement\n              (call) @target)))))))",
     "resolution_method": "exact",
     "sample": "sample.rb"
   }

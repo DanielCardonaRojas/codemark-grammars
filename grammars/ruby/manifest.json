@@ -5,17 +5,17 @@
     "gemspec"
   ],
   "curation": {
+    "drop_landmarks": [
+      "method_parameters",
+      "singleton_class"
+    ],
     "add_containers": [
-      [
-        "method",
-        "name"
-      ],
       [
         "singleton_method",
         "name"
       ]
     ],
-    "why": "methods nest statements in real code; this sample's hold only control flow, so the generator correctly declines to propose them."
+    "why": "method_parameters is a parameter-list wrapper and singleton_class is the `class << self` block, neither of which is a declaration. singleton_method is a container in real code but this sample's hold only a constructor call."
   },
   "name": "ruby",
   "profile": {
@@ -25,11 +25,11 @@
         "name"
       ],
       [
-        "module",
+        "method",
         "name"
       ],
       [
-        "method",
+        "module",
         "name"
       ],
       [
@@ -48,11 +48,12 @@
       "call": "call",
       "class": "class",
       "if": "if statement",
+      "if_modifier": "if statement",
       "method": "method",
       "module": "module",
       "operator_assignment": "assignment",
       "singleton_method": "method"
     }
   },
-  "version": "1.0.0"
+  "version": "1.1.0"
 }
