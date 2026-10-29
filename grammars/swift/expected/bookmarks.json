@@ -1,0 +1,54 @@
+[
+  {
+    "breadcrumbs": [
+      {
+        "line": 18,
+        "text": "final class Invoice {"
+      },
+      {
+        "line": 26,
+        "text": "    func compute() -> Double {"
+      }
+    ],
+    "line": 29,
+    "query": "(class_declaration\n  (class_body\n    (function_declaration\n      name: (simple_identifier) @name0 @sticky.function\n      (#eq? @name0 \"compute\")\n      (function_body\n        (statements\n          (for_statement\n            (statements\n              (if_statement\n                (statements\n                  (call_expression\n                    (_) @func\n                    (#eq? @func \"addTaxed\")) @target)))))))))",
+    "resolution_method": "exact",
+    "sample": "Invoice.swift"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 18,
+        "text": "final class Invoice {"
+      },
+      {
+        "line": 40,
+        "text": "    struct Summary {"
+      },
+      {
+        "line": 43,
+        "text": "        func render() -> String {"
+      }
+    ],
+    "line": 44,
+    "query": "(class_declaration\n  (class_body\n    (class_declaration\n      (class_body\n        (function_declaration\n          name: (simple_identifier) @name0 @sticky.function\n          (#eq? @name0 \"render\")\n          (function_body\n            (statements\n              (control_transfer_statement) @target)))))))",
+    "resolution_method": "exact",
+    "sample": "Invoice.swift"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 49,
+        "text": "extension Invoice: Payable {"
+      },
+      {
+        "line": 50,
+        "text": "    func pay(amount: Double) -> Bool {"
+      }
+    ],
+    "line": 51,
+    "query": "(class_declaration\n  (class_body\n    (function_declaration\n      name: (simple_identifier) @name0 @sticky.function\n      (#eq? @name0 \"pay\")\n      (function_body\n        (statements\n          (control_transfer_statement) @target)))))",
+    "resolution_method": "exact",
+    "sample": "Invoice.swift"
+  }
+]

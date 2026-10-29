@@ -12,18 +12,19 @@ codemark languages install ruby      # downloads, verifies, installs
 | Language | Extensions | Grammar | Revision |
 |---|---|---|---|
 | bash | `sh`, `bash` | [tree-sitter-bash](https://github.com/tree-sitter/tree-sitter-bash) | `v0.25.1` |
-| c_sharp | `cs`, `csx` | [tree-sitter-c-sharp](https://github.com/tree-sitter/tree-sitter-c-sharp) | `v0.23.1` |
+| c_sharp ⚠️ | `cs`, `csx` | [tree-sitter-c-sharp](https://github.com/tree-sitter/tree-sitter-c-sharp) | `v0.23.1` |
 | lua | `lua` | [tree-sitter-lua](https://github.com/tree-sitter-grammars/tree-sitter-lua) | `v0.4.0` |
 | php | `php`, `phtml` | [tree-sitter-php](https://github.com/tree-sitter/tree-sitter-php) | `v0.25.1` |
 | ruby | `rb`, `rake`, `gemspec` | [tree-sitter-ruby](https://github.com/tree-sitter/tree-sitter-ruby) | `v0.23.1` |
 | scala | `scala`, `sc` | [tree-sitter-scala](https://github.com/tree-sitter/tree-sitter-scala) | `v0.26.3` |
+| swift ⚠️ | `swift` | [tree-sitter-swift](https://github.com/alex-pinkus/tree-sitter-swift) | `0.7.3` |
+| typescript ⚠️ | `ts` | [tree-sitter-typescript](https://github.com/tree-sitter/tree-sitter-typescript) | `v0.23.2` |
 | zig | `zig`, `zon` | [tree-sitter-zig](https://github.com/tree-sitter-grammars/tree-sitter-zig) | `v1.1.2` |
 
-**c_sharp replaces a codemark built-in.** Installing it needs
-`--override-builtin` on a manual `add`; `languages install c_sharp` handles it.
-Codemark prefers a dynamic grammar over the built-in it shadows, which is what
-lets a bundled language be served from here instead — C# is 5.65 MB of codemark's
-binary, the largest of the eight.
+⚠️ **replaces a codemark built-in.** `languages install` handles it; a manual
+`add` needs `--override-builtin`. Codemark prefers a dynamic grammar over the
+built-in it shadows, which is what lets a bundled language be served from here —
+C#, Swift and TypeScript are together 11.7 MB of codemark's 24.2 MB binary.
 
 Some languages were evaluated and set aside — see
 [NOT-YET-SUPPORTED.md](NOT-YET-SUPPORTED.md) for which, and why.
@@ -42,6 +43,8 @@ build matches:
 | php | [`tree-sitter-php.wasm` @ v0.25.1](https://github.com/tree-sitter/tree-sitter-php/releases/download/v0.25.1/tree-sitter-php.wasm) | `bd5e2bf8d42306b7…` | 1.03 MB |
 | ruby | [`tree-sitter-ruby.wasm` @ v0.23.1](https://github.com/tree-sitter/tree-sitter-ruby/releases/download/v0.23.1/tree-sitter-ruby.wasm) | `09a96427d7c72f06…` | 2.01 MB |
 | scala | [`tree-sitter-scala.wasm` @ v0.26.3](https://github.com/tree-sitter/tree-sitter-scala/releases/download/v0.26.3/tree-sitter-scala.wasm) | `3809e090e63fa5a9…` | 3.84 MB |
+| swift | [`tree-sitter-swift.wasm` @ 0.7.3](https://github.com/alex-pinkus/tree-sitter-swift/releases/download/0.7.3/tree-sitter-swift.wasm) | `0258a7ef17303a80…` | 3.65 MB |
+| typescript | [`tree-sitter-tsx.wasm` @ v0.23.2](https://github.com/tree-sitter/tree-sitter-typescript/releases/download/v0.23.2/tree-sitter-tsx.wasm) | `79e5da75ea62855a…` | 1.38 MB |
 | zig | [`tree-sitter-zig.wasm` @ v1.1.2](https://github.com/tree-sitter-grammars/tree-sitter-zig/releases/download/v1.1.2/tree-sitter-zig.wasm) | `54b3b83dd9c62da5…` | 675 KB |
 
 Regenerate this table with `scripts/asset-table.sh` after adding a language or

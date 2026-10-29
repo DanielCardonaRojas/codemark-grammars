@@ -1,0 +1,10 @@
+# 1-based lines to bookmark, one per line.
+#
+# No line inside a `namespace`: see the note at the top of the sample — the
+# query generator currently produces a 0-match pattern for those.
+
+# Inside if > for > compute() > class Invoice.
+26
+
+# Inside the top-level function, outside any class.
+43

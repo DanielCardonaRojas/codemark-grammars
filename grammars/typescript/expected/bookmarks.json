@@ -1,0 +1,30 @@
+[
+  {
+    "breadcrumbs": [
+      {
+        "line": 18,
+        "text": "export class Invoice implements Payable {"
+      },
+      {
+        "line": 23,
+        "text": "  compute(): number {"
+      }
+    ],
+    "line": 26,
+    "query": "(class_declaration\n  (class_body\n    (method_definition\n      name: (property_identifier) @name0 @sticky.method\n      (#eq? @name0 \"compute\")\n      (statement_block\n        (for_in_statement\n          (statement_block\n            (if_statement\n              (statement_block\n                (expression_statement) @target))))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.ts"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 42,
+        "text": "export function formatMoney(value: number): string {"
+      }
+    ],
+    "line": 43,
+    "query": "(function_declaration\n  name: (identifier) @name0 @sticky.function\n  (#eq? @name0 \"formatMoney\")\n  (statement_block\n    (return_statement) @target))",
+    "resolution_method": "exact",
+    "sample": "invoice.ts"
+  }
+]

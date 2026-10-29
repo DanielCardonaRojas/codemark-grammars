@@ -1,0 +1,11 @@
+# 1-based lines to bookmark. Each sits INSIDE a construct the profile claims to
+# understand, so a broken `containers` shows up as a missing breadcrumb.
+
+# Inside if > for > compute() > class Invoice.
+29
+
+# Inside render() in the nested `struct Summary` — proves type-in-type nesting.
+44
+
+# Inside the extension's pay(), which is outside the class body.
+51

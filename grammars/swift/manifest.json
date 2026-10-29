@@ -1,0 +1,47 @@
+{
+  "extensions": [
+    "swift"
+  ],
+  "name": "swift",
+  "profile": {
+    "containers": [
+      [
+        "class_declaration",
+        "name"
+      ],
+      [
+        "protocol_declaration",
+        "name"
+      ],
+      [
+        "function_declaration",
+        "name"
+      ],
+      [
+        "init_declaration",
+        "name"
+      ]
+    ],
+    "landmark_kinds": [
+      "class_declaration",
+      "function_declaration",
+      "init_declaration",
+      "property_declaration",
+      "protocol_declaration",
+      "protocol_function_declaration"
+    ],
+    "node_labels": {
+      "assignment": "assignment",
+      "call_expression": "call",
+      "call_suffix": "call",
+      "class_declaration": "class",
+      "for_statement": "for loop",
+      "function_declaration": "function",
+      "if_statement": "if statement",
+      "property_declaration": "variable",
+      "protocol_declaration": "interface",
+      "protocol_function_declaration": "interface"
+    }
+  },
+  "version": "1.0.0"
+}
