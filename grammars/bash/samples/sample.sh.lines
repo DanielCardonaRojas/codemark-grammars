@@ -1,7 +1,34 @@
 # 1-based lines to bookmark, one per line.
+#
+# Bash has no type or module layer, so the deepest breadcrumb this language can
+# produce is `function > statement`. Each line below sits inside a different
+# control-flow kind, so a wrong `containers` shows up as a missing breadcrumb
+# rather than passing unnoticed.
 
-# Inside the `if` inside `deploy()` — the breadcrumb must name the function.
-11
+# Inside the `if` in resolve_target() — the breadcrumb must name the function.
+38
 
-# Inside the `for` loop inside `deploy()` — two levels deep.
-14
+# Inside a `case` branch in resolve_target(). `case_statement` is labelled but
+# must NOT be a container: the breadcrumb names the function, not the branch.
+#
+# This targets the branch's `local` declaration rather than its `printf`. A bare
+# command inside a case branch cannot be bookmarked at all: `case_item` is not a
+# landmark, so the query has no anchor between the command and the function, and
+# a lone `(command)` pattern matches every `printf` in the file. Picking a
+# `declaration_command` gives the query something to anchor on. Same class of
+# generator limitation as codemark#239.
+50
+
+# Inside the `if` inside the `for` in upload_artifacts() — two statement levels,
+# so the breadcrumb walk has to skip both to find the function.
+68
+
+# Inside the `while` body in verify_checksums().
+94
+
+# Inside the `until` loop — Bash models `until` as a keyword token inside
+# `while_statement`, so this exercises the same kind from the other spelling.
+99
+
+# Inside the `if` in main().
+120

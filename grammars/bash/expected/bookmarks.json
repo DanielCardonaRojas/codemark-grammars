@@ -2,24 +2,72 @@
   {
     "breadcrumbs": [
       {
-        "line": 7,
-        "text": "deploy() {"
+        "line": 31,
+        "text": "resolve_target() {"
       }
     ],
-    "line": 11,
-    "query": "(function_definition\n  name: (word) @name0 @sticky.function\n  (#eq? @name0 \"deploy\")\n  (compound_statement\n    (if_statement\n      (command\n        name: (command_name) @fn_name\n        (#eq? @fn_name \"return\")) @target)))",
+    "line": 38,
+    "query": "(function_definition\n  name: (word) @name0 @sticky.function\n  (#eq? @name0 \"resolve_target\")\n  (compound_statement\n    (if_statement\n      (elif_clause\n        (command\n          name: (command_name) @fn_name\n          (#eq? @fn_name \"log\")) @target))))",
     "resolution_method": "exact",
     "sample": "sample.sh"
   },
   {
     "breadcrumbs": [
       {
-        "line": 7,
-        "text": "deploy() {"
+        "line": 31,
+        "text": "resolve_target() {"
       }
     ],
-    "line": 14,
-    "query": "(function_definition\n  name: (word) @name0 @sticky.function\n  (#eq? @name0 \"deploy\")\n  (compound_statement\n    (for_statement\n      (do_group\n        (command\n          name: (command_name) @fn_name\n          (#eq? @fn_name \"echo\")) @target))))",
+    "line": 50,
+    "query": "(function_definition\n  name: (word) @name0 @sticky.function\n  (#eq? @name0 \"resolve_target\")\n  (compound_statement\n    (case_statement\n      (case_item\n        (declaration_command) @target))))",
+    "resolution_method": "exact",
+    "sample": "sample.sh"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 62,
+        "text": "upload_artifacts() {"
+      }
+    ],
+    "line": 68,
+    "query": "(function_definition\n  name: (word) @name0 @sticky.function\n  (#eq? @name0 \"upload_artifacts\")\n  (compound_statement\n    (for_statement\n      (do_group\n        (if_statement\n          (variable_assignment\n            name: (variable_name) @fn_name\n            (#eq? @fn_name \"FAILED_UNITS\")) @target)))))",
+    "resolution_method": "exact",
+    "sample": "sample.sh"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 81,
+        "text": "verify_checksums() {"
+      }
+    ],
+    "line": 94,
+    "query": "(function_definition\n  name: (word) @name0 @sticky.function\n  (#eq? @name0 \"verify_checksums\")\n  (compound_statement\n    (redirected_statement\n      (while_statement\n        (do_group\n          (variable_assignment\n            name: (variable_name) @fn_name\n            (#eq? @fn_name \"checked\")) @target)))))",
+    "resolution_method": "exact",
+    "sample": "sample.sh"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 81,
+        "text": "verify_checksums() {"
+      }
+    ],
+    "line": 99,
+    "query": "(function_definition\n  name: (word) @name0 @sticky.function\n  (#eq? @name0 \"verify_checksums\")\n  (compound_statement\n    (while_statement\n      (do_group\n        (variable_assignment\n          name: (variable_name) @fn_name\n          (#eq? @fn_name \"attempt\")) @target))))",
+    "resolution_method": "exact",
+    "sample": "sample.sh"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 111,
+        "text": "main() {"
+      }
+    ],
+    "line": 120,
+    "query": "(function_definition\n  name: (word) @name0 @sticky.function\n  (#eq? @name0 \"main\")\n  (compound_statement\n    (if_statement\n      (command\n        name: (command_name) @fn_name\n        (#eq? @fn_name \"log\")) @target)))",
     "resolution_method": "exact",
     "sample": "sample.sh"
   }

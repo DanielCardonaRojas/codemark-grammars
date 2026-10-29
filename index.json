@@ -7,7 +7,7 @@
         "sh",
         "bash"
       ],
-      "profile_version": "1.0.0",
+      "profile_version": "1.1.0",
       "profile_url": "grammars/bash/manifest.json",
       "ts_abi": "0.25",
       "grammar_repo": "https://github.com/tree-sitter/tree-sitter-bash",
