@@ -3,6 +3,25 @@
     "scala",
     "sc"
   ],
+  "curation": {
+    "drop_landmarks": [
+      "class_parameter",
+      "class_parameters",
+      "val_definition",
+      "var_definition"
+    ],
+    "add_containers": [
+      [
+        "function_definition",
+        "name"
+      ]
+    ],
+    "why": "the class_parameter* kinds are constructor-parameter wrappers; var_definition and val_definition name a 'type', not a name. The two dropped labels are expression kinds the sample happens to contain but which add nothing to a summary.",
+    "drop_labels": [
+      "assignment_expression",
+      "call_expression"
+    ]
+  },
   "name": "scala",
   "profile": {
     "containers": [

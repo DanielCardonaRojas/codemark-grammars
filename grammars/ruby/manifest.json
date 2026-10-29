@@ -4,6 +4,19 @@
     "rake",
     "gemspec"
   ],
+  "curation": {
+    "add_containers": [
+      [
+        "method",
+        "name"
+      ],
+      [
+        "singleton_method",
+        "name"
+      ]
+    ],
+    "why": "methods nest statements in real code; this sample's hold only control flow, so the generator correctly declines to propose them."
+  },
   "name": "ruby",
   "profile": {
     "containers": [

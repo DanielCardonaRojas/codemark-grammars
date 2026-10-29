@@ -3,6 +3,27 @@
     "php",
     "phtml"
   ],
+  "curation": {
+    "drop_landmarks": [
+      "declaration_list",
+      "property_declaration"
+    ],
+    "add_containers": [
+      [
+        "namespace_definition",
+        "name"
+      ],
+      [
+        "method_declaration",
+        "name"
+      ],
+      [
+        "function_definition",
+        "name"
+      ]
+    ],
+    "why": "declaration_list is the { } body. The semicolon form of namespace never encloses anything in the AST, so it must be added rather than observed; methods and functions likewise nest in real code."
+  },
   "name": "php",
   "profile": {
     "containers": [

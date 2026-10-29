@@ -3,6 +3,19 @@
     "zig",
     "zon"
   ],
+  "curation": {
+    "drop_containers": [
+      [
+        "variable_declaration",
+        "type"
+      ],
+      [
+        "struct_declaration",
+        "name"
+      ]
+    ],
+    "why": "a Zig struct is an anonymous value bound by the enclosing variable_declaration, so it has no name of its own; variable_declaration's 'type' field is a type, not a name \u2014 a breadcrumb reading 'f64' helps nobody."
+  },
   "name": "zig",
   "profile": {
     "containers": [

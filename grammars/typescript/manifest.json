@@ -2,6 +2,34 @@
   "extensions": [
     "ts"
   ],
+  "curation": {
+    "drop_landmarks": [
+      "class_body",
+      "property_signature",
+      "public_field_definition"
+    ],
+    "add_containers": [
+      [
+        "internal_module",
+        "name"
+      ],
+      [
+        "method_definition",
+        "name"
+      ],
+      [
+        "function_declaration",
+        "name"
+      ]
+    ],
+    "why": "class_body is a wrapper; signatures and field definitions declare nothing nestable. internal_module (namespace) is added rather than observed: a bookmark inside a namespace cannot be created at all (codemark#246), so the sample avoids them \u2014 but it remains the right container kind once that is fixed.",
+    "add_landmarks": [
+      "internal_module"
+    ],
+    "add_labels": {
+      "internal_module": "module"
+    }
+  },
   "name": "typescript",
   "profile": {
     "containers": [

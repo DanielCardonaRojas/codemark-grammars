@@ -2,6 +2,23 @@
   "extensions": [
     "swift"
   ],
+  "curation": {
+    "drop_landmarks": [
+      "class_body",
+      "enum_class_body"
+    ],
+    "add_containers": [
+      [
+        "function_declaration",
+        "name"
+      ],
+      [
+        "init_declaration",
+        "name"
+      ]
+    ],
+    "why": "both *_body kinds are { } wrappers. Functions and initializers are named in breadcrumbs even where this sample doesn't nest declarations inside them."
+  },
   "name": "swift",
   "profile": {
     "containers": [

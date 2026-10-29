@@ -104,6 +104,12 @@ resolve, and codemark rejects it on install.
 
 Commit the generated `expected/bookmarks.json`. CI runs the same script.
 
+**If you hand-edit the profile, record it in `curation`.** The harness
+regenerates from your samples and asserts `generated + curation == committed`,
+so an unrecorded edit fails the build — which is the point: it means the
+committed profile can't silently drift from the samples that justify it. See
+[MANIFEST.md](MANIFEST.md#curation-registry-only).
+
 Then record where your `.wasm` came from, so the next person can reproduce the
 verification instead of guessing which build you used:
 

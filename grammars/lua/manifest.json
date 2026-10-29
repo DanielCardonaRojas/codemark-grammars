@@ -1,7 +1,12 @@
 {
   "name": "lua",
   "version": "0.3.0",
-  "extensions": ["lua"],
+  "extensions": [
+    "lua"
+  ],
+  "curation": {
+    "why": "no curation \u2014 the generated profile is used as proposed."
+  },
   "profile": {
     "landmark_kinds": [
       "function_declaration",
@@ -20,7 +25,10 @@
       "function_call": "call"
     },
     "containers": [
-      ["function_declaration", "name"]
+      [
+        "function_declaration",
+        "name"
+      ]
     ]
   }
 }

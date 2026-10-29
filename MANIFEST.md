@@ -86,6 +86,38 @@ none of that.** A stored `".lua"` registers verbatim and matches no file;
 Extensions owned by a built-in are dropped at discovery with a warning. The
 grammar's other extensions still register — it isn't all-or-nothing.
 
+### `curation` (registry-only)
+
+Not read by codemark — it exists so the committed profile is **reproducible**:
+
+```
+generated(samples) + curation == committed profile
+```
+
+The generator proposes a profile from the samples; a human then removes noise
+and adds containers the samples don't happen to nest. Recording those edits
+makes the difference auditable, and `scripts/verify.sh` asserts the equation,
+so a sample change that alters the proposal fails loudly instead of leaving the
+manifest quietly stale.
+
+```json
+"curation": {
+  "drop_landmarks": ["declaration_list", "foreach_statement"],
+  "add_containers": [["constructor_declaration", "name"]],
+  "why": "declaration_list is the { } body wrapper; a constructor nests statements in real code even though this sample's doesn't."
+}
+```
+
+| Key | Effect |
+|---|---|
+| `drop_landmarks` | remove the kind from landmarks, labels **and** containers |
+| `drop_labels` | remove just the label |
+| `drop_containers` | remove one `[kind, field]` pair |
+| `add_landmarks` / `add_labels` / `add_containers` | the inverse |
+| `why` | **required** — a reviewer must be able to tell curation from a mistake |
+
+Drops apply before additions, so the result doesn't depend on key order.
+
 ### `profile`
 
 Optional. Omitting it (or `{}`) is valid: parsing and structural resolution work

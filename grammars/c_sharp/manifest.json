@@ -3,6 +3,20 @@
     "cs",
     "csx"
   ],
+  "curation": {
+    "drop_landmarks": [
+      "declaration_list",
+      "foreach_statement",
+      "variable_declaration"
+    ],
+    "add_containers": [
+      [
+        "constructor_declaration",
+        "name"
+      ]
+    ],
+    "why": "declaration_list is the { } body wrapper; foreach_statement is control flow and variable_declaration matched on a 'type' field, not a name. A constructor nests statements in real code even though this sample's doesn't."
+  },
   "name": "c_sharp",
   "profile": {
     "containers": [

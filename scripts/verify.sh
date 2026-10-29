@@ -11,6 +11,8 @@
 #   1. build the grammar's .wasm at the pinned revision (ABI 0.25)
 #   2. install it with this repo's profile
 #   3. `codemark languages validate` — must be lint-clean
+#   3b. regenerate the profile from the samples, apply the manifest's recorded
+#      curation, and confirm it reproduces the committed profile
 #   4. bookmark each sample's marked lines and compare against committed
 #      snapshots of the query, resolution method and breadcrumbs
 #
@@ -142,6 +144,31 @@ if not v["valid"]:
     sys.exit("profile is not valid for this grammar")
 print("  profile is valid")
 PY
+
+# --- 3b. the profile must be reproducible from the samples -------------------
+#
+# The committed profile is generated output plus human curation. Without this
+# check the two are connected only by memory: a sample change that alters the
+# proposal leaves the manifest quietly stale, and nothing distinguishes
+# deliberate curation from drift.
+#
+# Needs a codemark built with --features profile-authoring. Skipped (with a
+# note) when that isn't available, so the rest of the harness still runs.
+
+if "$CODEMARK" languages profile --help >/dev/null 2>&1; then
+  echo "==> checking the profile is reproducible from samples + curation"
+  GEN_ARGS=()
+  for sample in "$LANG_DIR"/samples/*; do
+    [[ "$sample" == *.lines ]] && continue
+    GEN_ARGS+=(--sample "$sample")
+  done
+  "$CODEMARK" languages profile init "$WASM" "${GEN_ARGS[@]}" \
+    --name "$LANG_NAME" > "$WORK/generated.json"
+  python3 "$REPO_ROOT/scripts/apply-curation.py" \
+    "$WORK/generated.json" "$LANG_DIR/manifest.json" --check
+else
+  echo "==> skipping reproducibility check (no profile-authoring build)"
+fi
 
 # --- 4. compare against the committed snapshots ------------------------------
 #

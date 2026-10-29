@@ -3,6 +3,9 @@
     "sh",
     "bash"
   ],
+  "curation": {
+    "why": "no curation \u2014 the generated profile is used as proposed."
+  },
   "name": "bash",
   "profile": {
     "containers": [
