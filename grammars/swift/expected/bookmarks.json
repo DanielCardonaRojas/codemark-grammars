@@ -2,35 +2,123 @@
   {
     "breadcrumbs": [
       {
-        "line": 18,
-        "text": "final class Invoice {"
-      },
-      {
-        "line": 26,
-        "text": "    func compute() -> Double {"
+        "line": 25,
+        "text": "enum Currency: String, CaseIterable {"
       }
     ],
-    "line": 29,
-    "query": "(class_declaration\n  (class_body\n    (function_declaration\n      name: (simple_identifier) @name0 @sticky.function\n      (#eq? @name0 \"compute\")\n      (function_body\n        (statements\n          (for_statement\n            (statements\n              (if_statement\n                (statements\n                  (call_expression\n                    (_) @func\n                    (#eq? @func \"addTaxed\")) @target)))))))))",
+    "line": 34,
+    "query": "(class_declaration\n  name: (type_identifier) @name0 @sticky.class\n  (#eq? @name0 \"Currency\")\n  (enum_class_body\n    (property_declaration\n      name: (pattern) @name1\n      (#eq? @name1 \"symbol\")\n      (computed_property\n        (statements\n          (switch_statement\n            (switch_entry\n              (switch_pattern) @name2\n              (#eq? @name2 \".usd\")\n              (statements\n                (control_transfer_statement) @target))))))))",
     "resolution_method": "exact",
     "sample": "Invoice.swift"
   },
   {
     "breadcrumbs": [
       {
-        "line": 18,
+        "line": 72,
+        "text": "final class Invoice {"
+      }
+    ],
+    "line": 102,
+    "query": "(class_declaration\n  (class_body\n    (subscript_declaration\n      name: (user_type (type_identifier) @name0)\n      (#eq? @name0 \"LineItem\")\n      (computed_property\n        (statements\n          (call_expression\n            (_) @func\n            (#eq? @func \"lines\")) @target)))))",
+    "resolution_method": "exact",
+    "sample": "Invoice.swift"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 72,
+        "text": "final class Invoice {"
+      }
+    ],
+    "line": 109,
+    "query": "(class_declaration\n  (class_body\n    (property_declaration\n      name: (pattern) @name0\n      (#eq? @name0 \"summary\")\n      (computed_property\n        (computed_getter\n          (statements\n            (property_declaration\n              name: (pattern) @fn_name\n              (#eq? @fn_name \"suffix\")) @target))))))",
+    "resolution_method": "exact",
+    "sample": "Invoice.swift"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 72,
         "text": "final class Invoice {"
       },
       {
-        "line": 40,
-        "text": "    struct Summary {"
+        "line": 96,
+        "text": "    deinit {"
+      }
+    ],
+    "line": 97,
+    "query": "(class_declaration\n  (class_body\n    (deinit_declaration\n      (function_body\n        (statements\n          (assignment) @target)))))",
+    "resolution_method": "exact",
+    "sample": "Invoice.swift"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 72,
+        "text": "final class Invoice {"
       },
       {
-        "line": 43,
+        "line": 116,
+        "text": "    func compute() -> Decimal {"
+      }
+    ],
+    "line": 124,
+    "query": "(class_declaration\n  (class_body\n    (function_declaration\n      name: (simple_identifier) @name0 @sticky.function\n      (#eq? @name0 \"compute\")\n      (function_body\n        (statements\n          (for_statement\n            (statements\n              (switch_statement\n                (switch_entry\n                  (statements\n                    (property_declaration\n                      name: (pattern) @fn_name\n                      (#eq? @fn_name \"taxed\")) @target))))))))))",
+    "resolution_method": "exact",
+    "sample": "Invoice.swift"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 72,
+        "text": "final class Invoice {"
+      },
+      {
+        "line": 116,
+        "text": "    func compute() -> Decimal {"
+      },
+      {
+        "line": 132,
+        "text": "        func rounded(_ value: Decimal) -> Decimal {"
+      }
+    ],
+    "line": 135,
+    "query": "(class_declaration\n  (class_body\n    (function_declaration\n      (function_body\n        (statements\n          (function_declaration\n            name: (simple_identifier) @name0 @sticky.function\n            (#eq? @name0 \"rounded\")\n            (function_body\n              (statements\n                (call_expression\n                  (_) @func\n                  (#eq? @func \"NSDecimalRound\")) @target))))))))",
+    "resolution_method": "exact",
+    "sample": "Invoice.swift"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 72,
+        "text": "final class Invoice {"
+      },
+      {
+        "line": 145,
+        "text": "    func settle(using gateway: (Decimal) async throws -> Bool) async throws -> State {"
+      }
+    ],
+    "line": 147,
+    "query": "(class_declaration\n  (class_body\n    (function_declaration\n      name: (simple_identifier) @name0 @sticky.function\n      (#eq? @name0 \"settle\")\n      (function_body\n        (statements\n          (property_declaration\n            (call_expression\n              (navigation_expression\n                (call_expression\n                  (_) @func\n                  (#eq? @func \"lines\\n            .filter\")) @target))))))))",
+    "resolution_method": "exact",
+    "sample": "Invoice.swift"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 72,
+        "text": "final class Invoice {"
+      },
+      {
+        "line": 170,
+        "text": "    struct Receipt {"
+      },
+      {
+        "line": 174,
         "text": "        func render() -> String {"
       }
     ],
-    "line": 44,
+    "line": 176,
     "query": "(class_declaration\n  (class_body\n    (class_declaration\n      (class_body\n        (function_declaration\n          name: (simple_identifier) @name0 @sticky.function\n          (#eq? @name0 \"render\")\n          (function_body\n            (statements\n              (control_transfer_statement) @target)))))))",
     "resolution_method": "exact",
     "sample": "Invoice.swift"
@@ -38,16 +126,32 @@
   {
     "breadcrumbs": [
       {
-        "line": 49,
+        "line": 183,
         "text": "extension Invoice: Payable {"
       },
       {
-        "line": 50,
-        "text": "    func pay(amount: Double) -> Bool {"
+        "line": 188,
+        "text": "    func pay(amount: Decimal) -> Bool {"
       }
     ],
-    "line": 51,
-    "query": "(class_declaration\n  (class_body\n    (function_declaration\n      name: (simple_identifier) @name0 @sticky.function\n      (#eq? @name0 \"pay\")\n      (function_body\n        (statements\n          (control_transfer_statement) @target)))))",
+    "line": 189,
+    "query": "(class_declaration\n  (class_body\n    (function_declaration\n      name: (simple_identifier) @name0 @sticky.function\n      (#eq? @name0 \"pay\")\n      (function_body\n        (statements\n          (assignment) @target)))))",
+    "resolution_method": "exact",
+    "sample": "Invoice.swift"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 195,
+        "text": "extension Payable {"
+      },
+      {
+        "line": 196,
+        "text": "    func describe() -> String {"
+      }
+    ],
+    "line": 197,
+    "query": "(class_declaration\n  (class_body\n    (function_declaration\n      name: (simple_identifier) @name0 @sticky.function\n      (#eq? @name0 \"describe\")\n      (function_body\n        (statements\n          (line_string_literal) @target)))))",
     "resolution_method": "exact",
     "sample": "Invoice.swift"
   }

@@ -20,28 +20,6 @@
   },
   "name": "scala",
   "profile": {
-    "containers": [
-      [
-        "class_definition",
-        "name"
-      ],
-      [
-        "function_definition",
-        "name"
-      ],
-      [
-        "object_definition",
-        "name"
-      ],
-      [
-        "package_clause",
-        "name"
-      ],
-      [
-        "trait_definition",
-        "name"
-      ]
-    ],
     "landmark_kinds": [
       "class_definition",
       "extension_definition",
@@ -60,9 +38,18 @@
       "function_definition": "function",
       "if_expression": "if statement",
       "match_expression": "match",
+      "object_definition": "module",
+      "package_clause": "namespace",
       "trait_definition": "interface",
       "type_definition": "type"
-    }
+    },
+    "containers": [
+      "class",
+      "function",
+      "interface",
+      "module",
+      "namespace"
+    ]
   },
   "version": "1.1.0"
 }

@@ -8,12 +8,6 @@
   },
   "name": "bash",
   "profile": {
-    "containers": [
-      [
-        "function_definition",
-        "name"
-      ]
-    ],
     "landmark_kinds": [
       "declaration_command",
       "function_definition"
@@ -25,7 +19,10 @@
       "if_statement": "if statement",
       "variable_assignment": "assignment",
       "while_statement": "while loop"
-    }
+    },
+    "containers": [
+      "function"
+    ]
   },
   "version": "1.1.0"
 }

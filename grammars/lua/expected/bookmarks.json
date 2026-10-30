@@ -60,14 +60,24 @@
     "sample": "sample.lua"
   },
   {
-    "breadcrumbs": [],
+    "breadcrumbs": [
+      {
+        "line": 107,
+        "text": "local formatMoney = function(value)"
+      }
+    ],
     "line": 108,
     "query": "(chunk\n  (variable_declaration\n    (assignment_statement\n      (expression_list\n        (function_definition\n          (block\n            (return_statement) @target))))))",
     "resolution_method": "exact",
     "sample": "sample.lua"
   },
   {
-    "breadcrumbs": [],
+    "breadcrumbs": [
+      {
+        "line": 112,
+        "text": "Invoice.describe = function(self)"
+      }
+    ],
     "line": 113,
     "query": "(chunk\n  (assignment_statement\n    (expression_list\n      (function_definition\n        (block\n          (variable_declaration) @target)))))",
     "resolution_method": "exact",

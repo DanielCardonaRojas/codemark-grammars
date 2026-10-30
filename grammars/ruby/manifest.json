@@ -10,33 +10,12 @@
       "singleton_class"
     ],
     "add_containers": [
-      [
-        "singleton_method",
-        "name"
-      ]
+      "method"
     ],
     "why": "method_parameters is a parameter-list wrapper and singleton_class is the `class << self` block, neither of which is a declaration. singleton_method is a container in real code but this sample's hold only a constructor call."
   },
   "name": "ruby",
   "profile": {
-    "containers": [
-      [
-        "class",
-        "name"
-      ],
-      [
-        "method",
-        "name"
-      ],
-      [
-        "module",
-        "name"
-      ],
-      [
-        "singleton_method",
-        "name"
-      ]
-    ],
     "landmark_kinds": [
       "class",
       "method",
@@ -53,7 +32,12 @@
       "module": "module",
       "operator_assignment": "assignment",
       "singleton_method": "method"
-    }
+    },
+    "containers": [
+      "class",
+      "method",
+      "module"
+    ]
   },
   "version": "1.1.0"
 }
