@@ -1,15 +1,43 @@
 # 1-based lines to bookmark. Each sits INSIDE a construct the profile claims to
 # understand, so a broken `containers` shows up as a missing breadcrumb.
 #
-# Note: the semicolon form `namespace App\Billing;` does not enclose the class
-# in the AST, so it never appears in a breadcrumb. That is the language, not a
-# profile gap — a braced `namespace X { ... }` would nest.
+# The sample uses the BRACED namespace form, which changes what this file can
+# assert. `namespace App\Billing;` (semicolon) encloses nothing in the AST, so
+# it could never appear in a breadcrumb — the old sample used it and recorded
+# that as a permanent gap. With `namespace App\Billing { ... }` the namespace is
+# a real ancestor, so every trail below is one level deeper and
+# `namespace_definition` is an observed container rather than a curated guess.
 
-# Inside if > foreach > total() > class Invoice.
-21
+# Inside a method on an enum — proves `enum_declaration` is a container, which
+# only works because the enum holds a method and not just cases.
+33
 
-# Inside the static method `empty()`.
-31
+# Inside a method on a trait. PHP's unit of reuse, and a container kind the old
+# sample never reached.
+50
 
-# Inside the top-level function `formatMoney`.
-42
+# Inside the constructor's guard clause: namespace > class > constructor.
+101
+
+# Inside a match arm inside the foreach in total() — the deepest chain here:
+# namespace > class > method > foreach > match > arm. The four match fragments
+# (`match_block`, `match_condition_list`, `match_conditional_expression`,
+# `match_default_expression`) are deliberately unlabelled, so the breadcrumb
+# names the method rather than the arm.
+116
+
+# Inside the try block in pay(), which also has catch and finally.
+127
+
+# Inside jsonSerialize(), on the line opening a closure assigned to a variable.
+146
+
+# Inside isVoid() on `final class LineItem`, a separate class in the namespace.
+175
+
+# Inside the top-level function formatMoney() — proves `function_definition`
+# works as a container with the namespace above it.
+181
+
+# Inside the `if` inside the foreach in the generator function eachTaxable().
+191
