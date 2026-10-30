@@ -2,36 +2,119 @@
   {
     "breadcrumbs": [
       {
-        "line": 8,
-        "text": "    pub fn compute(self: *Invoice) f64 {"
+        "line": 29,
+        "text": "    pub fn isSettled(self: InvoiceState) bool {"
       }
     ],
-    "line": 12,
-    "query": "(variable_declaration\n  (struct_declaration\n    (function_declaration\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"compute\")\n      (block\n        (labeled_statement\n          (for_statement\n            (block_expression\n              (block\n                (if_statement\n                  (block_expression\n                    (block\n                      (variable_declaration) @target)))))))))))",
+    "line": 30,
+    "query": "(variable_declaration\n  (enum_declaration\n    (function_declaration\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"isSettled\")\n      (block\n        (expression_statement) @target))))",
     "resolution_method": "exact",
     "sample": "sample.zig"
   },
   {
     "breadcrumbs": [
       {
-        "line": 8,
-        "text": "    pub fn compute(self: *Invoice) f64 {"
+        "line": 44,
+        "text": "    pub fn isVoid(self: LineItem) bool {"
       }
     ],
-    "line": 18,
-    "query": "(variable_declaration\n  (struct_declaration\n    (function_declaration\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"compute\")\n      (block\n        (expression_statement) @target))))",
+    "line": 45,
+    "query": "(variable_declaration\n  (struct_declaration\n    (function_declaration\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"isVoid\")\n      (block\n        (expression_statement) @target))))",
     "resolution_method": "exact",
     "sample": "sample.zig"
   },
   {
     "breadcrumbs": [
       {
-        "line": 27,
-        "text": "pub fn formatMoney(value: f64) f64 {"
+        "line": 60,
+        "text": "    pub fn init(lines: []const LineItem) InvoiceError!Self {"
       }
     ],
-    "line": 28,
-    "query": "(function_declaration\n  name: (identifier) @name0 @sticky.function\n  (#eq? @name0 \"formatMoney\")\n  (block\n    (expression_statement) @target))",
+    "line": 61,
+    "query": "(variable_declaration\n  (struct_declaration\n    (function_declaration\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"init\")\n      (block\n        (if_statement\n          condition: (_) @cond\n          (#eq? @cond \"lines.len == 0\")) @target))))",
+    "resolution_method": "exact",
+    "sample": "sample.zig"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 74,
+        "text": "    pub fn compute(self: *Self) f64 {"
+      }
+    ],
+    "line": 84,
+    "query": "(variable_declaration\n  (struct_declaration\n    (function_declaration\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"compute\")\n      (block\n        (labeled_statement\n          (for_statement\n            (block_expression\n              (block\n                (switch_expression\n                  (switch_case\n                    (block\n                      (if_statement\n                        condition: (_) @cond\n                        (#eq? @cond \"line.isVoid()\")) @target)))))))))))",
+    "resolution_method": "exact",
+    "sample": "sample.zig"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 98,
+        "text": "    pub fn render(self: Self, allocator: Allocator) ![]u8 {"
+      }
+    ],
+    "line": 100,
+    "query": "(variable_declaration\n  (struct_declaration\n    (function_declaration\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"render\")\n      (block\n        (defer_statement) @target))))",
+    "resolution_method": "exact",
+    "sample": "sample.zig"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 98,
+        "text": "    pub fn render(self: Self, allocator: Allocator) ![]u8 {"
+      },
+      {
+        "line": 108,
+        "text": "            fn label(state: InvoiceState) []const u8 {"
+      }
+    ],
+    "line": 109,
+    "query": "(variable_declaration\n  (struct_declaration\n    (function_declaration\n      (block\n        (variable_declaration\n          (struct_declaration\n            (function_declaration\n              name: (identifier) @name0 @sticky.function\n              (#eq? @name0 \"label\")\n              (block\n                (expression_statement\n                  (return_expression) @target)))))))))",
+    "resolution_method": "exact",
+    "sample": "sample.zig"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 121,
+        "text": "    pub fn pay(self: *Self, amount: f64) InvoiceError!bool {"
+      }
+    ],
+    "line": 125,
+    "query": "(variable_declaration\n  (struct_declaration\n    (function_declaration\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"pay\")\n      (block\n        (if_statement\n          (block_expression\n            (block\n              (variable_declaration) @target)))))))",
+    "resolution_method": "exact",
+    "sample": "sample.zig"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 135,
+        "text": "    pub fn countTaxable(self: Self) usize {"
+      }
+    ],
+    "line": 141,
+    "query": "(variable_declaration\n  (struct_declaration\n    (function_declaration\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"countTaxable\")\n      (block\n        (labeled_statement\n          (while_statement\n            (block_expression\n              (block\n                (if_statement\n                  (block_expression\n                    (block\n                      (variable_declaration) @target)))))))))))",
+    "resolution_method": "exact",
+    "sample": "sample.zig"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 150,
+        "text": "pub fn sumBy(comptime T: type, items: []const T, pick: fn (T) f64) f64 {"
+      }
+    ],
+    "line": 153,
+    "query": "(function_declaration\n  name: (identifier) @name0 @sticky.function\n  (#eq? @name0 \"sumBy\")\n  (block\n    (labeled_statement\n      (for_statement) @target)))",
+    "resolution_method": "exact",
+    "sample": "sample.zig"
+  },
+  {
+    "breadcrumbs": [],
+    "line": 172,
+    "query": "(test_declaration\n  (block) @target)",
     "resolution_method": "exact",
     "sample": "sample.zig"
   }
