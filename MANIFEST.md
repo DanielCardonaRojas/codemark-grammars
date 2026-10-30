@@ -27,15 +27,17 @@ manifest. Fetch one with `--from-registry`, or generate one with
     ],
     "node_labels": {
       "function_declaration": "function",
+      "function_definition": "function",
       "if_statement": "if statement",
       "function_call": "call"
     },
-    "containers": [
-      ["function_declaration", "name"]
-    ]
+    "containers": ["function"]
   }
 }
 ```
+
+The single `"function"` container covers both `function_declaration` and
+`function_definition`, since both carry that label.
 
 Codemark reads exactly three top-level fields:
 
@@ -103,18 +105,25 @@ manifest quietly stale.
 ```json
 "curation": {
   "drop_landmarks": ["declaration_list", "foreach_statement"],
-  "add_containers": [["constructor_declaration", "name"]],
+  "add_containers": ["constructor"],
   "why": "declaration_list is the { } body wrapper; a constructor nests statements in real code even though this sample's doesn't."
 }
 ```
 
 | Key | Effect |
 |---|---|
-| `drop_landmarks` | remove the kind from landmarks, labels **and** containers |
-| `drop_labels` | remove just the label |
-| `drop_containers` | remove one `[kind, field]` pair |
-| `add_landmarks` / `add_labels` / `add_containers` | the inverse |
+| `drop_landmarks` | remove the **kind** from landmarks and labels |
+| `drop_labels` | remove just the label for that kind |
+| `drop_containers` | remove one **label** from `containers` |
+| `add_landmarks` / `add_labels` | the inverse, keyed by node kind |
+| `add_containers` | add one **label** to `containers` |
 | `why` | **required** — a reviewer must be able to tell curation from a mistake |
+
+Note the asymmetry: landmarks and labels are keyed by **node kind**, containers
+by **label**. Dropping a landmark therefore does *not* implicitly drop a
+container — several kinds can share a label, so removing `foreach_statement`
+must not take `class` with it. A label is dropped only when no remaining kind
+carries it.
 
 Drops apply before additions, so the result doesn't depend on key order.
 
@@ -216,38 +225,84 @@ concept that should be unified across languages:
 
 ### `containers`
 
-Pairs of `[node_kind, name_field]` naming the ancestors worth showing in a
-breadcrumb:
+**Labels** from [`node_labels`](#node_labels), naming the landmarks the UI treats
+specially:
 
 ```json
-"containers": [
-  ["class_declaration", "name"],
-  ["impl_item", "type"]
-]
+"node_labels": {
+  "class_declaration": "class",
+  "struct_declaration": "class",
+  "method_declaration": "method"
+},
+"containers": ["class", "method"]
 ```
 
-A bookmark nested inside a listed kind gets a trail:
+A bookmark nested inside a kind carrying one of those labels gets a trail:
 
 ```
 Context: 2:module Billing › 3:  class Invoice › 11:    def compute
 ```
 
-Two counterintuitive properties:
+One entry covers **every** kind with that label, which is the point of keying on
+the classified vocabulary: a grammar's several spellings of the same idea are
+named once. Above, `class` picks up both `class_declaration` and
+`struct_declaration`.
 
-**1. No fallback.** The breadcrumb walker builds its whitelist purely from this
-list. Name a kind the grammar doesn't define — or leave it empty — and
-breadcrumbs are blank, with no error. Unlike the other two fields, nothing
-covers for you.
+Three counterintuitive properties:
 
-**2. The name field is currently unread.** The walker takes `containers[].0` and
-extracts the *whole source line*, so `["impl_item", "name"]` and
-`["impl_item", "type"]` behave identically today. Get it right anyway: it's part
-of the schema, `validate` checks it exists in the grammar, and breadcrumbs may
-yet use it to extract just the name.
+**1. No fallback.** The walker builds its whitelist purely from this list. Name a
+label no kind in the profile carries — or leave it empty — and breadcrumbs are
+blank. Unlike the other two fields, nothing covers for you. `validate` reports an
+unmatched label as an **error** for exactly this reason.
 
-The field belongs to the **container**, not the thing it contains. Rust's
-`impl_item` holds its name under `type`, not `name`. Assuming `name` is how a
-committed fixture once ended up pointing at a kind that didn't exist.
+**2. A container does not have to be named.** This is the part that trips people
+authoring a profile for a language like Zig.
+
+`containers` drives two presentations of one idea:
+
+| Presentation | What it needs | Nameless container |
+|---|---|---|
+| **Sticky header** | the *line*, pinned at the top of the viewer while you scroll | works fine |
+| **Breadcrumb trail** | the *name*, for a one-line path to the target | skipped by the renderer |
+
+So a kind with no name field is still a legitimate container. A Zig struct is an
+anonymous value bound by its enclosing `variable_declaration`:
+
+```zig
+pub const Invoice = struct {
+    pub fn compute(self: *Self) f64 { ... }
+};
+```
+
+`struct_declaration` has no name of its own, but you certainly want it pinned
+while scrolling through its methods. Listing its label is correct; the breadcrumb
+renderer is what decides to skip it.
+
+**3. A container is a landmark with a body.** That is the rule the generator
+applies, and having a body is what makes a kind worth pinning — it is something
+you can scroll inside. A one-liner (a C# `field_declaration`, a TypeScript
+`method_signature`) has nothing to scroll past and only adds noise.
+
+This cuts both ways, and the cut is visible in this repo. C#'s
+`property_declaration` is labelled `variable`, the same as `field_declaration`,
+so it cannot be a container without dragging those one-liners in too — recorded
+in that manifest's `curation.why` rather than worked around.
+
+#### The legacy pair form
+
+Manifests written before this schema used `[node_kind, name_field]` pairs:
+
+```json
+"containers": [["class_declaration", "name"], ["impl_item", "type"]]
+```
+
+Codemark still reads them, so an old manifest keeps working — `Profile` is
+`#[serde(default)]` with no `deny_unknown_fields` precisely so that holds. The
+name field is dropped on the way in: nothing ever read it (the walker extracts
+the whole source line), and the label form has no per-kind slot for it.
+`validate` reports the pair form as a warning pointing at the new shape.
+
+Every profile in this repo is on the label form as of `profile_version` 2.0.0.
 
 ---
 
@@ -308,7 +363,7 @@ Real cases from profiles in this repo, worth reading before authoring a new one:
 | **Lua** | `function_call`, not `call_expression`; no `local_function_declaration` at all. An early hand-written profile used both and silently produced no breadcrumbs. |
 | **Ruby** | Declarations are bare words (`class`, `module`, `method`) with no `_declaration` suffix. Anything deriving kinds from naming conventions misses them. |
 | **PHP** | `namespace X;` (semicolon form) doesn't enclose anything in the AST, so it can never appear in a breadcrumb. The braced form does. The repo also publishes two grammars from subdirectories, so its index entry needs `grammar_dir` and names one of two wasm assets. |
-| **Zig** | A struct is an anonymous value bound by the enclosing `variable_declaration`, so `struct_declaration` has no name field and can't be a container. |
+| **Zig** | A struct is an anonymous value bound by the enclosing `variable_declaration`, so `struct_declaration` has no name field. It is still a valid container — it sticks while you scroll, and the breadcrumb renderer skips it. |
 | **Scala** | Identical sibling statements make the generated query ambiguous and codemark refuses the bookmark — a sample-authoring constraint, not a profile defect. |
 | **Kotlin** | The grammar declares *no field names at all*, so no `containers` entry is possible. See [NOT-YET-SUPPORTED.md](NOT-YET-SUPPORTED.md). |
 | **Elixir** | `defmodule`/`def` are macro calls, so every declaration is the same node kind. Not expressible in this schema. See [NOT-YET-SUPPORTED.md](NOT-YET-SUPPORTED.md). |
