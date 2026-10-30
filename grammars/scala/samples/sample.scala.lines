@@ -1,12 +1,45 @@
 # 1-based lines to bookmark, one per line.
+#
+# The sample uses the BRACED package form. `package app.billing` on its own line
+# parses as a `package_clause` that encloses nothing, so it could never appear
+# in a breadcrumb; the braced form does enclose, which makes `package_clause` an
+# observed container and puts a package level on every trail below.
+#
+# Match arms and if-branches are given different shapes on purpose: identical
+# sibling statements make the generated structural query ambiguous and codemark
+# refuses the bookmark. A sample-authoring constraint, not a profile defect.
 
-# Inside if > for > compute() > class Invoice. The two if-branches are given
-# different shapes on purpose: identical sibling statements make the generated
-# structural query ambiguous, which is a sample problem, not a profile one.
-15
+# Inside a concrete method on a trait — proves `trait_definition` contains a
+# definition and not only an abstract signature.
+41
 
-# Inside `render()` in the nested `class Summary` — proves class nesting.
-24
+# Inside a guarded match arm inside the for comprehension in compute(). The
+# deepest chain here: package > class > def > for > match > arm.
+59
+
+# Inside the local `def rounded` declared in compute()'s body — a definition
+# nested in a method, which a parser corpus has no reason to produce.
+66
+
+# Inside render() in the nested `class Summary` — proves type-in-type
+# containment: package > class > class > def.
+91
 
 # Inside the companion `object Invoice`.
-29
+105
+
+# Inside `def money` on `object Formatting`.
+121
+
+# Inside `object Debug` nested in `object Formatting` — object-in-object.
+127
+
+# NOT bookmarkable, recorded rather than silently omitted:
+#
+#   57    case LineItem(_, amount, true) => amount * TaxRate
+#   78    true
+#
+# A match arm's own line has no landmark between it and the enclosing def, so
+# the query cannot anchor inside the arm and collides with its siblings. The
+# targets above sit on a uniquely shaped statement *within* an arm instead.
+# Same class of limitation as codemark#239.
