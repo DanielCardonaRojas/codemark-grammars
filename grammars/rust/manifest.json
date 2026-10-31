@@ -1,0 +1,87 @@
+{
+  "extensions": [
+    "rs"
+  ],
+  "curation": {
+    "drop_landmarks": [
+      "declaration_list",
+      "field_declaration",
+      "field_declaration_list",
+      "function_signature_item",
+      "ordered_field_declaration_list",
+      "struct_expression",
+      "struct_pattern",
+      "tuple_struct_pattern"
+    ],
+    "add_landmarks": [
+      "closure_expression"
+    ],
+    "add_containers": [
+      "type"
+    ],
+    "add_labels": {
+      "closure_expression": "function",
+      "static_item": "variable",
+      "struct_item": "class",
+      "while_expression": "while loop",
+      "loop_expression": "for loop",
+      "let_declaration": "variable",
+      "binary_expression": "expression"
+    },
+    "why": "struct_expression (3), struct_pattern (1) and tuple_struct_pattern (3) are *use* sites, not declarations: `Self { amount, .. }` and `State::Paid(total)` in a match arm. The generator reads their `name`/`type` field as a declaration name, so constructing or destructuring a struct looked like declaring one — and each was labelled `class`, which would put a pattern in a breadcrumb trail as though it were a type. struct_item is the only real struct declaration. declaration_list (9 occurrences, the highest in the table) is the `{ }` body of an impl, trait or module — the role C#'s declaration_list and Python's block play — and anchoring on it adds a level that names nothing; the impl_item or trait_item that owns it is the real landmark. field_declaration, field_declaration_list and ordered_field_declaration_list are the struct-body wrappers, dropped for the same reason and reached through the type that declares them; ordered_field_declaration_list additionally matched on a `type` field, so a tuple struct's element type looked like a name. function_signature_item is a trait method *signature* with no body (`fn total(&self) -> Money;`), so it can never contain anything — the defaulted method next to it is a real function_item and stays. closure_expression is added as a landmark: a Rust closure never wraps a declaration, so the generator cannot propose it no matter what the samples contain, but it is a real function body worth bookmarking inside — a closure passed to `map` or `and_then` is exactly the code you want to return to. Like Python's lambda it has no name field, so it sticks while scrolling and the breadcrumb renderer skips it; it is deliberately not a container. macro_definition is kept as the generator proposed it, but note it is a landmark and not a container: codemark parses the macro body as a token_tree, not as Rust, so nothing inside it can be bookmarked. `type` is added as a container so a `type Money = f64` can anchor a query; the generator proposed class/enum/function/impl/interface/module but not type. Keeping `class` and `enum` as containers is a deliberate improvement on the built-in Rust profile, whose containers are only function/impl/interface/module — there, a method in an inherent impl shows the impl but a struct or enum body never appears in a trail at all. The remaining add_labels carry no landmark or container weight and exist purely so a query summary reads in Rust's own vocabulary: while_expression and loop_expression (Rust spells its loops as expressions, and the generator only observed for_expression), let_declaration as `variable`, and binary_expression as `expression` to match the built-in profile. static_item and struct_item need their labels declared here even though both are generated landmarks: the generator labelled const_item `variable` and struct_expression `class` but left static_item and struct_item themselves unlabelled, so without these entries a `static` or a struct declaration would be a landmark with no name in a query summary — and `class` is what makes struct_item resolve as a container."
+  },
+  "name": "rust",
+  "profile": {
+    "landmark_kinds": [
+      "closure_expression",
+      "const_item",
+      "enum_item",
+      "enum_variant",
+      "function_item",
+      "impl_item",
+      "macro_definition",
+      "mod_item",
+      "static_item",
+      "struct_item",
+      "trait_item",
+      "type_item"
+    ],
+    "node_labels": {
+      "assignment_expression": "assignment",
+      "binary_expression": "expression",
+      "call_expression": "call",
+      "closure_expression": "function",
+      "compound_assignment_expr": "assignment",
+      "const_item": "variable",
+      "enum_item": "enum",
+      "enum_variant": "enum",
+      "for_expression": "for loop",
+      "function_item": "function",
+      "if_expression": "if statement",
+      "impl_item": "impl",
+      "let_declaration": "variable",
+      "loop_expression": "for loop",
+      "macro_definition": "macro",
+      "match_arm": "match",
+      "match_expression": "match",
+      "match_pattern": "match",
+      "mod_item": "module",
+      "return_expression": "return",
+      "static_item": "variable",
+      "struct_item": "class",
+      "trait_item": "interface",
+      "type_item": "type",
+      "while_expression": "while loop"
+    },
+    "containers": [
+      "class",
+      "enum",
+      "function",
+      "impl",
+      "interface",
+      "module",
+      "type"
+    ]
+  },
+  "version": "1.0.0"
+}

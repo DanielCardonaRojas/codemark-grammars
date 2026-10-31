@@ -1,0 +1,31 @@
+# 1-based lines to bookmark. Each sits INSIDE a construct the profile claims to
+# understand, so a broken `containers` shows up as a missing breadcrumb.
+#
+# Lines are chosen to be structurally distinct from their siblings. Codemark
+# refuses a bookmark whose generated query matches more than one node, so a
+# statement with an identically-shaped sibling is not a usable anchor (the
+# Scala profile hit exactly this).
+
+# Inside a conditional inside a method inside an inherent impl:
+# impl LineItem > fn taxed > if self.taxable.
+# The shallowest method chain, and `return` is the only one in that body.
+78
+
+# Inside a loop inside a conditional inside a method:
+# impl Invoice > fn compute > for line > if line.amount == 0.0.
+# The deepest control-flow chain; `continue` is the only one in the file.
+122
+
+# Inside a closure inside a method: impl Invoice > fn discounted > |amount|.
+# Proves a closure_expression body is reachable — the landmark no sample can
+# propose, since a Rust closure never wraps a declaration.
+138
+
+# Inside a method in an impl in a module: mod audit > impl Entry > fn record.
+# Proves `module` and `impl` stack as containers.
+176
+
+# The deepest named chain: a function nested in a method, in an impl, in a
+# module — mod audit > impl Entry > fn normalized > fn clamp. This is the line
+# that proves a nested `function` lands in the trail.
+185
