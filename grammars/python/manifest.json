@@ -1,0 +1,50 @@
+{
+  "extensions": [
+    "py",
+    "pyi",
+    "pyw"
+  ],
+  "curation": {
+    "drop_landmarks": [
+      "block",
+      "decorated_definition",
+      "expression_statement",
+      "for_statement",
+      "with_statement"
+    ],
+    "add_containers": [
+      "function"
+    ],
+    "why": "block is the indented body wrapper — the equivalent of C#'s declaration_list — and anchoring on it adds a level that names nothing. decorated_definition carries a `definition` field, so it looks like a named body to the generator, but it is a wrapper: the function_definition it wraps is the real landmark, and keeping both makes every decorated method a doubled breadcrumb. for_statement and with_statement are control flow that happen to carry a body. expression_statement is any bare expression. A nested function nests statements in real code, so `function` is added as a container even where the generator did not observe a declaration inside one; it is also what makes a closure show up in a trail. Python has no separate `method` node kind — a method is a function_definition inside a class_definition — so `function` covers both and there is deliberately no `method` label here."
+  },
+  "name": "python",
+  "profile": {
+    "landmark_kinds": [
+      "class_definition",
+      "function_definition",
+      "lambda",
+      "type_alias_statement"
+    ],
+    "node_labels": {
+      "assignment": "assignment",
+      "augmented_assignment": "assignment",
+      "call": "call",
+      "case_clause": "match",
+      "class_definition": "class",
+      "elif_clause": "if statement",
+      "for_statement": "for loop",
+      "function_definition": "function",
+      "if_statement": "if statement",
+      "lambda": "function",
+      "match_statement": "match",
+      "return_statement": "return",
+      "type_alias_statement": "type",
+      "while_statement": "while loop"
+    },
+    "containers": [
+      "class",
+      "function"
+    ]
+  },
+  "version": "1.0.0"
+}

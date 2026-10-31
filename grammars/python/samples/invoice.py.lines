@@ -1,0 +1,27 @@
+# 1-based lines to bookmark. Each sits INSIDE a construct the profile claims to
+# understand, so a broken `containers` shows up as a missing breadcrumb.
+#
+# Lines are chosen to be structurally distinct from their siblings. Codemark
+# refuses a bookmark whose generated query matches more than one node, so a
+# statement with an identically-shaped sibling is not a usable anchor (the
+# Scala profile hit exactly this).
+
+# Inside a constructor inside a class: class InvoiceError > def __init__.
+# The `super().__init__(...)` call is the only call in that body — its sibling
+# is an assignment, so the query stays unambiguous.
+34
+
+# Inside a conditional inside a method inside a class:
+# class Invoice > def compute > if not self.payable.
+# Proves `method` is a real container, not just a landmark.
+70
+
+# Inside a method in a class nested in a class:
+# class Invoice > class Draft > def promote.
+# Proves class-in-class containment — the chain Kotlin cannot express.
+124
+
+# The deepest chain here: a function nested in a method, in a nested class, in
+# a class — class Invoice > class Draft > def discount > def apply.
+# This is the line that proves `function` belongs in `containers`.
+129

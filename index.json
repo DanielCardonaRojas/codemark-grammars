@@ -63,6 +63,23 @@
       "wasm_sha256": "bd5e2bf8d42306b7aa32e6b7e39ae9fd9543c62a875ad8b2bc3d488242f72817"
     },
     {
+      "name": "python",
+      "extensions": [
+        "py",
+        "pyi",
+        "pyw"
+      ],
+      "profile_version": "2.0.0",
+      "profile_url": "grammars/python/manifest.json",
+      "ts_abi": "0.25",
+      "grammar_repo": "https://github.com/tree-sitter/tree-sitter-python",
+      "grammar_rev": "v0.25.0",
+      "description": "Python (overrides the built-in)",
+      "overrides_builtin": true,
+      "wasm_url": "https://github.com/tree-sitter/tree-sitter-python/releases/download/v0.25.0/tree-sitter-python.wasm",
+      "wasm_sha256": "16108b50df4ee9a30168794252ab55e7c93bfc5765d7fa0aa3e335752c515f47"
+    },
+    {
       "name": "ruby",
       "extensions": [
         "rb",
