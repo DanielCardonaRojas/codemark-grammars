@@ -1,0 +1,74 @@
+[
+  {
+    "breadcrumbs": [
+      {
+        "line": 39,
+        "text": "class InvoiceError(Exception):"
+      },
+      {
+        "line": 42,
+        "text": "    def __init__(self, invoice_id: int) -> None:"
+      }
+    ],
+    "line": 44,
+    "query": "(class_definition\n  (block\n    (function_definition\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"__init__\")\n      (block\n        (expression_statement\n          (call) @target)))))",
+    "resolution_method": "exact",
+    "sample": "invoice.py"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 64,
+        "text": "class Invoice:"
+      },
+      {
+        "line": 78,
+        "text": "    def compute(self) -> float:"
+      }
+    ],
+    "line": 80,
+    "query": "(class_definition\n  (block\n    (function_definition\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"compute\")\n      (block\n        (if_statement\n          (block\n            (raise_statement) @target))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.py"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 64,
+        "text": "class Invoice:"
+      },
+      {
+        "line": 122,
+        "text": "    class Draft:"
+      },
+      {
+        "line": 128,
+        "text": "        def promote(self) -> Invoice:"
+      }
+    ],
+    "line": 134,
+    "query": "(class_definition\n  (block\n    (class_definition\n      (block\n        (function_definition\n          name: (identifier) @name0 @sticky.function\n          (#eq? @name0 \"promote\")\n          (block\n            (return_statement) @target))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.py"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 122,
+        "text": "    class Draft:"
+      },
+      {
+        "line": 136,
+        "text": "        def discount(self, pct: float) -> float:"
+      },
+      {
+        "line": 137,
+        "text": "            def apply(amount: float) -> float:"
+      }
+    ],
+    "line": 139,
+    "query": "(class_definition\n  (block\n    (class_definition\n      (block\n        (function_definition\n          (block\n            (function_definition\n              name: (identifier) @name0 @sticky.function\n              (#eq? @name0 \"apply\")\n              (block\n                (return_statement) @target))))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.py"
+  }
+]
