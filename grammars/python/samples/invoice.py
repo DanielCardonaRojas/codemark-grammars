@@ -20,8 +20,16 @@ VERSION = "1.0.0"
 
 TAX_RATE = 1.2
 
+# A PEP 695 type alias (3.12+) — parses as `type_alias_statement`, which is a
+# landmark but not a container.
+type Money = float
 
-def money(value: float) -> str:
+# A lambda bound at module level. Labelled `function` and kept as a landmark,
+# but it has no `name` field, so the breadcrumb renderer skips it.
+as_cents = lambda value: int(value * 100)
+
+
+def money(value: Money) -> str:
     """A module-level function — the shallowest named container."""
     return f"{value:.2f}"
 
