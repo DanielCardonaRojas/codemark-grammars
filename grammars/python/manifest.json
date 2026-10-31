@@ -15,13 +15,19 @@
     "add_containers": [
       "function"
     ],
+    "add_landmarks": [
+      "lambda",
+      "type_alias_statement"
+    ],
     "add_labels": {
       "case_clause": "match",
+      "lambda": "function",
+      "type_alias_statement": "type",
       "elif_clause": "if statement",
       "for_statement": "for loop",
       "while_statement": "while loop"
     },
-    "why": "block is the indented body wrapper — the equivalent of C#'s declaration_list — and anchoring on it adds a level that names nothing. decorated_definition carries a `definition` field, so it looks like a named body to the generator, but it is a wrapper: the function_definition it wraps is the real landmark, and keeping both makes every decorated method a doubled breadcrumb. for_statement and with_statement are control flow that happen to carry a body. expression_statement is any bare expression. A nested function nests statements in real code, so `function` is added as a container even where the generator did not observe a declaration inside one; it is also what makes a closure show up in a trail. Python has no separate `method` node kind — a method is a function_definition inside a class_definition — so `function` covers both and there is deliberately no `method` label here. The four add_labels are control flow, which the generator does not label because it only proposes labels for landmark kinds; they carry no landmark or container weight and exist purely so a query summary reads 'for loop' rather than 'for_statement'. Note that for_statement appears in both drop_landmarks and add_labels on purpose: it should not anchor a query, but it should still be named in a summary."
+    "why": "block is the indented body wrapper — the equivalent of C#'s declaration_list — and anchoring on it adds a level that names nothing. decorated_definition carries a `definition` field, so it looks like a named body to the generator, but it is a wrapper: the function_definition it wraps is the real landmark, and keeping both makes every decorated method a doubled breadcrumb. for_statement and with_statement are control flow that happen to carry a body. expression_statement is any bare expression. A nested function nests statements in real code, so `function` is added as a container even where the generator did not observe a declaration inside one; it is also what makes a closure show up in a trail. Python has no separate `method` node kind — a method is a function_definition inside a class_definition — so `function` covers both and there is deliberately no `method` label here. The control-flow add_labels (case_clause, elif_clause, for_statement, while_statement) carry no landmark or container weight and exist purely so a query summary reads 'for loop' rather than 'for_statement'. Note that for_statement appears in both drop_landmarks and add_labels on purpose: it should not anchor a query, but it should still be named in a summary. lambda and type_alias_statement are added as landmarks even though the samples exercise both: the generator promotes a kind it observes *containing* a declaration, and neither of these ever wraps one, so no sample can make it propose them. They are still worth anchoring — a lambda is a real function body you may want to bookmark inside, and a type alias is a declaration a query should be able to hang off. lambda has no name field, so like a Zig struct_declaration it sticks while scrolling and the breadcrumb renderer skips it; it is deliberately not a container."
   },
   "name": "python",
   "profile": {

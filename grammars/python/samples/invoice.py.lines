@@ -9,20 +9,20 @@
 # Inside a constructor inside a class: class InvoiceError > def __init__.
 # The `super().__init__(...)` call is the only call in that body — its sibling
 # is an assignment, so the query stays unambiguous.
-42
+44
 
 # Inside a conditional inside a method inside a class:
 # class Invoice > def compute > if not self.payable.
 # Proves `function` is a real container for methods too — Python has no
 # separate method kind.
-78
+80
 
 # Inside a method in a class nested in a class:
 # class Invoice > class Draft > def promote.
 # Proves class-in-class containment — the chain Kotlin cannot express.
-132
+134
 
 # The deepest chain here: a function nested in a method, in a nested class, in
 # a class — class Invoice > class Draft > def discount > def apply.
 # This is the line that proves a nested `function` lands in the trail.
-137
+139

@@ -20,8 +20,10 @@ VERSION = "1.0.0"
 
 TAX_RATE = 1.2
 
-# A PEP 695 type alias (3.12+) — parses as `type_alias_statement`, which is a
-# landmark but not a container.
+# A PEP 695 type alias (3.12+) — parses as `type_alias_statement`. A landmark
+# but not a container. Neither this nor the lambda below ever wraps a
+# declaration, so the generator will not propose either one no matter what the
+# samples contain; both are declared in `curation.add_landmarks`.
 type Money = float
 
 # A lambda bound at module level. Labelled `function` and kept as a landmark,
