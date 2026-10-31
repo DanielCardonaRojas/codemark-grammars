@@ -1,11 +1,61 @@
 # 1-based lines to bookmark. Each sits INSIDE a construct the profile claims to
 # understand, so a broken `containers` shows up as a missing breadcrumb.
+#
+# Swift has no namespace construct, so a type is the outermost level. What this
+# file asserts instead is that every *kind* of type declaration works as a
+# container — class, struct, enum, protocol, extension — and that initialisers
+# and computed properties behave as the profile claims.
+#
+# Switch arms are given different shapes on purpose: identical sibling
+# statements make the generated structural query ambiguous and codemark refuses
+# the bookmark.
 
-# Inside if > for > compute() > class Invoice.
-29
+# Inside the computed property on an enum — proves `enum` is a container,
+# which works only because the enum holds a declaration and not just cases.
+34
 
-# Inside render() in the nested `struct Summary` — proves type-in-type nesting.
-44
+# Inside the subscript — a declaration with no identifier name at all, which
+# the concept schema handles because a container needs a body, not a name.
+102
 
-# Inside the extension's pay(), which is outside the class body.
-51
+# Inside the computed property's explicit getter body.
+109
+
+# Inside `deinit` — likewise nameless.
+97
+
+# Inside a switch arm inside the for loop in compute(). The deepest chain here:
+# class > method > for > switch > arm.
+124
+
+# Inside the local `func rounded` declared in compute()'s body — a declaration
+# nested in a function, which only idiomatic code produces.
+135
+
+# Inside the async method's trailing-closure chain.
+147
+
+# Inside render() on the nested `struct Receipt` — proves type-in-type
+# containment: class > struct > func.
+176
+
+# Inside pay() on `extension Invoice: Payable` — an extension is a container
+# kind of its own, and sits outside the class body entirely.
+189
+
+# Inside the default implementation on a protocol extension.
+197
+
+# NOT bookmarkable, recorded rather than silently omitted:
+#
+#   89    guard !lines.isEmpty else {
+#   90        throw InvoiceError.noLines
+#   93    self.lines = lines
+#
+# No line inside `init` can be bookmarked. An `init_declaration` has no name
+# field, so for any node whose nearest landmark ancestor is the initialiser the
+# generator emits an impossible `name:` pattern and tree-sitter rejects the
+# query outright. Reproduces with an empty profile, so no curation or schema
+# change fixes it — this is codemark#239. The subscript and the computed
+# property above are the nameless declarations that *do* work, because their
+# enclosing landmark is the class.

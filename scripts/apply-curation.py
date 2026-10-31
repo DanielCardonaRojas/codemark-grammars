@@ -23,28 +23,67 @@ import json
 import sys
 
 
+def container_entries(raw) -> list:
+    """Normalize `containers` to a list of label strings.
+
+    Accepts both shapes. The concept form is a list of labels; the legacy form
+    is a list of `[kind, name_field]` pairs, which is kept as a one-element
+    tuple so a part-migrated manifest round-trips rather than silently losing
+    the kind.
+
+    Written defensively because the obvious `[list(c) for c in raw]` explodes a
+    label string into its characters — `"function"` becomes
+    `["f", "u", "n", ...]` — which is exactly what happened on the first run of
+    this migration.
+    """
+    out = []
+    for entry in raw or []:
+        if isinstance(entry, str):
+            out.append(entry)
+        elif isinstance(entry, (list, tuple)) and entry:
+            # Legacy pair: keep only the kind, as codemark does.
+            out.append([entry[0]])
+    return out
+
+
 def apply(generated: dict, curation: dict) -> dict:
     """Return `generated` with `curation` applied. Order is fixed so the result
     is deterministic regardless of how the curation block is written."""
     profile = {
         "landmark_kinds": list(generated.get("landmark_kinds", [])),
         "node_labels": dict(generated.get("node_labels", {})),
-        "containers": [list(c) for c in generated.get("containers", [])],
+        "containers": container_entries(generated.get("containers")),
     }
 
-    # Drops first: a kind removed from landmarks should also lose its label and
-    # any container entry, so a curation block doesn't have to repeat itself.
+    def label_of(kind):
+        return profile["node_labels"].get(kind)
+
+    # Drops first: a kind removed from landmarks should also lose its label, so
+    # a curation block doesn't have to repeat itself.
+    #
+    # Dropping a landmark no longer implies dropping a container: a container is
+    # a *label*, and several kinds can share one. Removing `foreach_statement`
+    # must not take `class` with it just because both were proposed. A label is
+    # removed only when no remaining kind carries it.
     drop = set(curation.get("drop_landmarks", []))
     if drop:
         profile["landmark_kinds"] = [k for k in profile["landmark_kinds"] if k not in drop]
+        dropped_labels = {label_of(k) for k in drop if label_of(k)}
         profile["node_labels"] = {k: v for k, v in profile["node_labels"].items() if k not in drop}
-        profile["containers"] = [c for c in profile["containers"] if c[0] not in drop]
+        still_used = set(profile["node_labels"].values())
+        orphaned = {lbl for lbl in dropped_labels if lbl not in still_used}
+        profile["containers"] = [c for c in profile["containers"] if c not in orphaned]
 
     for kind in curation.get("drop_labels", []):
         profile["node_labels"].pop(kind, None)
 
-    for pair in curation.get("drop_containers", []):
-        profile["containers"] = [c for c in profile["containers"] if c != list(pair)]
+    for label in curation.get("drop_containers", []):
+        # Accept a bare label or a legacy pair, so an un-migrated curation block
+        # keeps working while a manifest is in flight.
+        target = label[0] if isinstance(label, (list, tuple)) else label
+        profile["containers"] = [
+            c for c in profile["containers"] if c != target and c != [target]
+        ]
 
     # Then additions.
     for kind in curation.get("add_landmarks", []):
@@ -54,21 +93,23 @@ def apply(generated: dict, curation: dict) -> dict:
     for kind, label in curation.get("add_labels", {}).items():
         profile["node_labels"][kind] = label
 
-    for pair in curation.get("add_containers", []):
-        if list(pair) not in profile["containers"]:
-            profile["containers"].append(list(pair))
+    for label in curation.get("add_containers", []):
+        target = label[0] if isinstance(label, (list, tuple)) else label
+        if target not in profile["containers"]:
+            profile["containers"].append(target)
 
     profile["landmark_kinds"].sort()
-    profile["containers"].sort()
+    profile["containers"].sort(key=lambda c: c if isinstance(c, str) else c[0])
     return profile
 
 
 def normalized(profile: dict) -> dict:
     """Compare on content, not on ordering or absent-vs-empty."""
+    conts = container_entries(profile.get("containers"))
     return {
         "landmark_kinds": sorted(profile.get("landmark_kinds", [])),
         "node_labels": dict(sorted(profile.get("node_labels", {}).items())),
-        "containers": sorted([list(c) for c in profile.get("containers", [])]),
+        "containers": sorted(conts, key=lambda c: c if isinstance(c, str) else c[0]),
     }
 
 

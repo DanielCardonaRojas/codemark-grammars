@@ -8,57 +8,57 @@
       "enum_class_body"
     ],
     "add_containers": [
-      [
-        "function_declaration",
-        "name"
-      ],
-      [
-        "init_declaration",
-        "name"
-      ]
+      "function",
+      "init"
     ],
     "why": "both *_body kinds are { } wrappers. Functions and initializers are named in breadcrumbs even where this sample doesn't nest declarations inside them."
   },
   "name": "swift",
   "profile": {
-    "containers": [
-      [
-        "class_declaration",
-        "name"
-      ],
-      [
-        "protocol_declaration",
-        "name"
-      ],
-      [
-        "function_declaration",
-        "name"
-      ],
-      [
-        "init_declaration",
-        "name"
-      ]
-    ],
     "landmark_kinds": [
       "class_declaration",
+      "deinit_declaration",
       "function_declaration",
+      "function_type",
       "init_declaration",
+      "lambda_function_type",
+      "lambda_function_type_parameters",
       "property_declaration",
       "protocol_declaration",
-      "protocol_function_declaration"
+      "protocol_function_declaration",
+      "protocol_property_declaration",
+      "subscript_declaration",
+      "tuple_type_item"
     ],
     "node_labels": {
       "assignment": "assignment",
       "call_expression": "call",
       "call_suffix": "call",
       "class_declaration": "class",
+      "deinit_declaration": "deinit",
       "for_statement": "for loop",
       "function_declaration": "function",
+      "function_type": "function",
       "if_statement": "if statement",
+      "init_declaration": "init",
+      "lambda_function_type": "function",
+      "lambda_function_type_parameters": "function",
       "property_declaration": "variable",
       "protocol_declaration": "interface",
-      "protocol_function_declaration": "interface"
-    }
+      "protocol_function_declaration": "interface",
+      "protocol_property_declaration": "interface",
+      "switch_entry": "match",
+      "switch_pattern": "match",
+      "switch_statement": "match",
+      "tuple_type_item": "type"
+    },
+    "containers": [
+      "class",
+      "deinit",
+      "function",
+      "init",
+      "interface"
+    ]
   },
   "version": "1.0.0"
 }

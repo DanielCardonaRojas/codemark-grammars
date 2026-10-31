@@ -38,9 +38,18 @@ jobs:
             exit 0
           fi
 
+          # `grep -o` exits 1 when nothing matches, and the job runs under
+          # `set -euo pipefail`, so a PR touching no grammar directory — a
+          # docs-only change, say — would fail the whole workflow rather than
+          # verifying nothing. `|| true` keeps the empty case a normal result.
           langs=$(grep -oE '^grammars/[^/]+' <<<"$changed" \
-            | cut -d/ -f2 | sort -u | jq -R . | jq -sc .)
-          [[ "$langs" == "[]" || -z "$langs" ]] && langs='[]'
+            | cut -d/ -f2 | sort -u | jq -R . | jq -sc . || true)
+          # Likewise `[[ ... ]] && x=y` returns the test's exit status, which is
+          # 1 when the condition is false. Use a full `if` so the common case
+          # (some languages changed) doesn't end the script.
+          if [[ -z "$langs" || "$langs" == "[]" || "$langs" == '[""]' ]]; then
+            langs='[]'
+          fi
           echo "languages=$langs" >> "$GITHUB_OUTPUT"
 
   verify:

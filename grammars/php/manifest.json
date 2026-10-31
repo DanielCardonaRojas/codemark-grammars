@@ -13,45 +13,12 @@
       "enum_declaration_list"
     ],
     "add_containers": [
-      [
-        "function_definition",
-        "name"
-      ]
+      "function"
     ],
     "why": "declaration_list and enum_declaration_list are the { } body wrappers. property_declaration is a field, not something a breadcrumb should descend into. function_definition is added rather than observed: this sample's top-level functions contain statements but no nested declaration, yet a function is worth naming in a trail. Note namespace_definition is now OBSERVED rather than curated in, because the sample uses the braced namespace form \u2014 the semicolon form encloses nothing in the AST and could never appear in a breadcrumb."
   },
   "name": "php",
   "profile": {
-    "containers": [
-      [
-        "class_declaration",
-        "name"
-      ],
-      [
-        "enum_declaration",
-        "name"
-      ],
-      [
-        "function_definition",
-        "name"
-      ],
-      [
-        "interface_declaration",
-        "name"
-      ],
-      [
-        "method_declaration",
-        "name"
-      ],
-      [
-        "namespace_definition",
-        "name"
-      ],
-      [
-        "trait_declaration",
-        "name"
-      ]
-    ],
     "landmark_kinds": [
       "anonymous_function",
       "arrow_function",
@@ -81,7 +48,15 @@
       "return_statement": "return",
       "scoped_call_expression": "call",
       "trait_declaration": "interface"
-    }
+    },
+    "containers": [
+      "class",
+      "enum",
+      "function",
+      "interface",
+      "method",
+      "namespace"
+    ]
   },
   "version": "1.1.0"
 }

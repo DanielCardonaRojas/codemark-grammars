@@ -29,10 +29,11 @@
 # Inside an anonymous `function_definition` bound to a local — the landmark tier
 # with no name field of its own, since the name lives on the declaration.
 #
-# Both this and the next line snapshot an EMPTY breadcrumb, deliberately.
-# `function_definition` cannot be a container: it has no name field to read, so
-# there is nothing for the walker to show. Pinning the empty value is what keeps
-# that distinguishable from `containers` having silently broken.
+# These two used to snapshot EMPTY breadcrumbs: the old rule required a
+# container to have an observed name field, and an anonymous function has none.
+# Under the concept schema a container is a landmark with a *body*, because a
+# body is what makes a kind worth pinning while scrolling — so both now resolve,
+# and the breadcrumb shows the assignment line that names the function.
 108
 
 # Inside the same anonymous shape assigned to a table field instead.
