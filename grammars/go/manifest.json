@@ -1,0 +1,82 @@
+{
+  "extensions": [
+    "go"
+  ],
+  "curation": {
+    "drop_landmarks": [
+      "composite_literal",
+      "field_declaration",
+      "field_declaration_list",
+      "import_declaration",
+      "method_elem",
+      "parameter_declaration",
+      "struct_type"
+    ],
+    "add_landmarks": [
+      "func_literal",
+      "type_spec"
+    ],
+    "add_containers": [
+      "type"
+    ],
+    "add_labels": {
+      "func_literal": "function",
+      "type_spec": "type",
+      "var_declaration": "variable",
+      "expression_case": "match",
+      "default_case": "match",
+      "type_switch_statement": "match",
+      "select_statement": "match",
+      "range_clause": "for loop",
+      "go_statement": "call",
+      "defer_statement": "call",
+      "short_var_declaration": "variable",
+      "var_spec": "variable",
+      "const_spec": "variable"
+    },
+    "why": "parameter_declaration (16 occurrences) and composite_literal matched on a `type` field, not a name: the generator accepts `type` as a name-bearing field, so every parameter and every `LineItem{...}` literal looked like a named declaration. They are the highest-frequency noise in the table and would make an argument the nearest anchor for half the file. struct_type, field_declaration and field_declaration_list are the struct-body wrappers — the equivalent of C#'s declaration_list and Python's block — and anchoring on them adds a level that names nothing; struct_type is also mislabelled `class`, which Go has no concept of. A struct's fields are reached through the type that declares them, so type_declaration/type_spec is the real anchor. method_elem is an interface method *spec*, not a definition with a body; it carries a name field so the generator promoted it, but it can never contain anything. import_declaration is a file preamble, never a place to bookmark inside. type_spec is added as a landmark even though the sample declares four of them: the generator promotes a kind it observes with a body or a name it owns, and type_spec's name sits in a child, so no sample can make it propose one. It must be a landmark because `type_declaration` alone cannot anchor an individual spec inside a grouped `type ( A int; B int )` block, and it is the kind the built-in Go profile anchors on. Both carry the `type` label and start on the same line in `type S struct {`, which codemark's breadcrumb walker collapses so the header is not emitted twice. func_literal is likewise added: a Go closure never wraps a declaration, so it is unproposable, but it is a real function body worth bookmarking inside — a closure passed to errgroup.Go or a deferred cleanup is exactly the code you want to return to. Like Python's lambda it has no name field, so it sticks while scrolling and the breadcrumb renderer skips it; it is deliberately not a container. `type` is added as a container because a type declaration genuinely nests fields and method specs, and it is what puts `type Invoice struct {` in a trail; the generator only proposed function and method. The remaining add_labels carry no landmark or container weight and exist purely so a query summary reads in Go's own vocabulary: expression_case/default_case/type_switch_statement/select_statement as `match`, range_clause as `for loop` (a `for ... := range` loop's clause). go_statement and defer_statement are labelled `call` rather than `go`/`defer`: both wrap a call expression, and `codemark languages validate` warns that a label outside the set the built-in profiles use gets no icon — no other profile in this registry invents one, so the keyword names were not worth a blank icon in every summary. short_var_declaration, var_spec and const_spec are labelled `variable` so a `:=` binding and an entry in a grouped `var (...)` block read the same as a plain `var`. var_declaration needs its label declared here even though it is a generated landmark: the generator labelled const_declaration `variable` but left var_declaration unlabelled, so without this entry a `var` block would be a landmark with no name in a query summary."
+  },
+  "name": "go",
+  "profile": {
+    "landmark_kinds": [
+      "const_declaration",
+      "func_literal",
+      "function_declaration",
+      "method_declaration",
+      "type_declaration",
+      "type_spec",
+      "var_declaration"
+    ],
+    "node_labels": {
+      "assignment_statement": "assignment",
+      "call_expression": "call",
+      "const_declaration": "variable",
+      "const_spec": "variable",
+      "default_case": "match",
+      "defer_statement": "call",
+      "expression_case": "match",
+      "expression_switch_statement": "match",
+      "for_statement": "for loop",
+      "func_literal": "function",
+      "function_declaration": "function",
+      "go_statement": "call",
+      "if_statement": "if statement",
+      "method_declaration": "method",
+      "range_clause": "for loop",
+      "return_statement": "return",
+      "select_statement": "match",
+      "short_var_declaration": "variable",
+      "type_declaration": "type",
+      "type_spec": "type",
+      "type_switch_statement": "match",
+      "var_declaration": "variable",
+      "var_spec": "variable"
+    },
+    "containers": [
+      "function",
+      "method",
+      "type"
+    ]
+  },
+  "version": "1.0.0"
+}

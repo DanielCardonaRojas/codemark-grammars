@@ -33,6 +33,21 @@
       "wasm_sha256": "d7fe0bf8e8b8d26b2b253f375e3c43386b332d23f7b7b3e15d49fff180fe46e3"
     },
     {
+      "name": "go",
+      "extensions": [
+        "go"
+      ],
+      "profile_version": "2.0.0",
+      "profile_url": "grammars/go/manifest.json",
+      "ts_abi": "0.25",
+      "grammar_repo": "https://github.com/tree-sitter/tree-sitter-go",
+      "grammar_rev": "v0.25.0",
+      "description": "Go (overrides the built-in)",
+      "overrides_builtin": true,
+      "wasm_url": "https://github.com/tree-sitter/tree-sitter-go/releases/download/v0.25.0/tree-sitter-go.wasm",
+      "wasm_sha256": "9504573f352b20be7f2f1911754d710622aedc15afff16d5ed8fb5645681aee7"
+    },
+    {
       "name": "lua",
       "extensions": [
         "lua"
