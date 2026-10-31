@@ -156,3 +156,37 @@ registry_url = "file:///srv/codemark-grammars"   # fork, mirror, or air-gapped
 
 `CODEMARK_GRAMMAR_REGISTRY` overrides it for one run. The index is cached
 locally, so installs keep working offline.
+
+## Pinning to a released profile set
+
+Codemark's default registry URL follows **`main`**, so by default you get the
+newest profiles as they land. The registry is also tagged, and
+`raw.githubusercontent.com` serves a tag as readily as a branch — so any tag
+works as a registry with no codemark change:
+
+```toml
+[grammars]
+registry_url = "https://raw.githubusercontent.com/DanielCardonaRojas/codemark-grammars/v2.0.0"
+```
+
+| Tag | Contents | Needs |
+|---|---|---|
+| `v2.0.0` | eleven profiles, concept `containers`, all verified green | a codemark that reads concept containers |
+| `v1.0.0` | nine profiles, legacy `[kind, name_field]` containers | any codemark |
+
+Since the index is cached locally, delete the cache after repointing — or wait
+out `index_ttl_secs` — so the new ref is actually fetched.
+
+### When you need `v1.0.0`
+
+`containers` changed shape: profiles used to list `[kind, name_field]` pairs and
+now list concept labels. A **newer** codemark reads both — a legacy pair still
+resolves. An **older** codemark reads a concept label as nothing at all, so
+`containers` comes out empty and breadcrumbs and sticky headers go silently
+blank; there is no fallback. `schema_version` doesn't catch this, correctly, as
+the *index* format didn't change.
+
+So if breadcrumbs vanished after an install, your codemark predates the
+migration: pin to `v1.0.0` or upgrade codemark. This is also what the tags are
+for in the other direction — `v2.0.0` names a set that was green across all
+eleven grammars, so it is a point to roll back *to*.
