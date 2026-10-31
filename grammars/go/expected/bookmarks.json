@@ -1,0 +1,70 @@
+[
+  {
+    "breadcrumbs": [
+      {
+        "line": 45,
+        "text": "type LineItem struct {"
+      }
+    ],
+    "line": 47,
+    "query": "(type_declaration\n  (type_spec\n    name: (type_identifier) @name0 @sticky.type\n    (#eq? @name0 \"LineItem\")\n    (struct_type\n      (field_declaration_list\n        (field_declaration\n          name: (field_identifier) @fn_name\n          (#eq? @fn_name \"Taxable\")) @target))))",
+    "resolution_method": "exact",
+    "sample": "invoice.go"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 52,
+        "text": "func (l LineItem) Taxed() Money {"
+      }
+    ],
+    "line": 54,
+    "query": "(method_declaration\n  name: (field_identifier) @name0 @sticky.method\n  (#eq? @name0 \"Taxed\")\n  (block\n    (statement_list\n      (if_statement\n        (block\n          (statement_list\n            (return_statement) @target))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.go"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 91,
+        "text": "func (i *Invoice) Compute() (Money, error) {"
+      }
+    ],
+    "line": 98,
+    "query": "(method_declaration\n  name: (field_identifier) @name0 @sticky.method\n  (#eq? @name0 \"Compute\")\n  (block\n    (statement_list\n      (for_statement\n        (block\n          (statement_list\n            (if_statement\n              (block\n                (statement_list\n                  (continue_statement) @target)))))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.go"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 109,
+        "text": "func (i *Invoice) Describe(verbose bool) string {"
+      },
+      {
+        "line": 122,
+        "text": "\t\tdefer func() {"
+      }
+    ],
+    "line": 123,
+    "query": "(method_declaration\n  (block\n    (statement_list\n      (if_statement\n        (block\n          (statement_list\n            (defer_statement\n              (call_expression\n                (func_literal\n                  (block\n                    (statement_list\n                      (expression_statement\n                        (call_expression\n                          (_) @func\n                          (#eq? @func \"fmt.Println\")) @target))))))))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.go"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 133,
+        "text": "func (i *Invoice) Discount(pct float64) Money {"
+      },
+      {
+        "line": 134,
+        "text": "\tapply := func(amount Money) Money {"
+      }
+    ],
+    "line": 136,
+    "query": "(method_declaration\n  (block\n    (statement_list\n      (short_var_declaration\n        (expression_list\n          (func_literal\n            (block\n              (statement_list\n                (return_statement) @target))))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.go"
+  }
+]

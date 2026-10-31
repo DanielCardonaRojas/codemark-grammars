@@ -1,0 +1,32 @@
+# 1-based lines to bookmark. Each sits INSIDE a construct the profile claims to
+# understand, so a broken `containers` shows up as a missing breadcrumb.
+#
+# Lines are chosen to be structurally distinct from their siblings. Codemark
+# refuses a bookmark whose generated query matches more than one node, so a
+# statement with an identically-shaped sibling is not a usable anchor (the
+# Scala profile hit exactly this).
+
+# Inside a struct type: type LineItem struct > the Taxable field.
+# Proves `type` is a real container — the entry the generator never proposed.
+# Also the case where type_declaration and type_spec start on the same line and
+# the breadcrumb walker must collapse them to one entry, not two.
+47
+
+# Inside a conditional inside a method: type LineItem > Taxed > if l.Taxable.
+# The method is on a value receiver, the shallowest method chain here.
+54
+
+# Inside a range loop inside a conditional inside a method:
+# Invoice > Compute > for range > if line.Void().
+# The deepest control-flow chain; `continue` is the only one in the file.
+98
+
+# Inside a deferred closure inside a conditional inside a method:
+# Invoice > Describe > if verbose > defer func().
+# Proves a func_literal body is reachable — the landmark no sample can propose.
+123
+
+# The deepest named chain: a closure nested in a method, so the trail is
+# Invoice > Discount > apply := func(...). This is the line that proves a
+# nested `function` lands in the trail alongside `method`.
+136
