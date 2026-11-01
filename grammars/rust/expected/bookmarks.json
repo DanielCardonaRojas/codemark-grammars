@@ -1,0 +1,94 @@
+[
+  {
+    "breadcrumbs": [
+      {
+        "line": 69,
+        "text": "impl LineItem {"
+      },
+      {
+        "line": 76,
+        "text": "    pub fn taxed(&self) -> Money {"
+      }
+    ],
+    "line": 78,
+    "query": "(impl_item\n  (declaration_list\n    (function_item\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"taxed\")\n      (block\n        (expression_statement\n          (if_expression\n            (block\n              (expression_statement) @target)))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.rs"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 100,
+        "text": "impl Invoice {"
+      },
+      {
+        "line": 113,
+        "text": "    pub fn compute(&mut self) -> Result<Money, String> {"
+      }
+    ],
+    "line": 122,
+    "query": "(impl_item\n  (declaration_list\n    (function_item\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"compute\")\n      (block\n        (expression_statement\n          (for_expression\n            (block\n              (expression_statement\n                (if_expression\n                  (block\n                    (expression_statement) @target))))))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.rs"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 100,
+        "text": "impl Invoice {"
+      },
+      {
+        "line": 135,
+        "text": "    pub fn discounted(&self, pct: f64) -> Money {"
+      },
+      {
+        "line": 136,
+        "text": "        let apply = |amount: Money| -> Money {"
+      }
+    ],
+    "line": 138,
+    "query": "(impl_item\n  (declaration_list\n    (function_item\n      (block\n        (let_declaration\n          (closure_expression\n            (block\n              (binary_expression) @target)))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.rs"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 165,
+        "text": "pub mod audit {"
+      },
+      {
+        "line": 173,
+        "text": "    impl Entry {"
+      },
+      {
+        "line": 175,
+        "text": "        pub fn record(invoice: &Invoice, delta: Money) -> Self {"
+      }
+    ],
+    "line": 176,
+    "query": "(mod_item\n  (declaration_list\n    (impl_item\n      (declaration_list\n        (function_item\n          name: (identifier) @name0 @sticky.function\n          (#eq? @name0 \"record\")\n          (block\n            (let_declaration) @target))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.rs"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 173,
+        "text": "    impl Entry {"
+      },
+      {
+        "line": 182,
+        "text": "        pub fn normalized(&self) -> Money {"
+      },
+      {
+        "line": 183,
+        "text": "            fn clamp(value: Money) -> Money {"
+      }
+    ],
+    "line": 185,
+    "query": "(mod_item\n  (declaration_list\n    (impl_item\n      (declaration_list\n        (function_item\n          (block\n            (function_item\n              name: (identifier) @name0 @sticky.function\n              (#eq? @name0 \"clamp\")\n              (block\n                (expression_statement\n                  (if_expression\n                    (block\n                      (expression_statement) @target)))))))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.rs"
+  }
+]

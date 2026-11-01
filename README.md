@@ -18,6 +18,7 @@ codemark languages install ruby      # downloads, verifies, installs
 | php | `php`, `phtml` | [tree-sitter-php](https://github.com/tree-sitter/tree-sitter-php) | `v0.25.1` |
 | python ⚠️ | `py`, `pyi`, `pyw` | [tree-sitter-python](https://github.com/tree-sitter/tree-sitter-python) | `v0.25.0` |
 | ruby | `rb`, `rake`, `gemspec` | [tree-sitter-ruby](https://github.com/tree-sitter/tree-sitter-ruby) | `v0.23.1` |
+| rust ⚠️ | `rs` | [tree-sitter-rust](https://github.com/tree-sitter/tree-sitter-rust) | `v0.24.2` |
 | scala | `scala`, `sc` | [tree-sitter-scala](https://github.com/tree-sitter/tree-sitter-scala) | `v0.26.3` |
 | swift ⚠️ | `swift` | [tree-sitter-swift](https://github.com/alex-pinkus/tree-sitter-swift) | `0.7.3` |
 | typescript ⚠️ | `ts` | [tree-sitter-typescript](https://github.com/tree-sitter/tree-sitter-typescript) | `v0.23.2` |
@@ -27,7 +28,7 @@ codemark languages install ruby      # downloads, verifies, installs
 `add` needs `--override-builtin`. Codemark prefers a dynamic grammar over the
 built-in it shadows, which is what lets a bundled language be served from here —
 C#, Swift and TypeScript are together 11.7 MB of codemark's 24.2 MB binary.
-Python and Go join them for the same reason.
+Python, Go and Rust join them for the same reason.
 
 Some languages were evaluated and set aside — see
 [NOT-YET-SUPPORTED.md](NOT-YET-SUPPORTED.md) for which, and why.
@@ -47,6 +48,7 @@ build matches:
 | php | [`tree-sitter-php.wasm` @ v0.25.1](https://github.com/tree-sitter/tree-sitter-php/releases/download/v0.25.1/tree-sitter-php.wasm) | `bd5e2bf8d42306b7…` | 1.03 MB |
 | python | [`tree-sitter-python.wasm` @ v0.25.0](https://github.com/tree-sitter/tree-sitter-python/releases/download/v0.25.0/tree-sitter-python.wasm) | `16108b50df4ee9a3…` | 447 KB |
 | ruby | [`tree-sitter-ruby.wasm` @ v0.23.1](https://github.com/tree-sitter/tree-sitter-ruby/releases/download/v0.23.1/tree-sitter-ruby.wasm) | `09a96427d7c72f06…` | 2.01 MB |
+| rust | [`tree-sitter-rust.wasm` @ v0.24.2](https://github.com/tree-sitter/tree-sitter-rust/releases/download/v0.24.2/tree-sitter-rust.wasm) | `24c89bd9252255e4…` | 1.07 MB |
 | scala | [`tree-sitter-scala.wasm` @ v0.26.3](https://github.com/tree-sitter/tree-sitter-scala/releases/download/v0.26.3/tree-sitter-scala.wasm) | `3809e090e63fa5a9…` | 3.84 MB |
 | swift | [`tree-sitter-swift.wasm` @ 0.7.3](https://github.com/alex-pinkus/tree-sitter-swift/releases/download/0.7.3/tree-sitter-swift.wasm) | `0258a7ef17303a80…` | 3.65 MB |
 | typescript | [`tree-sitter-tsx.wasm` @ v0.23.2](https://github.com/tree-sitter/tree-sitter-typescript/releases/download/v0.23.2/tree-sitter-tsx.wasm) | `79e5da75ea62855a…` | 1.38 MB |
