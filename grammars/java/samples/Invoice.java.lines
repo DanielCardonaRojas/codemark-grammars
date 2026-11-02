@@ -1,0 +1,42 @@
+# 1-based lines to bookmark. Each sits INSIDE a construct the profile claims to
+# understand, so a broken `containers` shows up as a missing breadcrumb.
+#
+# Lines are chosen to be structurally distinct from their siblings. Codemark
+# refuses a bookmark whose generated query matches more than one node, so a
+# statement with an identically-shaped sibling is not a usable anchor. Java hits
+# this harder than most languages here: `this.x = y;` and `return "literal";`
+# are extremely common shapes, so several otherwise-obvious anchors (the
+# constructor body at 79, every `return` inside the switch cases) generate a
+# query matching three nodes and are refused.
+#
+# The anchors also deliberately avoid bodies whose method carries an
+# annotation. `modifiers` is a *child* of method_declaration, so an @Override
+# method's node starts on the annotation line, and a breadcrumb — which renders
+# the node's first source line — reads "@Override" instead of the signature.
+# That is a codemark rendering limit the profile cannot express; see
+# grammars/java/README.md.
+
+# Inside a loop inside a static factory inside a class:
+# class Invoice > of(double...) > for (double amount).
+# `items.add(...)` is the only call in that loop body.
+87
+
+# Inside a lambda inside a method: class Invoice > discounted > amount -> {}.
+# Proves a lambda_expression body is reachable — the landmark no sample can
+# propose, since a Java lambda never wraps a declaration.
+120
+
+# A switch inside a method: class Invoice > describe > switch (state).
+# tree-sitter-java parses a statement-position switch as a switch_expression;
+# there is no switch_statement kind, which is why the profile labels
+# switch_block rather than the name that reads naturally.
+134
+
+# Inside a try inside a method: class Invoice > settle > try.
+146
+
+# Inside a constructor inside a class nested in a class:
+# class Invoice > class Draft > Draft(Invoice owner).
+# The deepest chain here: proves class-in-class containment and that
+# `constructor` works as a container, which the built-in Java profile omits.
+157

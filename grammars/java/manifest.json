@@ -1,0 +1,93 @@
+{
+  "extensions": [
+    "java"
+  ],
+  "curation": {
+    "drop_landmarks": [
+      "enum_body_declarations",
+      "field_declaration",
+      "import_declaration",
+      "local_variable_declaration",
+      "method_invocation",
+      "package_declaration"
+    ],
+    "add_landmarks": [
+      "annotation_type_declaration",
+      "lambda_expression"
+    ],
+    "add_containers": [
+      "constructor"
+    ],
+    "add_labels": {
+      "lambda_expression": "function",
+      "annotation_type_declaration": "interface",
+      "method_invocation": "call",
+      "object_creation_expression": "call",
+      "field_declaration": "variable",
+      "local_variable_declaration": "variable",
+      "package_declaration": "namespace",
+      "for_statement": "for loop",
+      "while_statement": "while loop",
+      "do_statement": "while loop",
+      "switch_block": "match",
+      "try_statement": "if statement",
+      "try_with_resources_statement": "if statement",
+      "catch_clause": "if statement",
+      "ternary_expression": "if statement"
+    },
+    "why": "method_invocation (8 occurrences) is a *call site*, not a declaration. The generator promoted it because it carries a `name` field and nests other declarations (an argument can contain a lambda), and it labelled it `method` — which is a container, so every `foo.bar()` would enter a breadcrumb trail as though it were a method declaration. Relabelled `call`, which is what the built-in Java profile does and what the label set reserves for exactly this. object_creation_expression is labelled `call` for the same reason: `new Invoice(items)` is a use site, and it matched on a `type` field. enum_body_declarations is the `{ }` wrapper holding an enum's members after the constants — the role C#'s declaration_list and Python's block play — and anchoring on it adds a level that names nothing; the enum_declaration that owns it is the real landmark. field_declaration and local_variable_declaration matched on a `declarator` field rather than a name: the identifier lives one level down in a variable_declarator, so the 'name' the generator found is the whole declarator. They are dropped as landmarks but kept as `variable` labels so a query summary still names them. import_declaration and package_declaration are the file preamble, never a place to bookmark inside; package_declaration keeps its `namespace` label (re-declared in add_labels, since dropping a landmark also drops its label) so a summary can still name the package. lambda_expression is added as a landmark: a Java lambda never wraps a declaration, so the generator cannot propose it no matter what the samples contain, but it is a real body worth bookmarking inside — a lambda passed to a stream or a Function field is exactly the code you want to return to. Like Python's lambda it has no name field, so it sticks while scrolling and the breadcrumb renderer skips it; it is deliberately not a container. annotation_type_declaration (`@interface Foo {}`) is added because it is a real top-level declaration the sample does not exercise — adding one purely to satisfy the generator would be sample padding, and it is labelled `interface`, which it structurally is. `constructor` is added as a container: the generator proposed it as a label but a constructor genuinely nests statements, and without it a bookmark inside a constructor shows the class but not the constructor it sits in. enum_constant stays as the generator proposed it, which is deliberate — a Java enum constant can carry a class body with overridden methods, so it really does contain declarations. record_declaration is kept and labelled `class`: it is a Java 16+ declaration the built-in Java profile does not know about at all, so this profile anchors records where the built-in silently cannot. The remaining add_labels carry no landmark or container weight and exist purely so a query summary reads in Java's own vocabulary: for_statement/while_statement/do_statement (the generator only observed enhanced_for_statement, the `for (T x : xs)` form), switch_block as `match` alongside the switch_expression the generator already labelled — note there is deliberately no `switch_statement` entry, because tree-sitter-java has no such kind: a `switch` in statement position parses as a switch_expression, and naming the kind that reads naturally is a lint error (`node kind 'switch_statement' is not defined by this grammar`) rather than a silent no-op — and try_statement/try_with_resources_statement/catch_clause/ternary_expression as `if statement` since the label set has no dedicated exception or ternary concept and these are the closest sanctioned fit."
+  },
+  "name": "java",
+  "profile": {
+    "landmark_kinds": [
+      "annotation_type_declaration",
+      "class_declaration",
+      "constructor_declaration",
+      "enum_constant",
+      "enum_declaration",
+      "interface_declaration",
+      "lambda_expression",
+      "method_declaration",
+      "record_declaration"
+    ],
+    "node_labels": {
+      "annotation_type_declaration": "interface",
+      "assignment_expression": "assignment",
+      "catch_clause": "if statement",
+      "class_declaration": "class",
+      "constructor_declaration": "constructor",
+      "do_statement": "while loop",
+      "enhanced_for_statement": "for loop",
+      "enum_constant": "enum",
+      "enum_declaration": "enum",
+      "field_declaration": "variable",
+      "for_statement": "for loop",
+      "if_statement": "if statement",
+      "interface_declaration": "interface",
+      "lambda_expression": "function",
+      "local_variable_declaration": "variable",
+      "method_declaration": "method",
+      "method_invocation": "call",
+      "object_creation_expression": "call",
+      "package_declaration": "namespace",
+      "record_declaration": "class",
+      "return_statement": "return",
+      "switch_block": "match",
+      "switch_block_statement_group": "match",
+      "switch_expression": "match",
+      "switch_label": "match",
+      "ternary_expression": "if statement",
+      "try_statement": "if statement",
+      "try_with_resources_statement": "if statement",
+      "while_statement": "while loop"
+    },
+    "containers": [
+      "class",
+      "constructor",
+      "enum",
+      "interface",
+      "method"
+    ]
+  },
+  "version": "1.0.0"
+}
