@@ -1,0 +1,29 @@
+# 1-based lines to bookmark. Each sits INSIDE a construct the profile claims to
+# understand, so a broken `containers` shows up as a missing breadcrumb.
+#
+# Lines are chosen to be structurally distinct from their siblings. Codemark
+# refuses a bookmark whose generated query matches more than one node, so a
+# statement with an identically-shaped sibling is not a usable anchor (the
+# Scala profile hit exactly this).
+
+# Inside a loop inside a conditional inside a method inside a class:
+# class Invoice > compute > for (const line of ...) > if (line.amount === 0).
+# The deepest control-flow chain; `continue` is the only one in the file.
+84
+
+# Inside an arrow function inside a method: Invoice > discounted > (amount) =>.
+# Proves an arrow_function body is reachable. Unlike Python's lambda or Rust's
+# closure, this one the generator *does* propose — an arrow function has a
+# body, so it is observable from the samples.
+97
+
+# Inside a static method inside a class: class Invoice > static count().
+128
+
+# Inside a function nested in a function: build > toLine.
+# Proves function-in-function containment.
+139
+
+# Inside a method on an object literal, inside a function:
+# build > helpers = { sum() }. A method_definition outside any class.
+145

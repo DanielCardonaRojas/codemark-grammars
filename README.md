@@ -15,6 +15,7 @@ codemark languages install ruby      # downloads, verifies, installs
 | c_sharp ⚠️ | `cs`, `csx` | [tree-sitter-c-sharp](https://github.com/tree-sitter/tree-sitter-c-sharp) | `v0.23.1` |
 | go ⚠️ | `go` | [tree-sitter-go](https://github.com/tree-sitter/tree-sitter-go) | `v0.25.0` |
 | java ⚠️ | `java` | [tree-sitter-java](https://github.com/tree-sitter/tree-sitter-java) | `v0.23.5` |
+| javascript | `js`, `jsx`, `mjs`, `cjs` | [tree-sitter-javascript](https://github.com/tree-sitter/tree-sitter-javascript) | `v0.25.0` |
 | lua | `lua` | [tree-sitter-lua](https://github.com/tree-sitter-grammars/tree-sitter-lua) | `v0.4.0` |
 | php | `php`, `phtml` | [tree-sitter-php](https://github.com/tree-sitter/tree-sitter-php) | `v0.25.1` |
 | python ⚠️ | `py`, `pyi`, `pyw` | [tree-sitter-python](https://github.com/tree-sitter/tree-sitter-python) | `v0.25.0` |
@@ -46,6 +47,7 @@ build matches:
 | c_sharp | [`tree-sitter-c_sharp.wasm` @ v0.23.1](https://github.com/tree-sitter/tree-sitter-c-sharp/releases/download/v0.23.1/tree-sitter-c_sharp.wasm) | `d7fe0bf8e8b8d26b…` | 5.65 MB |
 | go | [`tree-sitter-go.wasm` @ v0.25.0](https://github.com/tree-sitter/tree-sitter-go/releases/download/v0.25.0/tree-sitter-go.wasm) | `9504573f352b20be…` | 212 KB |
 | java | [`tree-sitter-java.wasm` @ v0.23.5](https://github.com/tree-sitter/tree-sitter-java/releases/download/v0.23.5/tree-sitter-java.wasm) | `4fdeac4ca6ca089f…` | 404 KB |
+| javascript | [`tree-sitter-javascript.wasm` @ v0.25.0](https://github.com/tree-sitter/tree-sitter-javascript/releases/download/v0.25.0/tree-sitter-javascript.wasm) | `5fb488d0cabb4775…` | 402 KB |
 | lua | [`tree-sitter-lua.wasm` @ v0.4.0](https://github.com/tree-sitter-grammars/tree-sitter-lua/releases/download/v0.4.0/tree-sitter-lua.wasm) | `46aa46cf86966ba3…` | 48 KB |
 | php | [`tree-sitter-php.wasm` @ v0.25.1](https://github.com/tree-sitter/tree-sitter-php/releases/download/v0.25.1/tree-sitter-php.wasm) | `bd5e2bf8d42306b7…` | 1.03 MB |
 | python | [`tree-sitter-python.wasm` @ v0.25.0](https://github.com/tree-sitter/tree-sitter-python/releases/download/v0.25.0/tree-sitter-python.wasm) | `16108b50df4ee9a3…` | 447 KB |
