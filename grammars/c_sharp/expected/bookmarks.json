@@ -75,7 +75,7 @@
       }
     ],
     "line": 158,
-    "query": "(namespace_declaration\n  (declaration_list\n    (class_declaration\n      (declaration_list\n        (method_declaration\n          name: (identifier) @name0 @sticky.method\n          (#eq? @name0 \"SettleAsync\")\n          (block\n            (local_declaration_statement\n              (variable_declaration\n                (variable_declarator\n                  (invocation_expression\n                    (member_access_expression\n                      (invocation_expression\n                        (member_access_expression\n                          (invocation_expression) @target)))))))))))))",
+    "query": "(namespace_declaration\n  (declaration_list\n    (class_declaration\n      (declaration_list\n        (method_declaration\n          name: (identifier) @name0 @sticky.method\n          (#eq? @name0 \"SettleAsync\")\n          (block\n            (local_declaration_statement\n              (variable_declaration\n                (variable_declarator\n                  (invocation_expression\n                    (member_access_expression\n                      (invocation_expression\n                        (member_access_expression\n                          (invocation_expression\n                            (member_access_expression name: (identifier) @fn_name)\n                            (#eq? @fn_name \"Where\")) @target)))))))))))))",
     "resolution_method": "exact",
     "sample": "Invoice.cs"
   },
