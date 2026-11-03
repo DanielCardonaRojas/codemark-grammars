@@ -142,6 +142,33 @@ Re-run with `--update`, then **read the diff**. Breadcrumbs that disappeared
 mean a `containers` entry stopped matching. Bump `profile_version` in
 `index.json`; bump `grammar_rev` too if you re-pinned the grammar.
 
+## Tagging a profile set
+
+`profile_version` tracks one profile and `schema_version` tracks the index
+format. A **tag** is the third and coarsest axis: a named set that was verified
+green together, so there is something to pin against or roll back to.
+
+Cut one when a change to the set as a whole lands on `main` and CI is green
+across *every* grammar:
+
+```bash
+git tag -a v2.1.0 <commit> -m "..."    # annotate: what changed, what it needs
+git push origin v2.1.0
+gh release create v2.1.0 --notes "..."
+```
+
+Which number moves:
+
+- **Major** — a profile change an older codemark cannot read. The
+  `[kind, name_field]` → concept `containers` migration was one: an older
+  binary reads the new form as no containers at all and silently loses
+  breadcrumbs. Say so in the tag message and name the version users need.
+- **Minor** — languages added, or profiles improved compatibly.
+
+Adding a single language doesn't need a tag — the default registry follows
+`main`, so it reaches users either way. Tag when you want a named recovery
+point, and record in the message what codemark version the set requires.
+
 ## Review checklist
 
 - [ ] `grammar_rev` is an exact tag or commit, not a branch
