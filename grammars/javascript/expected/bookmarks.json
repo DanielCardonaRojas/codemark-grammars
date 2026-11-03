@@ -1,0 +1,86 @@
+[
+  {
+    "breadcrumbs": [
+      {
+        "line": 56,
+        "text": "export class Invoice {"
+      },
+      {
+        "line": 77,
+        "text": "  compute() {"
+      }
+    ],
+    "line": 84,
+    "query": "(class_declaration\n  (class_body\n    (method_definition\n      name: (property_identifier) @name0 @sticky.method\n      (#eq? @name0 \"compute\")\n      (statement_block\n        (for_in_statement\n          (statement_block\n            (if_statement\n              (statement_block\n                (continue_statement) @target))))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.js"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 56,
+        "text": "export class Invoice {"
+      },
+      {
+        "line": 94,
+        "text": "  discounted(pct) {"
+      },
+      {
+        "line": 95,
+        "text": "    const apply = (amount) => {"
+      }
+    ],
+    "line": 97,
+    "query": "(class_declaration\n  (class_body\n    (method_definition\n      (statement_block\n        (lexical_declaration\n          (variable_declarator\n            (arrow_function\n              (statement_block\n                (return_statement) @target))))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.js"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 56,
+        "text": "export class Invoice {"
+      },
+      {
+        "line": 127,
+        "text": "  static count() {"
+      }
+    ],
+    "line": 128,
+    "query": "(class_declaration\n  (class_body\n    (method_definition\n      name: (property_identifier) @name0 @sticky.method\n      (#eq? @name0 \"count\")\n      (statement_block\n        (return_statement) @target))))",
+    "resolution_method": "exact",
+    "sample": "invoice.js"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 136,
+        "text": "export function build(amounts) {"
+      },
+      {
+        "line": 137,
+        "text": "  function toLine(amount) {"
+      }
+    ],
+    "line": 139,
+    "query": "(function_declaration\n  (statement_block\n    (function_declaration\n      name: (identifier) @name0 @sticky.function\n      (#eq? @name0 \"toLine\")\n      (statement_block\n        (return_statement) @target))))",
+    "resolution_method": "exact",
+    "sample": "invoice.js"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 136,
+        "text": "export function build(amounts) {"
+      },
+      {
+        "line": 144,
+        "text": "    sum(lines) {"
+      }
+    ],
+    "line": 145,
+    "query": "(function_declaration\n  (statement_block\n    (lexical_declaration\n      (variable_declarator\n        (object\n          (method_definition\n            name: (property_identifier) @name0 @sticky.method\n            (#eq? @name0 \"sum\")\n            (statement_block\n              (return_statement) @target)))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.js"
+  }
+]

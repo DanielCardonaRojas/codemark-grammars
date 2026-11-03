@@ -1,0 +1,77 @@
+{
+  "extensions": [
+    "js",
+    "jsx",
+    "mjs",
+    "cjs"
+  ],
+  "curation": {
+    "drop_landmarks": [
+      "lexical_declaration"
+    ],
+    "add_landmarks": [
+      "function_expression"
+    ],
+    "add_containers": [
+      "function"
+    ],
+    "add_labels": {
+      "function_expression": "function",
+      "lexical_declaration": "variable",
+      "variable_declaration": "variable",
+      "field_definition": "variable",
+      "while_statement": "while loop",
+      "do_statement": "while loop",
+      "switch_case": "match",
+      "try_statement": "if statement",
+      "catch_clause": "if statement",
+      "ternary_expression": "if statement",
+      "new_expression": "call"
+    },
+    "why": "lexical_declaration is a `const`/`let` statement, and at 7 occurrences it was the most frequent proposal. It looked like a container because `const apply = (amount) => {...}` genuinely nests an arrow function below it, but it names nothing itself \u2014 the variable_declarator holds the name one level down, and the arrow_function is the real body. Anchoring on it would add a level to every trail that passes through a const binding. Dropped as a landmark but kept as a `variable` label so a query summary still names it. function_expression is added as a landmark: it is the `function () {}` form used as a value (a callback, an IIFE, an event handler), and the sample does not happen to contain one because modern JavaScript prefers arrow functions \u2014 adding one purely to satisfy the generator would be sample padding. It is a real function body worth bookmarking inside, and it is labelled `function` so it resolves as a container like the other function forms. Note the contrast with Python's lambda and Rust's closure_expression, which can *never* be proposed: an arrow_function has a body, so the generator does propose it from the samples, and only function_expression needs declaring here. `function` is added as a container even though the generator already proposed it \u2014 it is kept explicit because arrow_function carries that label and has no name field, so like a Zig struct_declaration it anchors a query and sticks while scrolling while the breadcrumb renderer skips it. field_definition is labelled `variable` so a class field reads the same as a top-level binding; it is deliberately not a landmark, since a field is reached through the class that declares it. The remaining add_labels carry no landmark or container weight and exist purely so a query summary reads in JavaScript's own vocabulary: while_statement and do_statement (the generator observed only for_statement and for_in_statement). There is deliberately no `for_of_statement` entry: this grammar parses `for (const x of xs)` as a for_in_statement, which the generator already labelled `for loop`, and naming the kind that reads naturally is a lint error (`node kind 'for_of_statement' is not defined by this grammar, did you mean 'for_in_statement'?`) rather than a silent no-op, switch_case alongside the switch_statement and switch_default it already labelled, try_statement/catch_clause/ternary_expression as `if statement` since the label set has no dedicated exception or ternary concept and these are the closest sanctioned fit, and new_expression as `call` because `new Invoice(...)` is a use site rather than a declaration. Unlike Java, this grammar does have a real `switch_statement` kind, so no workaround is needed there."
+  },
+  "name": "javascript",
+  "profile": {
+    "landmark_kinds": [
+      "arrow_function",
+      "class_declaration",
+      "function_declaration",
+      "function_expression",
+      "generator_function_declaration",
+      "method_definition"
+    ],
+    "node_labels": {
+      "arrow_function": "function",
+      "assignment_expression": "assignment",
+      "augmented_assignment_expression": "assignment",
+      "call_expression": "call",
+      "catch_clause": "if statement",
+      "class_declaration": "class",
+      "do_statement": "while loop",
+      "field_definition": "variable",
+      "for_in_statement": "for loop",
+      "for_statement": "for loop",
+      "function_declaration": "function",
+      "function_expression": "function",
+      "generator_function_declaration": "function",
+      "if_statement": "if statement",
+      "lexical_declaration": "variable",
+      "method_definition": "method",
+      "new_expression": "call",
+      "return_statement": "return",
+      "switch_case": "match",
+      "switch_default": "match",
+      "switch_statement": "match",
+      "ternary_expression": "if statement",
+      "try_statement": "if statement",
+      "variable_declaration": "variable",
+      "while_statement": "while loop"
+    },
+    "containers": [
+      "class",
+      "function",
+      "method"
+    ]
+  },
+  "version": "1.0.0"
+}
