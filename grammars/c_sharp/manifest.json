@@ -15,7 +15,12 @@
       "constructor",
       "function"
     ],
-    "why": "declaration_list and enum_member_declaration_list are the { } body wrappers. foreach_statement is control flow that carries a body, so it looks like a declaration. variable_declaration and local_declaration_statement matched on a 'type' field rather than a name \u2014 a breadcrumb reading 'decimal' helps nobody. A constructor and a local function both nest statements in real code and are worth naming in a trail, so they are added as containers even though the generator did not observe a declaration inside them. property_declaration is labelled 'variable', the same as field_declaration and event_field_declaration, so it cannot be a container without dragging those one-liners in too. A C# property with accessor bodies is scrollable and arguably deserves its own label, but 'property' is not in codemark's canonical vocabulary and the built-in C# profile makes the same trade. Revisit if the vocabulary grows."
+    "why": "declaration_list and enum_member_declaration_list are the { } body wrappers. foreach_statement is control flow that carries a body, so it looks like a declaration. variable_declaration and local_declaration_statement matched on a 'type' field rather than a name \u2014 a breadcrumb reading 'decimal' helps nobody. A constructor and a local function both nest statements in real code and are worth naming in a trail, so they are added as containers even though the generator did not observe a declaration inside them. property_declaration is labelled 'variable', the same as field_declaration and event_field_declaration, so it cannot be a container without dragging those one-liners in too. A C# property with accessor bodies is scrollable and arguably deserves its own label, but 'property' is not in codemark's canonical vocabulary and the built-in C# profile makes the same trade. Revisit if the vocabulary grows. for_statement, while_statement and invocation_expression are labelled to match the built-in profile codemark shipped before 0.8.0. The generator labels landmark kinds, not control flow or calls, so these can only be curation; they carry no landmark or container weight and exist so a query summary reads 'for loop' or 'call' rather than the raw kind.",
+    "add_labels": {
+      "for_statement": "for loop",
+      "while_statement": "while loop",
+      "invocation_expression": "call"
+    }
   },
   "name": "c_sharp",
   "profile": {
@@ -56,7 +61,10 @@
       "record_declaration": "class",
       "return_statement": "return",
       "struct_declaration": "class",
-      "switch_statement": "match"
+      "switch_statement": "match",
+      "for_statement": "for loop",
+      "invocation_expression": "call",
+      "while_statement": "while loop"
     },
     "containers": [
       "class",

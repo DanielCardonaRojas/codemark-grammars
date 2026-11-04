@@ -23,6 +23,7 @@ codemark languages install ruby      # downloads, verifies, installs
 | rust ⚠️ | `rs` | [tree-sitter-rust](https://github.com/tree-sitter/tree-sitter-rust) | `v0.24.2` |
 | scala | `scala`, `sc` | [tree-sitter-scala](https://github.com/tree-sitter/tree-sitter-scala) | `v0.26.3` |
 | swift ⚠️ | `swift` | [tree-sitter-swift](https://github.com/alex-pinkus/tree-sitter-swift) | `0.7.3` |
+| tsx ⚠️ | `tsx` | [tree-sitter-typescript](https://github.com/tree-sitter/tree-sitter-typescript) (`tsx/`) | `v0.23.2` |
 | typescript ⚠️ | `ts` | [tree-sitter-typescript](https://github.com/tree-sitter/tree-sitter-typescript) | `v0.23.2` |
 | zig | `zig`, `zon` | [tree-sitter-zig](https://github.com/tree-sitter-grammars/tree-sitter-zig) | `v1.1.2` |
 
@@ -55,7 +56,8 @@ build matches:
 | rust | [`tree-sitter-rust.wasm` @ v0.24.2](https://github.com/tree-sitter/tree-sitter-rust/releases/download/v0.24.2/tree-sitter-rust.wasm) | `24c89bd9252255e4…` | 1.07 MB |
 | scala | [`tree-sitter-scala.wasm` @ v0.26.3](https://github.com/tree-sitter/tree-sitter-scala/releases/download/v0.26.3/tree-sitter-scala.wasm) | `3809e090e63fa5a9…` | 3.84 MB |
 | swift | [`tree-sitter-swift.wasm` @ 0.7.3](https://github.com/alex-pinkus/tree-sitter-swift/releases/download/0.7.3/tree-sitter-swift.wasm) | `0258a7ef17303a80…` | 3.65 MB |
-| typescript | [`tree-sitter-tsx.wasm` @ v0.23.2](https://github.com/tree-sitter/tree-sitter-typescript/releases/download/v0.23.2/tree-sitter-tsx.wasm) | `79e5da75ea62855a…` | 1.38 MB |
+| tsx | [`tree-sitter-tsx.wasm` @ v0.23.2](https://github.com/tree-sitter/tree-sitter-typescript/releases/download/v0.23.2/tree-sitter-tsx.wasm) | `79e5da75ea62855a…` | 1.38 MB |
+| typescript | [`tree-sitter-typescript.wasm` @ v0.23.2](https://github.com/tree-sitter/tree-sitter-typescript/releases/download/v0.23.2/tree-sitter-typescript.wasm) | `778025db5a8be0e7…` | 1.35 MB |
 | zig | [`tree-sitter-zig.wasm` @ v1.1.2](https://github.com/tree-sitter-grammars/tree-sitter-zig/releases/download/v1.1.2/tree-sitter-zig.wasm) | `54b3b83dd9c62da5…` | 675 KB |
 
 Regenerate this table with `scripts/asset-table.sh` after adding a language or

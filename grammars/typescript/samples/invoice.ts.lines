@@ -8,3 +8,12 @@
 
 # Inside the top-level function, outside any class.
 43
+
+# Inside a multi-line type alias: proves `type` is a container.
+48
+
+# Inside a while loop inside an exported arrow function:
+# export const settle = (...) => { while (...) { ... } }. The shape the
+# built-in profile anchored with export_statement / lexical_declaration, and
+# the arrow function (labelled `function`) is what lands in the trail.
+57

@@ -1,0 +1,74 @@
+[
+  {
+    "breadcrumbs": [
+      {
+        "line": 37,
+        "text": "export function InvoiceView({ lines, onPay }: InvoiceProps) {"
+      },
+      {
+        "line": 40,
+        "text": "  const total = useMemo(() => {"
+      }
+    ],
+    "line": 44,
+    "query": "(function_declaration\n  (statement_block\n    (lexical_declaration\n      (variable_declarator\n        (call_expression\n          (arguments\n            (arrow_function\n              (statement_block\n                (for_in_statement\n                  (statement_block\n                    (if_statement\n                      (statement_block\n                        (expression_statement) @target))))))))))))",
+    "resolution_method": "exact",
+    "sample": "InvoiceView.tsx"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 37,
+        "text": "export function InvoiceView({ lines, onPay }: InvoiceProps) {"
+      },
+      {
+        "line": 58,
+        "text": "        {lines.map((line) => ("
+      }
+    ],
+    "line": 59,
+    "query": "(function_declaration\n  (statement_block\n    (return_statement\n      (parenthesized_expression\n        (jsx_element\n          (jsx_element\n            (jsx_expression\n              (call_expression\n                (arguments\n                  (arrow_function\n                    (parenthesized_expression\n                      (jsx_self_closing_element\n                        name: (identifier) @fn_name\n                        (#eq? @fn_name \"LineRow\")) @target)))))))))))",
+    "resolution_method": "exact",
+    "sample": "InvoiceView.tsx"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 37,
+        "text": "export function InvoiceView({ lines, onPay }: InvoiceProps) {"
+      }
+    ],
+    "line": 64,
+    "query": "(function_declaration\n  name: (identifier) @name0 @sticky.function\n  (#eq? @name0 \"InvoiceView\")\n  (statement_block\n    (return_statement\n      (parenthesized_expression\n        (jsx_element\n          (jsx_element\n            (jsx_element\n              (jsx_opening_element\n                name: (identifier) @fn_name\n                (#eq? @fn_name \"button\")) @target)))))))",
+    "resolution_method": "exact",
+    "sample": "InvoiceView.tsx"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 72,
+        "text": "export const LineRow = ({ line }: { line: LineItem }) => {"
+      }
+    ],
+    "line": 73,
+    "query": "(lexical_declaration\n  (variable_declarator\n    (arrow_function\n      (statement_block\n        (lexical_declaration\n          (variable_declarator name: (identifier) @fn_name)\n          (#eq? @fn_name \"label\")) @target))))",
+    "resolution_method": "exact",
+    "sample": "InvoiceView.tsx"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 81,
+        "text": "export class InvoiceStore implements Payable {"
+      },
+      {
+        "line": 89,
+        "text": "  markPaid(id: string): void {"
+      }
+    ],
+    "line": 94,
+    "query": "(class_declaration\n  (class_body\n    (method_definition\n      name: (property_identifier) @name0 @sticky.method\n      (#eq? @name0 \"markPaid\")\n      (statement_block\n        (for_statement\n          (statement_block\n            (expression_statement) @target))))))",
+    "resolution_method": "exact",
+    "sample": "InvoiceView.tsx"
+  }
+]

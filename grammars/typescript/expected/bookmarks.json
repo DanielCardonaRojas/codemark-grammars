@@ -26,5 +26,29 @@
     "query": "(function_declaration\n  name: (identifier) @name0 @sticky.function\n  (#eq? @name0 \"formatMoney\")\n  (statement_block\n    (return_statement) @target))",
     "resolution_method": "exact",
     "sample": "invoice.ts"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 47,
+        "text": "export type Totals = {"
+      }
+    ],
+    "line": 48,
+    "query": "(type_alias_declaration\n  name: (type_identifier) @name0 @sticky.type\n  (#eq? @name0 \"Totals\")\n  (object_type\n    (property_signature\n      name: (property_identifier) @fn_name\n      (#eq? @fn_name \"net\")) @target))",
+    "resolution_method": "exact",
+    "sample": "invoice.ts"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 54,
+        "text": "export const settle = (invoice: Invoice, attempts: number): boolean => {"
+      }
+    ],
+    "line": 57,
+    "query": "(lexical_declaration\n  (variable_declarator\n    (arrow_function\n      (statement_block\n        (while_statement\n          (statement_block\n            (expression_statement) @target))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.ts"
   }
 ]

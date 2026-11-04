@@ -9,26 +9,31 @@
       "public_field_definition"
     ],
     "add_containers": [
-      "module",
-      "method",
-      "function"
+      "namespace",
+      "type"
     ],
-    "why": "class_body is a wrapper; signatures and field definitions declare nothing nestable. internal_module (namespace) is added rather than observed: a bookmark inside a namespace cannot be created at all (codemark#246), so the sample avoids them \u2014 but it remains the right container kind once that is fixed. type_alias_declaration is labelled 'type' and is a one-liner here, so it is no longer a container. That matches the rule: a container is a landmark with a body, because having a body is what makes a kind worth pinning while scrolling.",
     "add_landmarks": [
+      "export_statement",
       "internal_module"
     ],
     "add_labels": {
-      "internal_module": "module"
-    }
+      "internal_module": "namespace",
+      "lexical_declaration": "variable",
+      "variable_declaration": "variable"
+    },
+    "why": "class_body is a wrapper; signatures and field definitions declare nothing nestable. export_statement is added as a landmark to match the built-in profile codemark shipped before 0.8.0: it wraps `export const handler = () => ...`, which is everywhere in TypeScript, and the generator can never propose it because the declaration it wraps is a child, not something it observes nesting. It carries no label, so it is never a container and does not add a breadcrumb level. lexical_declaration is proposed by the generator once the sample has an exported arrow function, but only as an unlabelled landmark; it and variable_declaration (`var`) are labelled `variable` so a query summary names them, as the built-in did. Neither is a container: the variable_declarator holds the name one level down and the arrow_function (labelled `function`) is the real body, so the trail shows the arrow function's line instead. internal_module (`namespace X {}`) is added rather than observed: a bookmark inside a namespace cannot be created at all (codemark#246), so the sample avoids them. It is labelled `namespace`, matching the built-in, and `namespace` is a container so it shows in the trail once that is fixed. `type` is a container, as in the built-in: a multi-line `type X = { ... }` has a body worth pinning while scrolling, and the sample bookmarks a line inside one. The generator does not propose it because an object type's members are signatures, not declarations."
   },
   "name": "typescript",
   "profile": {
     "landmark_kinds": [
+      "arrow_function",
       "class_declaration",
       "enum_declaration",
+      "export_statement",
       "function_declaration",
       "interface_declaration",
       "internal_module",
+      "lexical_declaration",
       "method_definition",
       "method_signature",
       "type_alias_declaration"
@@ -47,7 +52,13 @@
       "method_signature": "method",
       "return_statement": "return",
       "type_alias_declaration": "type",
-      "internal_module": "module"
+      "internal_module": "namespace",
+      "arrow_function": "function",
+      "assignment_expression": "assignment",
+      "for_statement": "for loop",
+      "lexical_declaration": "variable",
+      "variable_declaration": "variable",
+      "while_statement": "while loop"
     },
     "containers": [
       "class",
@@ -55,7 +66,8 @@
       "function",
       "interface",
       "method",
-      "module"
+      "namespace",
+      "type"
     ]
   },
   "version": "1.0.0"
