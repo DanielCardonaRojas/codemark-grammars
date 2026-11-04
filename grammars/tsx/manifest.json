@@ -1,0 +1,80 @@
+{
+  "extensions": [
+    "tsx"
+  ],
+  "curation": {
+    "drop_landmarks": [
+      "class_body",
+      "property_signature",
+      "public_field_definition"
+    ],
+    "add_containers": [
+      "namespace",
+      "type"
+    ],
+    "add_landmarks": [
+      "export_statement",
+      "internal_module"
+    ],
+    "add_labels": {
+      "internal_module": "namespace",
+      "lexical_declaration": "variable",
+      "variable_declaration": "variable",
+      "jsx_element": "call",
+      "jsx_self_closing_element": "call",
+      "jsx_expression": "expression"
+    },
+    "why": "Identical to grammars/typescript's curation \u2014 the TSX grammar is tree-sitter-typescript's TypeScript grammar plus JSX, and every non-JSX decision there applies here unchanged: class_body is a wrapper; signatures and field definitions declare nothing nestable. export_statement is added as a landmark to match the built-in profile codemark shipped before 0.8.0: it wraps `export const handler = () => ...`, which is everywhere in TypeScript, and the generator can never propose it because the declaration it wraps is a child, not something it observes nesting. It carries no label, so it is never a container and does not add a breadcrumb level. lexical_declaration is proposed by the generator once the sample has an exported arrow function, but only as an unlabelled landmark; it and variable_declaration (`var`) are labelled `variable` so a query summary names them, as the built-in did. Neither is a container: the variable_declarator holds the name one level down and the arrow_function (labelled `function`) is the real body, so the trail shows the arrow function's line instead. internal_module (`namespace X {}`) is added rather than observed: a bookmark inside a namespace cannot be created at all (codemark#246), so the sample avoids them. It is labelled `namespace`, matching the built-in, and `namespace` is a container so it shows in the trail once that is fixed. `type` is a container, as in the built-in: a multi-line `type X = { ... }` has a body worth pinning while scrolling, and the sample bookmarks a line inside one. The generator does not propose it because an object type's members are signatures, not declarations. JSX additions: jsx_element and jsx_self_closing_element are labelled `call`, since `<LineRow line={line} />` is a component invocation (it compiles to a createElement call) and a use site rather than a declaration; jsx_expression (`{...}` inside markup) is labelled `expression`. None of them is a landmark or container. A JSX element has no name field \u2014 the tag name sits on jsx_opening_element one level down \u2014 so anchoring on it would produce a query that cannot be pinned to one element, and pinning markup in a trail would bury the component that owns it. The component itself (a function_declaration or an arrow_function labelled `function`) is what the trail shows."
+  },
+  "name": "tsx",
+  "profile": {
+    "landmark_kinds": [
+      "arrow_function",
+      "class_declaration",
+      "enum_declaration",
+      "export_statement",
+      "function_declaration",
+      "interface_declaration",
+      "internal_module",
+      "lexical_declaration",
+      "method_definition",
+      "method_signature",
+      "type_alias_declaration"
+    ],
+    "node_labels": {
+      "arrow_function": "function",
+      "assignment_expression": "assignment",
+      "augmented_assignment_expression": "assignment",
+      "call_expression": "call",
+      "class_declaration": "class",
+      "enum_assignment": "assignment",
+      "enum_declaration": "enum",
+      "for_in_statement": "for loop",
+      "for_statement": "for loop",
+      "function_declaration": "function",
+      "if_statement": "if statement",
+      "interface_declaration": "interface",
+      "internal_module": "namespace",
+      "jsx_element": "call",
+      "jsx_expression": "expression",
+      "jsx_self_closing_element": "call",
+      "lexical_declaration": "variable",
+      "method_definition": "method",
+      "method_signature": "method",
+      "return_statement": "return",
+      "type_alias_declaration": "type",
+      "variable_declaration": "variable",
+      "while_statement": "while loop"
+    },
+    "containers": [
+      "class",
+      "enum",
+      "function",
+      "interface",
+      "method",
+      "namespace",
+      "type"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -24,17 +24,25 @@ python3 - "$REPO_ROOT/index.json" > "$WORK/entries" <<'PY'
 import json, sys
 for g in json.load(open(sys.argv[1]))["grammars"]:
     repo = g["grammar_repo"].removeprefix("https://github.com/")
-    print(f"{g['name']}|{repo}|{g.get('grammar_rev','')}")
+    print(f"{g['name']}|{repo}|{g.get('grammar_rev','')}|{g.get('wasm_url','')}")
 PY
 
 echo "| Language | Download | SHA-256 | Size |"
 echo "|---|---|---|---|"
 
-while IFS='|' read -r name repo rev; do
+while IFS='|' read -r name repo rev pinned; do
   [[ -z "$rev" ]] && { echo "| $name | _no pinned revision_ | — | — |"; continue; }
 
-  url=$(gh api "repos/$repo/releases/tags/$rev" \
-        --jq '.assets[]|select(.name|endswith(".wasm")).browser_download_url' 2>/dev/null | head -1)
+  # Prefer the entry's own `wasm_url`. A release can publish several grammars
+  # — tree-sitter-typescript ships tree-sitter-tsx.wasm and
+  # tree-sitter-typescript.wasm — and "first .wasm asset" picks tsx for both
+  # the `typescript` and `tsx` entries. Fall back to the release lookup only
+  # for an entry that pins no URL.
+  url="$pinned"
+  if [[ -z "$url" ]]; then
+    url=$(gh api "repos/$repo/releases/tags/$rev" \
+          --jq '.assets[]|select(.name|endswith(".wasm")).browser_download_url' 2>/dev/null | head -1)
+  fi
 
   if [[ -z "$url" ]]; then
     echo "| $name | _no \`.wasm\` asset at \`$rev\` — build from source_ | — | — |"

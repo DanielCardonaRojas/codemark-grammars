@@ -22,7 +22,7 @@
         "cs",
         "csx"
       ],
-      "profile_version": "2.0.0",
+      "profile_version": "2.1.0",
       "profile_url": "grammars/c_sharp/manifest.json",
       "ts_abi": "0.23",
       "grammar_repo": "https://github.com/tree-sitter/tree-sitter-c-sharp",
@@ -116,7 +116,7 @@
         "pyi",
         "pyw"
       ],
-      "profile_version": "2.0.0",
+      "profile_version": "2.1.0",
       "profile_url": "grammars/python/manifest.json",
       "ts_abi": "0.25",
       "grammar_repo": "https://github.com/tree-sitter/tree-sitter-python",
@@ -177,7 +177,7 @@
       "extensions": [
         "swift"
       ],
-      "profile_version": "2.0.0",
+      "profile_version": "2.1.0",
       "profile_url": "grammars/swift/manifest.json",
       "ts_abi": "0.25",
       "grammar_repo": "https://github.com/alex-pinkus/tree-sitter-swift",
@@ -188,11 +188,27 @@
       "wasm_sha256": "0258a7ef17303a8079ffe0748b3583d59656b5c3e8653fca7b6451b3e6689eb2"
     },
     {
+      "name": "tsx",
+      "extensions": [
+        "tsx"
+      ],
+      "profile_version": "1.0.0",
+      "profile_url": "grammars/tsx/manifest.json",
+      "ts_abi": "0.23",
+      "grammar_repo": "https://github.com/tree-sitter/tree-sitter-typescript",
+      "grammar_rev": "v0.23.2",
+      "grammar_dir": "tsx",
+      "description": "TypeScript with JSX (overrides the built-in's .tsx support)",
+      "overrides_builtin": true,
+      "wasm_url": "https://github.com/tree-sitter/tree-sitter-typescript/releases/download/v0.23.2/tree-sitter-tsx.wasm",
+      "wasm_sha256": "79e5da75ea62855a0cd67177685f0164eac87d5f630b3cbe1e0a099751ad30f8"
+    },
+    {
       "name": "typescript",
       "extensions": [
         "ts"
       ],
-      "profile_version": "2.0.0",
+      "profile_version": "2.1.0",
       "profile_url": "grammars/typescript/manifest.json",
       "ts_abi": "0.23",
       "grammar_repo": "https://github.com/tree-sitter/tree-sitter-typescript",

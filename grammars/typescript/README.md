@@ -5,7 +5,7 @@
 | Grammar | https://github.com/tree-sitter/tree-sitter-typescript |
 | Revision | `v0.23.2` |
 | Built with | tree-sitter CLI 0.23 (prebuilt release asset) |
-| Profile version | 1.0.0 |
+| Profile version | 2.1.0 |
 
 ## Verified against
 
@@ -25,15 +25,25 @@ of a 24.2 MB binary. The index marks it `"overrides_builtin": true`.
 The entry pins `tree-sitter-typescript.wasm` explicitly. Same trap as
 `tree-sitter-php_only.wasm`.
 
-This entry claims only `.ts`. The built-in also claims `.tsx`, which this
-grammar cannot parse — see codemark#244 for the resulting name/extension
-resolution gap.
+This entry claims only `.ts`; `.tsx` is the separate [`tsx`](../tsx/README.md)
+entry, built from the same repository's `tsx/` grammar. The pre-0.8.0 built-in
+claimed both — see codemark#244 for the name/extension resolution gap that
+caused while the two were split between built-in and registry.
 
 **Namespaces are not exercised.** A bookmark inside a `namespace` makes the
 query generator emit a pattern matching 0 nodes, so it can't be created at all
-(codemark#246). `internal_module` stays in `containers` because it is the right
-kind once that is fixed; the sample simply can't cover it today.
+(codemark#246). `internal_module` is labelled `namespace` (as in the built-in)
+and `namespace` stays in `containers` because it is the right container once
+that is fixed; the sample simply can't cover it today.
 
 `class_body`, `property_signature` and `public_field_definition` were dropped
-from the generated landmarks; `method_definition` and `function_declaration`
-were added to `containers`.
+from the generated landmarks.
+
+**Parity with the pre-0.8.0 built-in.** `export_statement` is a curated
+landmark: it wraps `export const handler = () => …`, and the generator never
+proposes it. With an exported arrow function in the sample, the generator itself
+proposes `lexical_declaration` and `arrow_function` (labelled `function`, so the
+arrow function's line shows in the trail) and labels `for_statement`,
+`while_statement` and `assignment_expression`. `lexical_declaration` and
+`variable_declaration` are curated to `variable`. `type` is a container, and the
+sample bookmarks a line inside a multi-line `type Totals = { … }`.

@@ -26,3 +26,17 @@
 # a class — class Invoice > class Draft > def discount > def apply.
 # This is the line that proves a nested `function` lands in the trail.
 139
+
+# NOT bookmarkable, recorded rather than silently omitted:
+#
+#   109        parts = [money(line.amount) for line in self.lines]
+#   105    @functools.cached_property
+#
+# No line inside or on a decorated definition can be bookmarked today, with
+# or without decorated_definition in landmark_kinds — and with codemark's old
+# built-in Python profile too. A statement in a decorated method's body yields
+# a query matching every decorated definition in the file (ambiguous), and a
+# decorator line yields an impossible `(decorator) @target` pattern. That is a
+# query-generator limitation in codemark, not something this profile can fix.
+# decorated_definition is kept as a landmark for parity with the built-in so
+# that it takes effect once the generator handles it.

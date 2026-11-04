@@ -14,6 +14,11 @@
 # which works only because the enum holds a declaration and not just cases.
 34
 
+# An enum case on its own line — the case with associated values, so its shape
+# differs from the bare `case noLines` above it. Proves enum_entry is a
+# landmark and that the `enum` container keeps the case line in the trail.
+43
+
 # Inside the subscript — a declaration with no identifier name at all, which
 # the concept schema handles because a container needs a body, not a name.
 102

@@ -5,7 +5,7 @@
 | Grammar | https://github.com/tree-sitter/tree-sitter-python |
 | Revision | `v0.25.0` |
 | Built with | tree-sitter CLI 0.25 (prebuilt release asset) |
-| Profile version | 2.0.0 |
+| Profile version | 2.1.0 |
 
 ## Verified against
 
@@ -41,11 +41,18 @@ profile labels `function_definition` as `function` and has no `method` label at
 all, unlike C# (`method_declaration`) or Ruby (`method`). One container entry,
 `function`, covers plain functions, methods and nested closures.
 
-**`decorated_definition` is a wrapper, not a landmark.** A decorated function
-parses as `decorated_definition` → `decorator` + `function_definition`. It
-carries a `definition` field, so it looks like a named body to the generator,
-but promoting it doubles every decorated method in a breadcrumb trail. Dropped
-in `curation`; the wrapped `function_definition` is the real anchor.
+**`decorated_definition` is a landmark, but not a container.** A decorated
+function parses as `decorated_definition` → `decorator` + `function_definition`.
+It is kept as a landmark, as in the built-in profile codemark shipped before
+0.8.0, so a `@decorator`-ed function or class has an anchor. It carries no
+label, so it is never a container and doesn't double a breadcrumb — the trail
+shows the wrapped `def`.
+
+Lines inside decorated definitions can't currently be bookmarked, and that is
+true with or without this landmark (and with the old built-in profile). A body
+statement yields a query matching every decorated definition in the file, and a
+decorator line yields an impossible `(decorator) @target` pattern. That's a
+codemark query-generator limitation, recorded in `samples/invoice.py.lines`.
 
 **`block` is the body wrapper.** Python's indented suite is a `block` node,
 playing the role C#'s `declaration_list` does. It is dropped for the same

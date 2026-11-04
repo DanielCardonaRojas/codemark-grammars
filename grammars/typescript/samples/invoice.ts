@@ -42,3 +42,25 @@ export class Invoice implements Payable {
 export function formatMoney(value: number): string {
   return value.toFixed(2);
 }
+
+// A multi-line type alias has a body worth pinning, so `type` is a container.
+export type Totals = {
+  net: number;
+  tax: number;
+};
+
+// The pattern the built-in profile anchored with export_statement and
+// lexical_declaration: an exported const bound to an arrow function.
+export const settle = (invoice: Invoice, attempts: number): boolean => {
+  let tries = 0;
+  while (tries < attempts) {
+    tries = tries + 1;
+    if (invoice.pay(tries)) {
+      return true;
+    }
+  }
+  for (let i = 0; i < attempts; i++) {
+    console.warn("retry", i);
+  }
+  return false;
+};

@@ -14,6 +14,18 @@
   {
     "breadcrumbs": [
       {
+        "line": 41,
+        "text": "enum InvoiceError: Error {"
+      }
+    ],
+    "line": 43,
+    "query": "(class_declaration\n  name: (type_identifier) @name0 @sticky.class\n  (#eq? @name0 \"InvoiceError\")\n  (enum_class_body\n    (enum_entry\n      name: (simple_identifier) @fn_name\n      (#eq? @fn_name \"tooManyLines\")) @target))",
+    "resolution_method": "exact",
+    "sample": "Invoice.swift"
+  },
+  {
+    "breadcrumbs": [
+      {
         "line": 72,
         "text": "final class Invoice {"
       }

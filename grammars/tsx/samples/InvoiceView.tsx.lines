@@ -1,0 +1,32 @@
+# 1-based lines to bookmark. Each sits INSIDE a construct the profile claims to
+# understand, so a broken `containers` shows up as a missing breadcrumb.
+#
+# Lines are chosen to be structurally distinct from their siblings. Codemark
+# refuses a bookmark whose generated query matches more than one node, so a
+# statement with an identically-shaped sibling is not a usable anchor.
+
+# The deepest chain: a hook callback inside a function component —
+# InvoiceView > useMemo(() => ...) > for > if.
+44
+
+# A JSX element inside a `.map` callback inside the component's markup. Proves
+# the TSX grammar parses JSX (the TypeScript grammar cannot) and that a
+# self-closing element is reachable by tag name.
+59
+
+# A JSX element with children, pinned by its tag name inside the component.
+64
+
+# Inside an exported arrow-function component — the shape export_statement and
+# lexical_declaration exist to anchor.
+73
+
+# Inside a for loop inside a class method: class InvoiceStore > markPaid.
+94
+
+# NOT bookmarkable, recorded rather than silently omitted:
+#
+#   51    setStatus(Status.Paid);
+#
+# Its sibling `onPay(total);` has the same shape, so the generated query
+# matches both and codemark refuses it. Not a profile problem.

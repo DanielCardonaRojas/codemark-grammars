@@ -9,15 +9,25 @@
     ],
     "add_containers": [
       "function",
-      "init"
+      "init",
+      "enum"
     ],
-    "why": "both *_body kinds are { } wrappers. Functions and initializers are named in breadcrumbs even where this sample doesn't nest declarations inside them."
+    "why": "both *_body kinds are { } wrappers. Functions and initializers are named in breadcrumbs even where this sample doesn't nest declarations inside them. enum_entry is added as a landmark labelled `enum`, and `enum` as a container, matching the built-in profile codemark shipped before 0.8.0. The generator can never propose it: a case has no body and never wraps a declaration. Because this grammar parses `enum` as a class_declaration (labelled `class`), the `enum` container resolves only to enum_entry, which is what keeps a `case` line in the trail when an associated-value case or a long case list is bookmarked. subscript_declaration is labelled `subscript` — the generator proposes it as a landmark but leaves it unlabelled — and while_statement is labelled `while loop` purely so a query summary reads naturally.",
+    "add_landmarks": [
+      "enum_entry"
+    ],
+    "add_labels": {
+      "enum_entry": "enum",
+      "subscript_declaration": "subscript",
+      "while_statement": "while loop"
+    }
   },
   "name": "swift",
   "profile": {
     "landmark_kinds": [
       "class_declaration",
       "deinit_declaration",
+      "enum_entry",
       "function_declaration",
       "function_type",
       "init_declaration",
@@ -50,11 +60,15 @@
       "switch_entry": "match",
       "switch_pattern": "match",
       "switch_statement": "match",
-      "tuple_type_item": "type"
+      "tuple_type_item": "type",
+      "enum_entry": "enum",
+      "subscript_declaration": "subscript",
+      "while_statement": "while loop"
     },
     "containers": [
       "class",
       "deinit",
+      "enum",
       "function",
       "init",
       "interface"

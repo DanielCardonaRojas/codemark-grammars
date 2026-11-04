@@ -5,7 +5,7 @@
 | Grammar | https://github.com/tree-sitter/tree-sitter-c-sharp |
 | Revision | `v0.23.1` |
 | Built with | tree-sitter CLI 0.23 (prebuilt release asset) |
-| Profile version | 1.0.0 |
+| Profile version | 2.1.0 |
 
 ## Verified against
 
@@ -41,3 +41,8 @@ in this sample the constructor holds only an assignment.
 The sample avoids a symmetric `if`/`else`: two structurally identical sibling
 branches make the generated query match both, and codemark refuses an ambiguous
 bookmark. That is a sample-authoring constraint, not a profile defect.
+
+`for_statement` → `for loop`, `while_statement` → `while loop` and
+`invocation_expression` → `call` are curated labels matching the built-in
+profile codemark shipped before 0.8.0. The generator labels landmark kinds, not
+control flow or calls, so they can only come from `curation`.
