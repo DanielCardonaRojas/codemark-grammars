@@ -22,16 +22,20 @@ A `.wasm` you build yourself will differ byte-for-byte (emscripten output isn't
 reproducible) but should verify identically — node kinds come from the grammar
 revision, not the build.
 
-## This entry overrides a built-in
+## Built into codemark before 0.8.0
 
-Codemark bundles a Python grammar, so this entry **replaces** it. That needs
+Codemark compiled a Python grammar in until 0.8.0, which moved it to this
+registry (codemark#278); since then Dart is the only built-in grammar.
+On codemark 0.8.0 and later this is an ordinary registry entry. On an older
+codemark it **replaces** the built-in instead, which needs
 `--override-builtin` on a manual `add`; the index marks it with
-`"overrides_builtin": true` so the verification harness passes the flag.
+`"overrides_builtin": true` so `languages install` and the verification
+harness pass the flag.
 
-Both `python` and its alias `py` are reserved names, which is why
+Both `python` and its alias `py` were a reserved name on codemark before 0.8.0, which is why
 [CONTRIBUTING.md](../../CONTRIBUTING.md) lists Python among the names a *new*
-grammar may not take. An override entry is the exception, and it is the same
-path `c_sharp`, `swift` and `typescript` already take.
+grammar may not take. This entry is the exception, the same path
+`c_sharp`, `swift` and `typescript` take.
 
 ## Notes
 

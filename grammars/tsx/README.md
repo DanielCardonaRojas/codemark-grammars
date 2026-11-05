@@ -25,11 +25,12 @@ as a type assertion and cannot parse JSX at all — so `.tsx` cannot share the
 TSX variant and claimed both extensions; once it was unbundled, `.tsx` needed an
 entry of its own. `grammar_dir` is `tsx` so CI builds the right one.
 
-## This entry overrides a built-in (before 0.8.0)
+## Built into codemark before 0.8.0
 
 On codemark versions that still compile TypeScript in, `tsx` is an alias of
 the built-in, so installing this entry needs `--override-builtin` and the index
 marks it `"overrides_builtin": true` — the same as the other unbundled languages.
+From 0.8.0 on it is an ordinary registry entry.
 
 ## Notes
 

@@ -13,11 +13,17 @@
 codemark languages install swift
 ```
 
-## This entry overrides a built-in
+## Built into codemark before 0.8.0
 
-Codemark bundles a Swift grammar, so this entry **replaces** it — 3.24 MB of a
-24.2 MB binary, the second largest of the eight. The index marks it
-`"overrides_builtin": true`.
+Codemark compiled a Swift grammar in until 0.8.0, which moved it to this
+registry (codemark#278); since then Dart is the only built-in grammar.
+On codemark 0.8.0 and later this is an ordinary registry entry. On an older
+codemark it **replaces** the built-in instead, which needs
+`--override-builtin` on a manual `add`; the index marks it with
+`"overrides_builtin": true` so `languages install` and the verification
+harness pass the flag.
+
+It was 3.24 MB of a 24.2 MB binary, the second largest of the eight.
 
 ## Notes
 

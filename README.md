@@ -27,11 +27,13 @@ codemark languages install ruby      # downloads, verifies, installs
 | typescript ⚠️ | `ts` | [tree-sitter-typescript](https://github.com/tree-sitter/tree-sitter-typescript) | `v0.23.2` |
 | zig | `zig`, `zon` | [tree-sitter-zig](https://github.com/tree-sitter-grammars/tree-sitter-zig) | `v1.1.2` |
 
-⚠️ **replaces a codemark built-in.** `languages install` handles it; a manual
-`add` needs `--override-builtin`. Codemark prefers a dynamic grammar over the
-built-in it shadows, which is what lets a bundled language be served from here —
-C#, Swift and TypeScript are together 11.7 MB of codemark's 24.2 MB binary.
-Python, Go, Rust and Java join them for the same reason.
+⚠️ **was a codemark built-in before 0.8.0.** Since codemark 0.8.0 Dart is the
+only grammar compiled in; these languages load from this registry like any
+other. On an older codemark the entry *replaces* the built-in instead:
+`languages install` handles that, while a manual `add` needs
+`--override-builtin` — which is why the index still marks these entries
+`"overrides_builtin": true`. They were moved out to shrink the binary: C#,
+Swift and TypeScript alone were 11.7 MB of codemark's 24.2 MB.
 
 Some languages were evaluated and set aside — see
 [NOT-YET-SUPPORTED.md](NOT-YET-SUPPORTED.md) for which, and why.

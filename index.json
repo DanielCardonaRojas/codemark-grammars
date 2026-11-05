@@ -27,7 +27,7 @@
       "ts_abi": "0.23",
       "grammar_repo": "https://github.com/tree-sitter/tree-sitter-c-sharp",
       "grammar_rev": "v0.23.1",
-      "description": "C# (overrides the built-in)",
+      "description": "C#",
       "overrides_builtin": true,
       "wasm_url": "https://github.com/tree-sitter/tree-sitter-c-sharp/releases/download/v0.23.1/tree-sitter-c_sharp.wasm",
       "wasm_sha256": "d7fe0bf8e8b8d26b2b253f375e3c43386b332d23f7b7b3e15d49fff180fe46e3"
@@ -42,7 +42,7 @@
       "ts_abi": "0.25",
       "grammar_repo": "https://github.com/tree-sitter/tree-sitter-go",
       "grammar_rev": "v0.25.0",
-      "description": "Go (overrides the built-in)",
+      "description": "Go",
       "overrides_builtin": true,
       "wasm_url": "https://github.com/tree-sitter/tree-sitter-go/releases/download/v0.25.0/tree-sitter-go.wasm",
       "wasm_sha256": "9504573f352b20be7f2f1911754d710622aedc15afff16d5ed8fb5645681aee7"
@@ -57,7 +57,7 @@
       "ts_abi": "0.23",
       "grammar_repo": "https://github.com/tree-sitter/tree-sitter-java",
       "grammar_rev": "v0.23.5",
-      "description": "Java (overrides the built-in)",
+      "description": "Java",
       "overrides_builtin": true,
       "wasm_url": "https://github.com/tree-sitter/tree-sitter-java/releases/download/v0.23.5/tree-sitter-java.wasm",
       "wasm_sha256": "4fdeac4ca6ca089f06c6f7e562abcac1733cd465728cc7031ebb73c2019122c4"
@@ -121,7 +121,7 @@
       "ts_abi": "0.25",
       "grammar_repo": "https://github.com/tree-sitter/tree-sitter-python",
       "grammar_rev": "v0.25.0",
-      "description": "Python (overrides the built-in)",
+      "description": "Python",
       "overrides_builtin": true,
       "wasm_url": "https://github.com/tree-sitter/tree-sitter-python/releases/download/v0.25.0/tree-sitter-python.wasm",
       "wasm_sha256": "16108b50df4ee9a30168794252ab55e7c93bfc5765d7fa0aa3e335752c515f47"
@@ -152,7 +152,7 @@
       "ts_abi": "0.24",
       "grammar_repo": "https://github.com/tree-sitter/tree-sitter-rust",
       "grammar_rev": "v0.24.2",
-      "description": "Rust (overrides the built-in)",
+      "description": "Rust",
       "overrides_builtin": true,
       "wasm_url": "https://github.com/tree-sitter/tree-sitter-rust/releases/download/v0.24.2/tree-sitter-rust.wasm",
       "wasm_sha256": "24c89bd9252255e4aebbcbd7d2d308bd92c86dd95a130fdc80efa49577b8d738"
@@ -182,7 +182,7 @@
       "ts_abi": "0.25",
       "grammar_repo": "https://github.com/alex-pinkus/tree-sitter-swift",
       "grammar_rev": "0.7.3",
-      "description": "Swift (overrides the built-in)",
+      "description": "Swift",
       "overrides_builtin": true,
       "wasm_url": "https://github.com/alex-pinkus/tree-sitter-swift/releases/download/0.7.3/tree-sitter-swift.wasm",
       "wasm_sha256": "0258a7ef17303a8079ffe0748b3583d59656b5c3e8653fca7b6451b3e6689eb2"
@@ -198,7 +198,7 @@
       "grammar_repo": "https://github.com/tree-sitter/tree-sitter-typescript",
       "grammar_rev": "v0.23.2",
       "grammar_dir": "tsx",
-      "description": "TypeScript with JSX (overrides the built-in's .tsx support)",
+      "description": "TypeScript with JSX",
       "overrides_builtin": true,
       "wasm_url": "https://github.com/tree-sitter/tree-sitter-typescript/releases/download/v0.23.2/tree-sitter-tsx.wasm",
       "wasm_sha256": "79e5da75ea62855a0cd67177685f0164eac87d5f630b3cbe1e0a099751ad30f8"
@@ -214,7 +214,7 @@
       "grammar_repo": "https://github.com/tree-sitter/tree-sitter-typescript",
       "grammar_rev": "v0.23.2",
       "grammar_dir": "typescript",
-      "description": "TypeScript (overrides the built-in)",
+      "description": "TypeScript",
       "overrides_builtin": true,
       "wasm_url": "https://github.com/tree-sitter/tree-sitter-typescript/releases/download/v0.23.2/tree-sitter-typescript.wasm",
       "wasm_sha256": "778025db5a8be0e70f8ccc3671e486dfeddd048c25d9e8a70c26de2e1bf6f97d"
