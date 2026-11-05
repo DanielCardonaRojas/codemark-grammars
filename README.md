@@ -12,28 +12,20 @@ codemark languages install ruby      # downloads, verifies, installs
 | Language | Extensions | Grammar | Revision |
 |---|---|---|---|
 | bash | `sh`, `bash` | [tree-sitter-bash](https://github.com/tree-sitter/tree-sitter-bash) | `v0.25.1` |
-| c_sharp ⚠️ | `cs`, `csx` | [tree-sitter-c-sharp](https://github.com/tree-sitter/tree-sitter-c-sharp) | `v0.23.1` |
-| go ⚠️ | `go` | [tree-sitter-go](https://github.com/tree-sitter/tree-sitter-go) | `v0.25.0` |
-| java ⚠️ | `java` | [tree-sitter-java](https://github.com/tree-sitter/tree-sitter-java) | `v0.23.5` |
+| c_sharp | `cs`, `csx` | [tree-sitter-c-sharp](https://github.com/tree-sitter/tree-sitter-c-sharp) | `v0.23.1` |
+| go | `go` | [tree-sitter-go](https://github.com/tree-sitter/tree-sitter-go) | `v0.25.0` |
+| java | `java` | [tree-sitter-java](https://github.com/tree-sitter/tree-sitter-java) | `v0.23.5` |
 | javascript | `js`, `jsx`, `mjs`, `cjs` | [tree-sitter-javascript](https://github.com/tree-sitter/tree-sitter-javascript) | `v0.25.0` |
 | lua | `lua` | [tree-sitter-lua](https://github.com/tree-sitter-grammars/tree-sitter-lua) | `v0.4.0` |
 | php | `php`, `phtml` | [tree-sitter-php](https://github.com/tree-sitter/tree-sitter-php) | `v0.25.1` |
-| python ⚠️ | `py`, `pyi`, `pyw` | [tree-sitter-python](https://github.com/tree-sitter/tree-sitter-python) | `v0.25.0` |
+| python | `py`, `pyi`, `pyw` | [tree-sitter-python](https://github.com/tree-sitter/tree-sitter-python) | `v0.25.0` |
 | ruby | `rb`, `rake`, `gemspec` | [tree-sitter-ruby](https://github.com/tree-sitter/tree-sitter-ruby) | `v0.23.1` |
-| rust ⚠️ | `rs` | [tree-sitter-rust](https://github.com/tree-sitter/tree-sitter-rust) | `v0.24.2` |
+| rust | `rs` | [tree-sitter-rust](https://github.com/tree-sitter/tree-sitter-rust) | `v0.24.2` |
 | scala | `scala`, `sc` | [tree-sitter-scala](https://github.com/tree-sitter/tree-sitter-scala) | `v0.26.3` |
-| swift ⚠️ | `swift` | [tree-sitter-swift](https://github.com/alex-pinkus/tree-sitter-swift) | `0.7.3` |
-| tsx ⚠️ | `tsx` | [tree-sitter-typescript](https://github.com/tree-sitter/tree-sitter-typescript) (`tsx/`) | `v0.23.2` |
-| typescript ⚠️ | `ts` | [tree-sitter-typescript](https://github.com/tree-sitter/tree-sitter-typescript) | `v0.23.2` |
+| swift | `swift` | [tree-sitter-swift](https://github.com/alex-pinkus/tree-sitter-swift) | `0.7.3` |
+| tsx | `tsx` | [tree-sitter-typescript](https://github.com/tree-sitter/tree-sitter-typescript) (`tsx/`) | `v0.23.2` |
+| typescript | `ts` | [tree-sitter-typescript](https://github.com/tree-sitter/tree-sitter-typescript) | `v0.23.2` |
 | zig | `zig`, `zon` | [tree-sitter-zig](https://github.com/tree-sitter-grammars/tree-sitter-zig) | `v1.1.2` |
-
-⚠️ **was a codemark built-in before 0.8.0.** Since codemark 0.8.0 Dart is the
-only grammar compiled in; these languages load from this registry like any
-other. On an older codemark the entry *replaces* the built-in instead:
-`languages install` handles that, while a manual `add` needs
-`--override-builtin` — which is why the index still marks these entries
-`"overrides_builtin": true`. They were moved out to shrink the binary: C#,
-Swift and TypeScript alone were 11.7 MB of codemark's 24.2 MB.
 
 Some languages were evaluated and set aside — see
 [NOT-YET-SUPPORTED.md](NOT-YET-SUPPORTED.md) for which, and why.

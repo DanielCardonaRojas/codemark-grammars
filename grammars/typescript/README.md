@@ -13,18 +13,6 @@
 codemark languages install typescript
 ```
 
-## Built into codemark before 0.8.0
-
-Codemark compiled a TypeScript grammar in until 0.8.0, which moved it to this
-registry (codemark#278); since then Dart is the only built-in grammar.
-On codemark 0.8.0 and later this is an ordinary registry entry. On an older
-codemark it **replaces** the built-in instead, which needs
-`--override-builtin` on a manual `add`; the index marks it with
-`"overrides_builtin": true` so `languages install` and the verification
-harness pass the flag.
-
-It was 2.75 MB of a 24.2 MB binary.
-
 ## Notes
 
 **That release ships two wasm assets**, and the first one alphabetically is

@@ -91,11 +91,9 @@ Get the checksum from `scripts/asset-table.sh` (step 5), or:
 curl -fsSL <wasm_url> | shasum -a 256
 ```
 
-`name` must not collide with a codemark built-in or its aliases — such an entry
-could never resolve, and codemark rejects it on install. Since codemark 0.8.0
-the only built-in is dart; before that rust, swift, typescript, python, go,
-java and c# were built in too. Those names are already taken by the registry's
-own entries for them, so a new grammar can't use them either way.
+`name` must not collide with a codemark built-in or its aliases (today only
+dart), nor with an entry already in this registry — such an entry could never
+resolve, and codemark rejects it on install.
 
 ## 5. Verify
 

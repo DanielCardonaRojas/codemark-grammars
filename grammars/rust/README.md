@@ -22,21 +22,6 @@ A `.wasm` you build yourself will differ byte-for-byte (emscripten output isn't
 reproducible) but should verify identically — node kinds come from the grammar
 revision, not the build.
 
-## Built into codemark before 0.8.0
-
-Codemark compiled a Rust grammar in until 0.8.0, which moved it to this
-registry (codemark#278); since then Dart is the only built-in grammar.
-On codemark 0.8.0 and later this is an ordinary registry entry. On an older
-codemark it **replaces** the built-in instead, which needs
-`--override-builtin` on a manual `add`; the index marks it with
-`"overrides_builtin": true` so `languages install` and the verification
-harness pass the flag.
-
-Both `rust` and its alias `rs` were a reserved name on codemark before 0.8.0, which is why
-[CONTRIBUTING.md](../../CONTRIBUTING.md) lists Rust among the names a *new*
-grammar may not take. This entry is the exception, the same path
-`c_sharp`, `go`, `python`, `swift` and `typescript` take.
-
 ## Notes
 
 **This profile adds containers the built-in lacks.** The built-in Rust profile
