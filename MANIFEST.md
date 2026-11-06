@@ -66,8 +66,8 @@ Carries three separate responsibilities:
    looks the language up by it when resolving later. Renaming a grammar after
    bookmarks exist orphans them.
 2. **Collision domain.** It must not be — or alias — a codemark built-in.
-   `rust`, `rs`, `ts`, `py`, `cs` and friends are rejected before any file is
-   written, because such a grammar could never win lookup.
+   Such a name is rejected before any file is written, because the grammar
+   could never win lookup.
 3. **WASM symbol binding.** A Tree-sitter module exports `tree_sitter_<name>`,
    so this must match the grammar's own name. Installing
    `tree-sitter-lua.wasm` under the name `mylua` fails with *"module did not

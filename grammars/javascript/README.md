@@ -22,16 +22,11 @@ A `.wasm` you build yourself will differ byte-for-byte (emscripten output isn't
 reproducible) but should verify identically — node kinds come from the grammar
 revision, not the build.
 
-## Not an override
+## Extensions
 
-Unlike `java`, `go`, `python` and `rust`, JavaScript is **not** a codemark
-built-in, so this is an ordinary entry — no `--override-builtin`, no
-`overrides_builtin` in the index.
-
-The extensions don't collide either: codemark's TypeScript built-in claims only
-`ts` and `tsx`, leaving `js`, `jsx`, `mjs` and `cjs` free. This profile takes
-all four. JSX parses with this grammar (tree-sitter-javascript includes JSX),
-which is why `jsx` is included rather than split out.
+This profile takes `js`, `jsx`, `mjs` and `cjs`. JSX parses with this grammar
+(tree-sitter-javascript includes JSX), which is why `jsx` is included rather
+than split out. TypeScript's `.tsx` has its own entry, `tsx`.
 
 ## Notes
 

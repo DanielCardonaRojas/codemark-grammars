@@ -22,17 +22,6 @@ A `.wasm` you build yourself will differ byte-for-byte (emscripten output isn't
 reproducible) but should verify identically — node kinds come from the grammar
 revision, not the build.
 
-## This entry overrides a built-in
-
-Codemark bundles a Java grammar, so this entry **replaces** it. That needs
-`--override-builtin` on a manual `add`; the index marks it with
-`"overrides_builtin": true` so the verification harness passes the flag.
-
-`java` is a reserved name, which is why
-[CONTRIBUTING.md](../../CONTRIBUTING.md) lists Java among the names a *new*
-grammar may not take. An override entry is the exception, and it is the same
-path `c_sharp`, `go`, `python`, `rust`, `swift` and `typescript` already take.
-
 ## What this adds over the built-in
 
 The landmark set is a strict superset of the built-in Java profile's. The

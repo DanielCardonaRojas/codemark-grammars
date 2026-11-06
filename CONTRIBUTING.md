@@ -91,8 +91,8 @@ Get the checksum from `scripts/asset-table.sh` (step 5), or:
 curl -fsSL <wasm_url> | shasum -a 256
 ```
 
-`name` must not collide with a codemark built-in (rust, swift, typescript,
-python, go, java, c#, dart) or their aliases — such an entry could never
+`name` must not collide with a codemark built-in or its aliases (today only
+dart), nor with an entry already in this registry — such an entry could never
 resolve, and codemark rejects it on install.
 
 ## 5. Verify

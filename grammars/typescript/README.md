@@ -13,11 +13,6 @@
 codemark languages install typescript
 ```
 
-## This entry overrides a built-in
-
-Codemark bundles a TypeScript grammar, so this entry **replaces** it — 2.75 MB
-of a 24.2 MB binary. The index marks it `"overrides_builtin": true`.
-
 ## Notes
 
 **That release ships two wasm assets**, and the first one alphabetically is

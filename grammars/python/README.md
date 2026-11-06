@@ -22,17 +22,6 @@ A `.wasm` you build yourself will differ byte-for-byte (emscripten output isn't
 reproducible) but should verify identically — node kinds come from the grammar
 revision, not the build.
 
-## This entry overrides a built-in
-
-Codemark bundles a Python grammar, so this entry **replaces** it. That needs
-`--override-builtin` on a manual `add`; the index marks it with
-`"overrides_builtin": true` so the verification harness passes the flag.
-
-Both `python` and its alias `py` are reserved names, which is why
-[CONTRIBUTING.md](../../CONTRIBUTING.md) lists Python among the names a *new*
-grammar may not take. An override entry is the exception, and it is the same
-path `c_sharp`, `swift` and `typescript` already take.
-
 ## Notes
 
 **There is no `method` node kind.** A Python method is a `function_definition`

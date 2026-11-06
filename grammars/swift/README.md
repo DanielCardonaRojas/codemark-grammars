@@ -13,12 +13,6 @@
 codemark languages install swift
 ```
 
-## This entry overrides a built-in
-
-Codemark bundles a Swift grammar, so this entry **replaces** it — 3.24 MB of a
-24.2 MB binary, the second largest of the eight. The index marks it
-`"overrides_builtin": true`.
-
 ## Notes
 
 `class_body` and `enum_class_body` were dropped from the generated landmarks:

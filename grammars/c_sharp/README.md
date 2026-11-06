@@ -15,15 +15,6 @@ curl -fsSL -o c_sharp.wasm \
 codemark languages install c_sharp
 ```
 
-## This entry overrides a built-in
-
-Codemark bundles a C# grammar, so this entry **replaces** it. That needs
-`--override-builtin` on a manual `add`; the index marks it with
-`"overrides_builtin": true` so the verification harness passes the flag.
-
-C# is the largest bundled grammar — 5.67 MB of a 24.2 MB binary, 38% of all
-grammar weight — which is why it is the first built-in moved to the registry.
-
 ## Notes
 
 The registry name is **`c_sharp`**, not `csharp`. A Tree-sitter module exports
