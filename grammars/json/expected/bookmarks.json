@@ -1,0 +1,81 @@
+[
+  {
+    "breadcrumbs": [
+      {
+        "line": 5,
+        "text": "  \"customer\": {"
+      }
+    ],
+    "line": 6,
+    "query": "(document\n  (object\n    (pair\n      key: (string . (string_content) @name0 .)\n      (#eq? @name0 \"customer\")\n      (object\n        (pair\n          key: (string . (string_content) @fn_name .)\n          (#eq? @fn_name \"name\")) @target))))",
+    "resolution_method": "exact",
+    "sample": "invoice.json"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 5,
+        "text": "  \"customer\": {"
+      },
+      {
+        "line": 8,
+        "text": "    \"address\": {"
+      }
+    ],
+    "line": 10,
+    "query": "(document\n  (object\n    (pair\n      (object\n        (pair\n          key: (string . (string_content) @name0 .)\n          (#eq? @name0 \"address\")\n          (object\n            (pair\n              key: (string . (string_content) @fn_name .)\n              (#eq? @fn_name \"city\")) @target))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.json"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 5,
+        "text": "  \"customer\": {"
+      },
+      {
+        "line": 8,
+        "text": "    \"address\": {"
+      }
+    ],
+    "line": 11,
+    "query": "(document\n  (object\n    (pair\n      (object\n        (pair\n          key: (string . (string_content) @name0 .)\n          (#eq? @name0 \"address\")\n          (object\n            (pair\n              key: (string . (string_content) @fn_name .)\n              (#eq? @fn_name \"country\")) @target))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.json"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 14,
+        "text": "  \"lines\": ["
+      }
+    ],
+    "line": 28,
+    "query": "(document\n  (object\n    (pair\n      key: (string . (string_content) @name0 .)\n      (#eq? @name0 \"lines\")\n      (array\n        (object\n          (pair\n            key: (string . (string_content) @fn_name .)\n            (#eq? @fn_name \"discount\")) @target)))))",
+    "resolution_method": "exact",
+    "sample": "invoice.json"
+  },
+  {
+    "breadcrumbs": [
+      {
+        "line": 31,
+        "text": "  \"totals\": {"
+      },
+      {
+        "line": 33,
+        "text": "    \"tax\": {"
+      }
+    ],
+    "line": 34,
+    "query": "(document\n  (object\n    (pair\n      (object\n        (pair\n          key: (string . (string_content) @name0 .)\n          (#eq? @name0 \"tax\")\n          (object\n            (pair\n              key: (string . (string_content) @fn_name .)\n              (#eq? @fn_name \"rate\")) @target))))))",
+    "resolution_method": "exact",
+    "sample": "invoice.json"
+  },
+  {
+    "breadcrumbs": [],
+    "line": 39,
+    "query": "(document\n  (object\n    (pair\n      key: (string . (string_content) @fn_name .)\n      (#eq? @fn_name \"tags\")) @target))",
+    "resolution_method": "exact",
+    "sample": "invoice.json"
+  }
+]

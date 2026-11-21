@@ -1,0 +1,30 @@
+{
+  "name": "json",
+  "version": "1.0.0",
+  "extensions": [
+    "json"
+  ],
+  "curation": {
+    "add_landmarks": [
+      "pair"
+    ],
+    "add_labels": {
+      "pair": "variable"
+    },
+    "add_containers": [
+      "variable"
+    ],
+    "why": "JSON has no declarations, so the generator proposes nothing: it only promotes kinds it sees wrapping a declaration. The structure a reader navigates by is the key path, and a `pair` is the only kind with a name (its `key` field). Making it a landmark anchors queries on the enclosing keys; labelling it `variable` (the closest shared concept for a named value) and making that a container gives a nested line a breadcrumb trail of the keys above it. `object` and `array` are deliberately left out: they are anonymous values, so they add no name to a breadcrumb and would only add anchors between the keys."
+  },
+  "profile": {
+    "landmark_kinds": [
+      "pair"
+    ],
+    "node_labels": {
+      "pair": "variable"
+    },
+    "containers": [
+      "variable"
+    ]
+  }
+}

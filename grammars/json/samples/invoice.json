@@ -1,0 +1,41 @@
+{
+  "id": "INV-2026-0042",
+  "status": "draft",
+  "issued": "2026-11-21",
+  "customer": {
+    "name": "Acme Corp",
+    "email": "billing@acme.example",
+    "address": {
+      "street": "1 Infinite Loop",
+      "city": "Springfield",
+      "country": "US"
+    }
+  },
+  "lines": [
+    {
+      "sku": "WIDGET-1",
+      "description": "Widget, large",
+      "quantity": 3,
+      "unit_price": 19.99,
+      "taxable": true
+    },
+    {
+      "sku": "SERVICE-H",
+      "description": "Installation, per hour",
+      "quantity": 2.5,
+      "unit_price": 80,
+      "taxable": false,
+      "discount": null
+    }
+  ],
+  "totals": {
+    "subtotal": 259.97,
+    "tax": {
+      "rate": 0.0825,
+      "amount": 4.95
+    },
+    "total": 264.92
+  },
+  "tags": ["priority", "net-30"],
+  "notes": "Payment due within 30 days.\nThank you!"
+}
