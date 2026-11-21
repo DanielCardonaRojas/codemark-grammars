@@ -1,0 +1,39 @@
+# 1-based lines to bookmark, one per line. Blank lines and # comments ignored.
+#
+# JSON has no declarations: the structure a reader navigates by is the key
+# path. `pair` is the only kind with a name (its `key`), so it is the single
+# landmark and container, and each line below should anchor on the keys above
+# it and show them as breadcrumbs.
+
+# `customer.name` — one level down. Ends in a separator comma, which must not
+# widen the target to the enclosing object.
+6
+
+# `customer.address.city` — two levels down, so the breadcrumb walk has to
+# name both enclosing pairs.
+10
+
+# `customer.address.country` — the last member, with no trailing comma.
+11
+
+# `lines[1].discount` — inside an object inside an array. The object and array
+# are anonymous, so the breadcrumb names `lines` and nothing between.
+28
+
+# `totals.tax.rate` — two levels down in a different branch, so a query that
+# lost a key would also match nothing here or something under `customer`.
+34
+
+# `tags` — a pair whose value is an array, directly under the root object.
+39
+
+# NOT bookmarkable, kept here as a record rather than silently omitted:
+#
+#   17    "description": "Widget, large",
+#   26    "unit_price": 80,
+#
+# Every key here also appears in the sibling element of `lines`, and objects in
+# an array are anonymous — nothing in the path tells element 0 from element 1,
+# so codemark refuses the query as ambiguous. The same identical-siblings
+# limitation as Scala's; line 28 works only because `discount` is unique to its
+# element.
